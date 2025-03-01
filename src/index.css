@@ -58,7 +58,7 @@
   }
 
   body {
-    @apply bg-flowai-beige text-flowai-black font-inter overscroll-none;
+    @apply bg-white text-flowai-black font-inter overscroll-none;
   }
 
   h1 {
@@ -92,47 +92,61 @@
   }
 
   .btn-primary {
-    @apply bg-flowai-black text-flowai-white font-medium rounded-lg px-6 py-3 
+    @apply bg-flowai-black text-white font-medium rounded-lg px-6 py-3 
            transition-colors duration-300 hover:bg-flowai-darkGray inline-flex items-center justify-center
            relative overflow-hidden;
   }
 
   .btn-primary::before {
-    @apply content-[''] absolute inset-0 bg-gradient-to-r from-teal-600/20 to-blue-500/20 opacity-0 
-           transition-opacity duration-500;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(14, 165, 233, 0.2), rgba(20, 184, 166, 0.2));
+    opacity: 0;
+    transition: opacity 0.5s;
   }
 
   .group:hover .btn-primary::before {
-    @apply opacity-100;
+    opacity: 1;
   }
 
   .btn-primary::after {
-    @apply content-[''] absolute -inset-px bg-gradient-to-r from-teal-600 to-blue-500 rounded-lg
-           opacity-0 transition-opacity duration-500 blur-sm;
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(to right, #0EA5E9, #14B8A6);
+    border-radius: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.5s;
+    filter: blur(8px);
     z-index: -1;
   }
 
   .group:hover .btn-primary::after {
-    @apply opacity-100;
+    opacity: 1;
   }
 
   .btn-outline {
     @apply border border-flowai-black text-flowai-black font-medium rounded-lg px-6 py-3 
-           transition-colors duration-300 hover:bg-flowai-black hover:text-flowai-white inline-flex items-center justify-center
+           transition-colors duration-300 hover:bg-flowai-black hover:text-white inline-flex items-center justify-center
            relative overflow-hidden;
   }
 
   .btn-outline::before {
-    @apply content-[''] absolute inset-0 bg-gradient-to-r from-teal-600/20 to-blue-500/20 opacity-0 
-           transition-opacity duration-500;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(14, 165, 233, 0.2), rgba(20, 184, 166, 0.2));
+    opacity: 0;
+    transition: opacity 0.5s;
   }
 
   .group:hover .btn-outline::before {
-    @apply opacity-100;
+    opacity: 1;
   }
 
   .card {
-    @apply bg-flowai-white rounded-lg p-8 transition-all duration-300;
+    @apply bg-white rounded-lg p-8 transition-all duration-300;
   }
 
   .card-hover {
@@ -140,11 +154,11 @@
   }
 
   .glass {
-    @apply backdrop-blur-lg bg-flowai-white/30 border border-flowai-white/20;
+    @apply backdrop-blur-lg bg-white/30 border border-white/20;
   }
 
   .navbar-item {
-    @apply font-bold text-[16px] hover:text-teal-400 transition-colors duration-300;
+    @apply font-bold text-[16px] hover:text-sky-400 transition-colors duration-300;
   }
 
   .revealed {
@@ -192,6 +206,33 @@
   .glow-btn:hover::before {
     opacity: 1;
   }
+
+  .tech-badge {
+    @apply px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800 m-1 inline-block;
+  }
+  
+  .typing-effect {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid currentColor;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+  
+  .count-up-animation {
+    animation: countUp 2s ease-out forwards;
+  }
+  
+  .feature-button {
+    @apply px-5 py-2 rounded-full text-sm font-medium transition-all duration-300;
+  }
+  
+  .feature-button.active {
+    @apply bg-indigo-900 text-white;
+  }
+  
+  .feature-button:not(.active) {
+    @apply bg-white text-black border border-gray-200 hover:bg-gray-50;
+  }
 }
 
 @layer utilities {
@@ -212,7 +253,7 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-teal-600 to-blue-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-sky-600 to-teal-500 bg-clip-text text-transparent;
   }
 
   /* Typing animation for code */
@@ -234,6 +275,16 @@
   @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: currentColor }
   }
 
   /* Count up animation */

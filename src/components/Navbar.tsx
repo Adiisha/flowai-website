@@ -38,11 +38,11 @@ const Navbar = () => {
       }`}
     >
       <nav className="mx-auto max-w-7xl mt-4 mb-8 px-6 md:px-8">
-        <div className="relative flex justify-between items-center bg-flowai-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg">
+        <div className="relative flex justify-between items-center bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg">
           <div className="flex-1 flex items-center justify-between">
             <a href="#" className="flex items-center">
               <span className="text-2xl font-bold text-flowai-black">
-                Flow<span className="text-teal-500">AI</span>
+                Flow<span className="text-sky-500">AI</span>
               </span>
             </a>
 
@@ -51,8 +51,6 @@ const Navbar = () => {
               <a href="#services" className="navbar-item">Services</a>
               <a href="#about" className="navbar-item">About</a>
               <a href="#roadmap" className="navbar-item">Roadmap</a>
-              <a href="#testimonials" className="navbar-item">Testimonials</a>
-              <a href="#launching" className="navbar-item">Coming Soon</a>
               <a href="#contact" className="navbar-item">Contact</a>
             </div>
 
@@ -74,7 +72,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         <div
-          className={`absolute left-0 right-0 z-20 md:hidden bg-flowai-white/95 backdrop-blur-md shadow-lg rounded-b-xl transform transition-all duration-300 ease-in-out ${
+          className={`absolute left-0 right-0 z-20 md:hidden bg-white/95 backdrop-blur-md shadow-lg rounded-b-xl transform transition-all duration-300 ease-in-out ${
             isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5 pointer-events-none'
           }`}
         >
@@ -99,20 +97,6 @@ const Navbar = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Roadmap
-            </a>
-            <a
-              href="#testimonials"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Testimonials
-            </a>
-            <a
-              href="#launching"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Coming Soon
             </a>
             <a
               href="#contact"

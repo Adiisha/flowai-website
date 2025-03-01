@@ -57,27 +57,27 @@ const LaunchingSection = () => {
   
   const CountdownItem = ({ value, label }: { value: number, label: string }) => (
     <div className="flex flex-col items-center">
-      <div className="bg-flowai-white text-flowai-black w-16 h-16 rounded-lg flex items-center justify-center text-2xl font-bold shadow-md">
+      <div className="bg-white text-flowai-black w-16 h-16 rounded-lg flex items-center justify-center text-2xl font-bold shadow-md border border-gray-100">
         {value.toString().padStart(2, '0')}
       </div>
-      <span className="text-sm mt-2">{label}</span>
+      <span className="text-sm mt-2 text-gray-600">{label}</span>
     </div>
   );
   
   return (
-    <section id="launching" className="py-24 bg-flowai-black text-flowai-white">
+    <section id="launching" className="py-24 bg-white text-gray-900">
       <div className="section-container">
         <div className="text-center mb-16">
-          <span className="px-3 py-1 bg-flowai-white text-flowai-black text-sm font-medium rounded-full">
+          <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded-full">
             Coming Soon
           </span>
           <h2 
             ref={ref as React.RefObject<HTMLHeadingElement>}
-            className={`mt-4 text-flowai-white ${isInView ? 'animate-fade-in' : 'opacity-0'}`}
+            className={`mt-4 text-gray-900 ${isInView ? 'animate-fade-in' : 'opacity-0'}`}
           >
             New AI Features Launching Soon
           </h2>
-          <p className="max-w-2xl mx-auto mt-4 text-flowai-white/80">
+          <p className="max-w-2xl mx-auto mt-4 text-gray-700">
             We're preparing to launch our next generation of AI tools. Sign up to be notified when we go live.
           </p>
         </div>
@@ -86,7 +86,7 @@ const LaunchingSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="flex flex-col">
               <h3 className="text-2xl font-bold mb-4">Next-gen AI tools await</h3>
-              <p className="mb-8 text-flowai-white/80">
+              <p className="mb-8 text-gray-700">
                 Our upcoming platform includes groundbreaking features for AI-driven analytics, 
                 predictive customer insights, and automated workflow optimization.
               </p>
@@ -95,21 +95,21 @@ const LaunchingSection = () => {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full px-4 py-3 rounded-lg text-flowai-black border-2 border-transparent focus:border-flowai-white/30 focus:outline-none"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-100"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-flowai-black text-flowai-white px-4 py-1.5 rounded transition-colors duration-300 hover:bg-flowai-darkGray"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-sky-500 text-white px-4 py-1.5 rounded transition-colors duration-300 hover:bg-sky-600"
                 >
                   Notify Me
                 </button>
               </form>
               
               {isSubmitted && (
-                <div className="mt-3 text-green-400 flex items-center">
+                <div className="mt-3 text-green-600 flex items-center">
                   <Bell size={16} className="mr-2" />
                   Thank you! We'll notify you when we launch.
                 </div>
@@ -117,7 +117,7 @@ const LaunchingSection = () => {
             </div>
             
             <div>
-              <div className="bg-flowai-darkGray/50 backdrop-blur-md rounded-2xl p-8 shadow-xl">
+              <div className="bg-gray-50 backdrop-blur-md rounded-2xl p-8 shadow border border-gray-100">
                 <h4 className="text-xl font-bold mb-6 text-center">Launching In</h4>
                 
                 <div className="flex justify-center gap-4">
@@ -132,7 +132,7 @@ const LaunchingSection = () => {
                     {['AI Analytics', 'Predictive Insights', 'Custom Reports', 'API Access'].map((feature, index) => (
                       <span 
                         key={index}
-                        className="bg-flowai-white/10 px-3 py-1 rounded-full text-sm"
+                        className="bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-700"
                       >
                         {feature}
                       </span>

@@ -34,23 +34,45 @@ const Index = () => {
       observer.observe(element);
     });
 
-    // Apply subtle parallax effect on scroll
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      
-      document.querySelectorAll('.parallax').forEach((element) => {
-        const speed = Number(element.getAttribute('data-speed')) || 0.1;
-        (element as HTMLElement).style.transform = `translateY(${scrollY * speed}px)`;
+    // Handle count-up animation
+    const countUp = (el: Element, target: number) => {
+      let count = 0;
+      const increment = target / 50; // Adjust speed
+      const timer = setInterval(() => {
+        count += increment;
+        if (count >= target) {
+          clearInterval(timer);
+          count = target;
+        }
+        el.textContent = Math.floor(count).toString();
+      }, 30);
+    };
+
+    const handleCountUpElements = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = Number(entry.target.getAttribute('data-target') || '0');
+          countUp(entry.target, target);
+          countObserver.unobserve(entry.target);
+        }
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    const countObserver = new IntersectionObserver(handleCountUpElements, {
+      threshold: 0.5,
+    });
+
+    document.querySelectorAll('[data-count-up]').forEach(el => {
+      countObserver.observe(el);
+    });
 
     return () => {
       revealElements.forEach(element => {
         observer.unobserve(element);
       });
-      window.removeEventListener('scroll', handleScroll);
+      document.querySelectorAll('[data-count-up]').forEach(el => {
+        countObserver.unobserve(el);
+      });
     };
   }, []);
 

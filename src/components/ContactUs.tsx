@@ -31,37 +31,37 @@ const ContactUs = () => {
   };
 
   return (
-    <section id="contact" className="py-24 bg-flowai-black text-flowai-white">
+    <section id="contact" className="py-24 bg-white text-gray-900">
       <div className="section-container grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="flex flex-col justify-center">
-          <h2 className="text-[48px] font-bold tracking-tight text-flowai-white">
+          <h2 className="text-[48px] font-bold tracking-tight text-gray-900">
             Ask whatever you have in your mind
           </h2>
-          <p className="mt-6 text-lg text-flowai-white/90">
+          <p className="mt-6 text-lg text-gray-700">
             Whether you have questions or are ready to discuss your business, 
             we're here to help. Reach out today.
           </p>
           
           <div className="mt-10 space-y-4">
             <div className="flex items-center gap-3">
-              <Mail className="w-6 h-6" />
-              <a href="mailto:theflowai01@gmail.com" className="text-flowai-white hover:text-flowai-lightGray transition-colors">
+              <Mail className="w-6 h-6 text-sky-500" />
+              <a href="mailto:theflowai01@gmail.com" className="text-gray-900 hover:text-sky-600 transition-colors">
                 theflowai01@gmail.com
               </a>
             </div>
             <div className="flex items-center gap-3">
-              <Phone className="w-6 h-6" />
-              <a href="tel:+919004452118" className="text-flowai-white hover:text-flowai-lightGray transition-colors">
+              <Phone className="w-6 h-6 text-sky-500" />
+              <a href="tel:+919004452118" className="text-gray-900 hover:text-sky-600 transition-colors">
                 +91 9004452118
               </a>
             </div>
           </div>
         </div>
         
-        <div className="bg-flowai-black/40 rounded-lg backdrop-blur-sm p-8 border border-white/10">
+        <div className="bg-gray-50/80 rounded-lg backdrop-blur-sm p-8 border border-gray-100 shadow-sm">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-2">
+              <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-700">
                 Name
               </label>
               <input
@@ -70,14 +70,14 @@ const ContactUs = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full p-3 bg-flowai-black/60 rounded-md border border-flowai-white/20 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 text-flowai-white"
+                className="w-full p-3 bg-white rounded-md border border-gray-200 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-gray-900"
                 placeholder="Jane Smith"
                 required
               />
             </div>
             
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
+              <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-700">
                 Email
               </label>
               <input
@@ -86,14 +86,14 @@ const ContactUs = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full p-3 bg-flowai-black/60 rounded-md border border-flowai-white/20 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 text-flowai-white"
+                className="w-full p-3 bg-white rounded-md border border-gray-200 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-gray-900"
                 placeholder="jane@example.com"
                 required
               />
             </div>
             
             <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-2">
+              <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-700">
                 Message
               </label>
               <textarea
@@ -102,7 +102,7 @@ const ContactUs = () => {
                 value={formData.message}
                 onChange={handleChange}
                 rows={5}
-                className="w-full p-3 bg-flowai-black/60 rounded-md border border-flowai-white/20 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 text-flowai-white"
+                className="w-full p-3 bg-white rounded-md border border-gray-200 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-gray-900"
                 placeholder="Hi, I am reaching out for..."
                 required
               />
@@ -110,7 +110,7 @@ const ContactUs = () => {
             
             <button
               type="submit"
-              className="w-full py-3 rounded-md bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 transition-all duration-300 text-white font-medium flex items-center justify-center gap-2 group glow-btn"
+              className="w-full py-3 rounded-md bg-gradient-to-r from-sky-500 to-teal-500 hover:from-sky-600 hover:to-teal-600 transition-all duration-300 text-white font-medium flex items-center justify-center gap-2 group glow-btn"
             >
               <span>Submit</span>
               <Send className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
