@@ -1,98 +1,102 @@
 
-import { Github, Twitter, Linkedin, Instagram, Mail, PhoneCall } from 'lucide-react';
+import { Mail, Phone, Twitter, Facebook, Instagram, Linkedin, ArrowRight } from 'lucide-react';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-  
   return (
-    <footer id="contact" className="bg-flowai-black text-flowai-white pt-16 pb-8">
+    <footer className="bg-flowai-black text-flowai-white py-16">
       <div className="section-container">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          <div>
-            <div className="text-2xl font-bold mb-4">Flow AI</div>
-            <p className="text-flowai-white/80 mb-6 max-w-xs">
-              AI Solutions for Tomorrow. We pioneer custom artificial intelligence solutions designed to transform your business.
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="col-span-1 lg:col-span-1">
+            <h3 className="text-2xl font-bold mb-6">Flow<span className="text-teal-500">AI</span></h3>
+            <p className="text-flowai-white/80 mb-6">
+              Empowering businesses with custom AI solutions to drive innovation, efficiency, and growth.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-flowai-white hover:text-purple-400 transition-colors duration-300">
-                <Twitter size={20} />
+              <a href="#" className="text-flowai-white hover:text-teal-500 transition-colors">
+                <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="text-flowai-white hover:text-purple-400 transition-colors duration-300">
-                <Linkedin size={20} />
+              <a href="#" className="text-flowai-white hover:text-teal-500 transition-colors">
+                <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-flowai-white hover:text-purple-400 transition-colors duration-300">
-                <Github size={20} />
+              <a href="#" className="text-flowai-white hover:text-teal-500 transition-colors">
+                <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="text-flowai-white hover:text-purple-400 transition-colors duration-300">
-                <Instagram size={20} />
+              <a href="#" className="text-flowai-white hover:text-teal-500 transition-colors">
+                <Linkedin className="w-5 h-5" />
               </a>
             </div>
           </div>
           
           <div>
-            <h5 className="text-xl font-bold mb-6">Quick Links</h5>
+            <h4 className="text-xl font-semibold mb-6">Explore</h4>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-flowai-white/80 hover:text-purple-400 transition-colors duration-300 inline-block">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="text-flowai-white/80 hover:text-purple-400 transition-colors duration-300 inline-block">
+                <a href="#services" className="text-flowai-white/80 hover:text-teal-500 transition-colors flex items-center">
+                  <ArrowRight className="w-3 h-3 mr-2" />
                   Services
                 </a>
               </li>
               <li>
-                <a href="#about" className="text-flowai-white/80 hover:text-purple-400 transition-colors duration-300 inline-block">
+                <a href="#about" className="text-flowai-white/80 hover:text-teal-500 transition-colors flex items-center">
+                  <ArrowRight className="w-3 h-3 mr-2" />
                   About Us
                 </a>
               </li>
               <li>
-                <a href="#launching" className="text-flowai-white/80 hover:text-purple-400 transition-colors duration-300 inline-block">
-                  Launching Soon
+                <a href="#roadmap" className="text-flowai-white/80 hover:text-teal-500 transition-colors flex items-center">
+                  <ArrowRight className="w-3 h-3 mr-2" />
+                  Roadmap
                 </a>
               </li>
               <li>
-                <a href="#contact" className="text-flowai-white/80 hover:text-purple-400 transition-colors duration-300 inline-block">
-                  Contact
+                <a href="#testimonials" className="text-flowai-white/80 hover:text-teal-500 transition-colors flex items-center">
+                  <ArrowRight className="w-3 h-3 mr-2" />
+                  Testimonials
                 </a>
               </li>
             </ul>
           </div>
           
-          <div>
-            <h5 className="text-xl font-bold mb-6">Contact Us</h5>
-            <ul className="space-y-4">
-              <li className="flex items-start">
-                <Mail size={20} className="mt-1 mr-3 flex-shrink-0" />
-                <a href="mailto:theflowai01@gmail.com" className="text-flowai-white/80 hover:text-purple-400 transition-colors duration-300">
-                  theflowai01@gmail.com
-                </a>
-              </li>
-              <li className="flex items-start">
-                <PhoneCall size={20} className="mt-1 mr-3 flex-shrink-0" />
-                <a href="tel:+919004452118" className="text-flowai-white/80 hover:text-purple-400 transition-colors duration-300">
-                  +91 9004452118
-                </a>
-              </li>
-            </ul>
-            
-            <div className="mt-8">
-              <h5 className="text-xl font-bold mb-6">Services</h5>
+          <div className="col-span-1 md:col-span-2 lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h4 className="text-xl font-semibold mb-6">Services</h4>
               <ul className="space-y-3">
                 <li>
-                  <a href="#services" className="text-flowai-white/80 hover:text-purple-400 transition-colors duration-300 inline-block">
+                  <a href="#" className="text-flowai-white/80 hover:text-teal-500 transition-colors">
                     AI Chatbots
                   </a>
                 </li>
                 <li>
-                  <a href="#services" className="text-flowai-white/80 hover:text-purple-400 transition-colors duration-300 inline-block">
+                  <a href="#" className="text-flowai-white/80 hover:text-teal-500 transition-colors">
                     AI-Powered CRM
                   </a>
                 </li>
                 <li>
-                  <a href="#services" className="text-flowai-white/80 hover:text-purple-400 transition-colors duration-300 inline-block">
+                  <a href="#" className="text-flowai-white/80 hover:text-teal-500 transition-colors">
                     Ticketing Systems
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-flowai-white/80 hover:text-teal-500 transition-colors">
+                    Feedback Analysis
+                  </a>
+                </li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="text-xl font-semibold mb-6">Contact Us</h4>
+              <ul className="space-y-4">
+                <li className="flex items-start">
+                  <Mail className="w-5 h-5 mr-3 mt-1 text-teal-500" />
+                  <a href="mailto:theflowai01@gmail.com" className="text-flowai-white/80 hover:text-teal-500 transition-colors">
+                    theflowai01@gmail.com
+                  </a>
+                </li>
+                <li className="flex items-start">
+                  <Phone className="w-5 h-5 mr-3 mt-1 text-teal-500" />
+                  <a href="tel:+919004452118" className="text-flowai-white/80 hover:text-teal-500 transition-colors">
+                    +91 9004452118
                   </a>
                 </li>
               </ul>
@@ -100,8 +104,8 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="mt-16 pt-8 border-t border-flowai-white/10 text-center text-flowai-white/60 text-sm">
-          <p>&copy; {currentYear} Flow AI. All rights reserved.</p>
+        <div className="mt-16 pt-8 border-t border-flowai-white/10 text-center text-flowai-white/60">
+          <p>© {new Date().getFullYear()} FlowAI. All rights reserved.</p>
         </div>
       </div>
     </footer>

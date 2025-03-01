@@ -1,11 +1,48 @@
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useInView } from '@/lib/animate';
 
 const About = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
   const textRef = useRef<HTMLDivElement>(null);
   const codeRef = useRef<HTMLDivElement>(null);
+  const [counts, setCounts] = useState({
+    clients: 0,
+    experts: 0,
+    satisfaction: 0
+  });
+  const targetCounts = {
+    clients: 150,
+    experts: 40,
+    satisfaction: 98
+  };
+  
+  // Handle counter animation
+  useEffect(() => {
+    if (isInView && counts.clients < targetCounts.clients) {
+      const clientsInterval = setInterval(() => {
+        setCounts(prev => {
+          const newClients = Math.min(prev.clients + 1, targetCounts.clients);
+          const newExperts = Math.min(prev.experts + 1, targetCounts.experts);
+          const newSatisfaction = Math.min(prev.satisfaction + 1, targetCounts.satisfaction);
+          
+          if (newClients === targetCounts.clients && 
+              newExperts === targetCounts.experts && 
+              newSatisfaction === targetCounts.satisfaction) {
+            clearInterval(clientsInterval);
+          }
+          
+          return {
+            clients: newClients,
+            experts: newExperts,
+            satisfaction: newSatisfaction
+          };
+        });
+      }, 30);
+      
+      return () => clearInterval(clientsInterval);
+    }
+  }, [isInView, counts]);
   
   useEffect(() => {
     if (isInView && codeRef.current) {
@@ -51,19 +88,19 @@ const About = () => {
           let line = codeLines[i];
           
           if (line.includes('import') || line.includes('export')) {
-            line = `<span class="text-purple-500">${line}</span>`;
+            line = `<span class="text-green-500">${line}</span>`;
           } else if (line.includes('class') || line.includes('extends')) {
-            line = line.replace('class', '<span class="text-purple-500">class</span>')
-                       .replace('extends', '<span class="text-purple-500">extends</span>')
+            line = line.replace('class', '<span class="text-blue-500">class</span>')
+                       .replace('extends', '<span class="text-blue-500">extends</span>')
                        .replace('BusinessSolution', '<span class="text-yellow-400">BusinessSolution</span>')
-                       .replace('AI', '<span class="text-blue-400">AI</span>');
+                       .replace('AI', '<span class="text-teal-400">AI</span>');
           } else if (line.includes('constructor') || line.includes('async')) {
-            line = line.replace('constructor', '<span class="text-purple-500">constructor</span>')
-                       .replace('async', '<span class="text-purple-500">async</span>');
+            line = line.replace('constructor', '<span class="text-blue-500">constructor</span>')
+                       .replace('async', '<span class="text-blue-500">async</span>');
           } else if (line.includes('this')) {
-            line = line.replace(/this\./g, '<span class="text-blue-400">this.</span>');
+            line = line.replace(/this\./g, '<span class="text-teal-400">this.</span>');
           } else if (line.includes('return')) {
-            line = line.replace('return', '<span class="text-purple-500">return</span>');
+            line = line.replace('return', '<span class="text-blue-500">return</span>');
           } else if (line.match(/[a-zA-Z]+\(/)) {
             line = line.replace(/([a-zA-Z]+)(\()/g, '<span class="text-green-400">$1</span>$2');
           }
@@ -94,12 +131,12 @@ const About = () => {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#ffffff33_0%,_transparent_70%)]"></div>
               <div 
                 ref={codeRef}
-                className="text-left p-8 font-mono text-sm overflow-auto h-full text-gray-300 code-container"
+                className="text-left p-8 font-mono text-sm overflow-auto h-full text-gray-300 code-container animate-typing"
               >
                 {/* Code will be typed here */}
               </div>
             </div>
-            <div className="absolute bottom-8 right-8 bg-flowai-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg max-w-[280px]">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-flowai-white/80 backdrop-blur-sm p-6 rounded-lg shadow-lg max-w-[280px]">
               <h4 className="text-xl font-bold mb-2">Our Vision</h4>
               <p className="text-sm">
                 Creating a world where businesses of all sizes can harness the power of AI to achieve their full potential.
@@ -124,19 +161,19 @@ const About = () => {
             
             <div className="grid grid-cols-2 gap-8">
               <div className="flex flex-col">
-                <div className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">150+</div>
+                <div className="text-3xl font-bold mb-2 text-flowai-black">{counts.clients}+</div>
                 <p className="text-base">Clients Worldwide</p>
               </div>
               <div className="flex flex-col">
-                <div className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">40+</div>
+                <div className="text-3xl font-bold mb-2 text-flowai-black">{counts.experts}+</div>
                 <p className="text-base">AI Experts</p>
               </div>
               <div className="flex flex-col">
-                <div className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">98%</div>
+                <div className="text-3xl font-bold mb-2 text-flowai-black">{counts.satisfaction}%</div>
                 <p className="text-base">Client Satisfaction</p>
               </div>
               <div className="flex flex-col">
-                <div className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">24/7</div>
+                <div className="text-3xl font-bold mb-2 text-flowai-black">24/7</div>
                 <p className="text-base">Support Services</p>
               </div>
             </div>

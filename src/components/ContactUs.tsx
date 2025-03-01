@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Mail, Send } from 'lucide-react';
+import { Mail, Send, Phone } from 'lucide-react';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -49,6 +49,12 @@ const ContactUs = () => {
                 theflowai01@gmail.com
               </a>
             </div>
+            <div className="flex items-center gap-3">
+              <Phone className="w-6 h-6" />
+              <a href="tel:+919004452118" className="text-flowai-white hover:text-flowai-lightGray transition-colors">
+                +91 9004452118
+              </a>
+            </div>
           </div>
         </div>
         
@@ -64,7 +70,7 @@ const ContactUs = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full p-3 bg-flowai-black/60 rounded-md border border-flowai-white/20 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-flowai-white"
+                className="w-full p-3 bg-flowai-black/60 rounded-md border border-flowai-white/20 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 text-flowai-white"
                 placeholder="Jane Smith"
                 required
               />
@@ -80,7 +86,7 @@ const ContactUs = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full p-3 bg-flowai-black/60 rounded-md border border-flowai-white/20 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-flowai-white"
+                className="w-full p-3 bg-flowai-black/60 rounded-md border border-flowai-white/20 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 text-flowai-white"
                 placeholder="jane@example.com"
                 required
               />
@@ -96,7 +102,7 @@ const ContactUs = () => {
                 value={formData.message}
                 onChange={handleChange}
                 rows={5}
-                className="w-full p-3 bg-flowai-black/60 rounded-md border border-flowai-white/20 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 text-flowai-white"
+                className="w-full p-3 bg-flowai-black/60 rounded-md border border-flowai-white/20 focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 text-flowai-white"
                 placeholder="Hi, I am reaching out for..."
                 required
               />
@@ -104,10 +110,7 @@ const ContactUs = () => {
             
             <button
               type="submit"
-              className="w-full py-3 rounded-md bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 transition-all duration-300 text-white font-medium flex items-center justify-center gap-2 group"
-              style={{
-                boxShadow: '0 0 15px rgba(155, 135, 245, 0.5)'
-              }}
+              className="w-full py-3 rounded-md bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 transition-all duration-300 text-white font-medium flex items-center justify-center gap-2 group glow-btn"
             >
               <span>Submit</span>
               <Send className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />

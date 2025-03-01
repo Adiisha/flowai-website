@@ -28,36 +28,36 @@ const ServiceCard = ({ icon, title, description, index, serviceType }: ServiceCa
       if (!canvas) return;
 
       // Customize the scene based on serviceType
-      let color = '#9b87f5'; // Purple for most services
+      let color = '#33C3F0'; // Sky blue for most services
       let wireframe = false;
       let geometryType: 'sphere' | 'torus' | 'box' | 'cylinder' | 'cone' = 'sphere';
       
       switch (serviceType) {
-        case 'chatbots':
-          color = '#9b87f5'; // Purple
+        case "chatbots":
+          color = '#33C3F0'; // Sky blue
           geometryType = 'sphere';
           break;
-        case 'crm':
-          color = '#7E69AB'; // Darker purple
+        case "crm":
+          color = '#F97316'; // Bright orange
           geometryType = 'box';
           break;
-        case 'ticketing':
+        case "ticketing":
           color = '#D3E4FD'; // Light blue
           geometryType = 'torus';
           break;
-        case 'feedback':
+        case "feedback":
           color = '#FDE1D3'; // Soft peach
           geometryType = 'cylinder';
           break;
-        case 'onboarding':
+        case "onboarding":
           color = '#E5DEFF'; // Soft purple
           geometryType = 'cone';
           break;
-        case 'fraud':
-          color = '#D946EF'; // Magenta pink
+        case "fraud":
+          color = '#0EA5E9'; // Ocean blue
           geometryType = 'sphere';
           break;
-        case 'document':
+        case "document":
           color = '#F2FCE2'; // Soft green
           geometryType = 'box';
           break;
@@ -244,12 +244,6 @@ const Services = () => {
       title: "Fraud Detection",
       description: "Secure transactions with real-time anomaly detection powered by advanced AI algorithms.",
       type: "fraud"
-    },
-    {
-      icon: <FileText className="w-8 h-8" />,
-      title: "Document Management",
-      description: "Effortlessly manage documents with intelligent search and automated categorization.",
-      type: "document"
     }
   ];
 
@@ -271,7 +265,7 @@ const Services = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {services.map((service, index) => (
             <ServiceCard
               key={index}
