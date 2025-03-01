@@ -94,29 +94,41 @@
   .btn-primary {
     @apply bg-flowai-black text-flowai-white font-medium rounded-lg px-6 py-3 
            transition-colors duration-300 hover:bg-flowai-darkGray inline-flex items-center justify-center
-           relative overflow-hidden group;
+           relative overflow-hidden;
   }
 
   .btn-primary::before {
     @apply content-[''] absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-500/20 opacity-0 
-           group-hover:opacity-100 transition-opacity duration-500;
+           transition-opacity duration-500;
+  }
+
+  .group:hover .btn-primary::before {
+    @apply opacity-100;
   }
 
   .btn-primary::after {
     @apply content-[''] absolute -inset-px bg-gradient-to-r from-purple-600 to-pink-500 rounded-lg
-           opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm;
+           opacity-0 transition-opacity duration-500 blur-sm;
     z-index: -1;
+  }
+
+  .group:hover .btn-primary::after {
+    @apply opacity-100;
   }
 
   .btn-outline {
     @apply border border-flowai-black text-flowai-black font-medium rounded-lg px-6 py-3 
            transition-colors duration-300 hover:bg-flowai-black hover:text-flowai-white inline-flex items-center justify-center
-           relative overflow-hidden group;
+           relative overflow-hidden;
   }
 
   .btn-outline::before {
     @apply content-[''] absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-500/20 opacity-0 
-           group-hover:opacity-100 transition-opacity duration-500;
+           transition-opacity duration-500;
+  }
+
+  .group:hover .btn-outline::before {
+    @apply opacity-100;
   }
 
   .card {
