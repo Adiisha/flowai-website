@@ -53,6 +53,7 @@ const Roadmap = () => {
   const [activeStep, setActiveStep] = useState(0);
   const { ref, isInView } = useInView({ threshold: 0.1, triggerOnce: false });
   const containerRef = useRef<HTMLDivElement>(null);
+  const stepsContainerRef = useRef<HTMLDivElement>(null);
   
   const steps = [
     {
@@ -87,6 +88,33 @@ const Roadmap = () => {
     }
   ];
   
+  // Handle horizontal scrolling with mouse wheel
+  useEffect(() => {
+    const container = stepsContainerRef.current;
+    if (!container) return;
+    
+    const handleWheel = (e: WheelEvent) => {
+      if (isInView && container) {
+        e.preventDefault();
+        
+        if (e.deltaY > 0) {
+          // Scrolling down, move to next step
+          setActiveStep(prev => (prev + 1) >= steps.length ? prev : prev + 1);
+        } else {
+          // Scrolling up, move to previous step
+          setActiveStep(prev => (prev - 1) < 0 ? 0 : prev - 1);
+        }
+      }
+    };
+    
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+    };
+  }, [isInView, steps.length]);
+  
+  // Auto-advance steps
   useEffect(() => {
     if (isInView) {
       const interval = setInterval(() => {
@@ -97,21 +125,22 @@ const Roadmap = () => {
     }
   }, [isInView, steps.length]);
   
+  // 3D perspective effect on scroll
   useEffect(() => {
     if (containerRef.current) {
-      const rotateX = (window.innerHeight / 2 - window.scrollY) / 30;
-      containerRef.current.style.transform = `perspective(1000px) rotateX(${Math.min(Math.max(-5, rotateX), 5)}deg)`;
+      const handleScroll = () => {
+        if (containerRef.current) {
+          const rect = containerRef.current.getBoundingClientRect();
+          const distanceFromCenter = window.innerHeight / 2 - (rect.top + rect.height / 2);
+          const rotateX = distanceFromCenter / 30;
+          
+          containerRef.current.style.transform = `perspective(1000px) rotateX(${Math.min(Math.max(-5, rotateX), 5)}deg)`;
+        }
+      };
+      
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
     }
-    
-    const handleScroll = () => {
-      if (containerRef.current) {
-        const rotateX = (window.innerHeight / 2 - window.scrollY) / 30;
-        containerRef.current.style.transform = `perspective(1000px) rotateX(${Math.min(Math.max(-5, rotateX), 5)}deg)`;
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -137,19 +166,54 @@ const Roadmap = () => {
           className="preserve-3d transform transition-transform duration-700 ease-out"
           style={{ perspective: '1000px' }}
         >
-          <div className="max-w-4xl mx-auto py-10 space-y-12">
+          <div 
+            ref={stepsContainerRef}
+            className="max-w-4xl mx-auto py-10 space-y-12 relative"
+          >
             {steps.map((step, index) => (
-              <RoadmapStep
+              <div 
                 key={index}
-                icon={step.icon}
-                title={step.title}
-                description={step.description}
-                number={step.number}
-                isActive={activeStep === index}
-                isComplete={index < activeStep}
-                onClick={() => setActiveStep(index)}
-              />
+                className={`transition-all duration-700 ease-out ${
+                  activeStep === index 
+                    ? 'opacity-100 translate-x-0' 
+                    : index < activeStep 
+                      ? 'opacity-0 -translate-x-full' 
+                      : 'opacity-0 translate-x-full'
+                }`}
+                style={{
+                  position: activeStep === index ? 'relative' : 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0
+                }}
+              >
+                <RoadmapStep
+                  icon={step.icon}
+                  title={step.title}
+                  description={step.description}
+                  number={step.number}
+                  isActive={activeStep === index}
+                  isComplete={index < activeStep}
+                  onClick={() => setActiveStep(index)}
+                />
+              </div>
             ))}
+            
+            {/* Progress indicator */}
+            <div className="flex justify-center space-x-2 mt-8">
+              {steps.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveStep(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    activeStep === index 
+                      ? 'bg-flowai-black w-12' 
+                      : 'bg-flowai-black/30'
+                  }`}
+                  aria-label={`Go to step ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
           
           <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-flowai-white to-transparent"></div>

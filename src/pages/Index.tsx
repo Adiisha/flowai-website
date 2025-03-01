@@ -7,7 +7,9 @@ import About from '@/components/About';
 import Roadmap from '@/components/Roadmap';
 import Testimonials from '@/components/Testimonials';
 import LaunchingSection from '@/components/LaunchingSection';
+import ContactUs from '@/components/ContactUs';
 import Footer from '@/components/Footer';
+import BackToTop from '@/components/BackToTop';
 
 const Index = () => {
   useEffect(() => {
@@ -48,7 +50,9 @@ const Index = () => {
       <Roadmap />
       <Testimonials />
       <LaunchingSection />
+      <ContactUs />
       <Footer />
+      <BackToTop />
     </div>
   );
 };
