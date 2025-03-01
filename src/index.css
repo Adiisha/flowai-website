@@ -93,12 +93,30 @@
 
   .btn-primary {
     @apply bg-flowai-black text-flowai-white font-medium rounded-lg px-6 py-3 
-           transition-colors duration-300 hover:bg-flowai-darkGray inline-flex items-center justify-center;
+           transition-colors duration-300 hover:bg-flowai-darkGray inline-flex items-center justify-center
+           relative overflow-hidden group;
+  }
+
+  .btn-primary::before {
+    @apply content-[''] absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-500/20 opacity-0 
+           group-hover:opacity-100 transition-opacity duration-500;
+  }
+
+  .btn-primary::after {
+    @apply content-[''] absolute -inset-px bg-gradient-to-r from-purple-600 to-pink-500 rounded-lg
+           opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm;
+    z-index: -1;
   }
 
   .btn-outline {
     @apply border border-flowai-black text-flowai-black font-medium rounded-lg px-6 py-3 
-           transition-colors duration-300 hover:bg-flowai-black hover:text-flowai-white inline-flex items-center justify-center;
+           transition-colors duration-300 hover:bg-flowai-black hover:text-flowai-white inline-flex items-center justify-center
+           relative overflow-hidden group;
+  }
+
+  .btn-outline::before {
+    @apply content-[''] absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-500/20 opacity-0 
+           group-hover:opacity-100 transition-opacity duration-500;
   }
 
   .card {
@@ -114,7 +132,7 @@
   }
 
   .navbar-item {
-    @apply font-bold text-[16px] hover:text-flowai-lightGray transition-colors duration-300;
+    @apply font-bold text-[16px] hover:text-purple-400 transition-colors duration-300;
   }
 
   .revealed {
@@ -123,6 +141,44 @@
 
   .rotate-3d {
     @apply transition-transform duration-500 ease-out perspective-[1000px];
+  }
+
+  .code-container {
+    font-family: 'Fira Code', 'Courier New', monospace;
+    line-height: 1.6;
+  }
+
+  .code-line {
+    @apply py-0.5;
+  }
+
+  .glow-btn {
+    @apply relative overflow-hidden;
+    box-shadow: 0 0 10px rgba(155, 135, 245, 0.5);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .glow-btn:hover {
+    box-shadow: 0 0 20px rgba(155, 135, 245, 0.8);
+  }
+
+  .glow-btn::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #9b87f5, #D946EF, #8B5CF6);
+    z-index: -1;
+    border-radius: 0.5rem;
+    filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .glow-btn:hover::before {
+    opacity: 1;
   }
 }
 
@@ -141,5 +197,9 @@
 
   .text-shadow {
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent;
   }
 }

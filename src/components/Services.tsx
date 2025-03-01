@@ -28,37 +28,37 @@ const ServiceCard = ({ icon, title, description, index, serviceType }: ServiceCa
       if (!canvas) return;
 
       // Customize the scene based on serviceType
-      let color = '#000000';
-      let wireframe = true;
+      let color = '#9b87f5'; // Purple for most services
+      let wireframe = false;
       let geometryType: 'sphere' | 'torus' | 'box' | 'cylinder' | 'cone' = 'sphere';
       
       switch (serviceType) {
         case 'chatbots':
-          color = '#6c5ce7';
+          color = '#9b87f5'; // Purple
           geometryType = 'sphere';
           break;
         case 'crm':
-          color = '#00cec9';
+          color = '#7E69AB'; // Darker purple
           geometryType = 'box';
           break;
         case 'ticketing':
-          color = '#fdcb6e';
+          color = '#D3E4FD'; // Light blue
           geometryType = 'torus';
           break;
         case 'feedback':
-          color = '#e17055';
+          color = '#FDE1D3'; // Soft peach
           geometryType = 'cylinder';
           break;
         case 'onboarding':
-          color = '#a29bfe';
+          color = '#E5DEFF'; // Soft purple
           geometryType = 'cone';
           break;
         case 'fraud':
-          color = '#ff7675';
+          color = '#D946EF'; // Magenta pink
           geometryType = 'sphere';
           break;
         case 'document':
-          color = '#55efc4';
+          color = '#F2FCE2'; // Soft green
           geometryType = 'box';
           break;
       }
@@ -111,7 +111,7 @@ const ServiceCard = ({ icon, title, description, index, serviceType }: ServiceCa
         color: color,
         wireframe: wireframe,
         transparent: true,
-        opacity: 0.7
+        opacity: 0.4
       });
       
       const mesh = new THREE.Mesh(geometry, material);
@@ -136,11 +136,16 @@ const ServiceCard = ({ icon, title, description, index, serviceType }: ServiceCa
           // Make the mesh follow the mouse
           mesh.position.x = mouseX * 1.5;
           mesh.position.y = mouseY * 1.5;
+          
+          // Add glow effect when hovered
+          material.emissive = new THREE.Color(color);
+          material.emissiveIntensity = 0.5;
         } else {
           mesh.rotation.y += 0.003;
           mesh.rotation.x += 0.002;
           mesh.position.x = Math.sin(Date.now() * 0.001) * 0.5;
           mesh.position.y = Math.cos(Date.now() * 0.001) * 0.5;
+          material.emissiveIntensity = 0;
         }
         
         renderer.render(scene, camera);
@@ -189,7 +194,7 @@ const ServiceCard = ({ icon, title, description, index, serviceType }: ServiceCa
         ref={canvasRef} 
         className="absolute inset-0 w-full h-full pointer-events-none z-0"
       />
-      <div className="relative z-10">
+      <div className="relative z-10 p-6">
         <div className="bg-flowai-beigeDark p-4 rounded-full w-16 h-16 flex items-center justify-center mb-5">
           {icon}
         </div>

@@ -34,10 +34,23 @@ const Index = () => {
       observer.observe(element);
     });
 
+    // Apply subtle parallax effect on scroll
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      
+      document.querySelectorAll('.parallax').forEach((element) => {
+        const speed = Number(element.getAttribute('data-speed')) || 0.1;
+        (element as HTMLElement).style.transform = `translateY(${scrollY * speed}px)`;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
     return () => {
       revealElements.forEach(element => {
         observer.unobserve(element);
       });
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 

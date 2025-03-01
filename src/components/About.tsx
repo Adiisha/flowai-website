@@ -5,6 +5,82 @@ import { useInView } from '@/lib/animate';
 const About = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
   const textRef = useRef<HTMLDivElement>(null);
+  const codeRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    if (isInView && codeRef.current) {
+      const codeElement = codeRef.current;
+      const codeLines = [
+        'import { AI } from "@flow/core";',
+        '',
+        'class BusinessSolution extends AI {',
+        '  constructor(client) {',
+        '    super();',
+        '    this.client = client;',
+        '    this.challenges = client.challenges;',
+        '  }',
+        '',
+        '  async analyze() {',
+        '    const insights = await this.processData(',
+        '      this.client.data',
+        '    );',
+        '    return insights;',
+        '  }',
+        '',
+        '  createStrategy() {',
+        '    return {',
+        '      solutions: this.challenges.map(challenge => ({',
+        '        problem: challenge.description,',
+        '        solution: this.generateSolution(challenge)',
+        '      }))',
+        '    };',
+        '  }',
+        '}',
+        '',
+        'export default BusinessSolution;'
+      ];
+      
+      let i = 0;
+      
+      const typeCode = () => {
+        if (i < codeLines.length) {
+          const codeLine = document.createElement('div');
+          codeLine.className = 'code-line';
+          
+          // Add syntax highlighting classes
+          let line = codeLines[i];
+          
+          if (line.includes('import') || line.includes('export')) {
+            line = `<span class="text-purple-500">${line}</span>`;
+          } else if (line.includes('class') || line.includes('extends')) {
+            line = line.replace('class', '<span class="text-purple-500">class</span>')
+                       .replace('extends', '<span class="text-purple-500">extends</span>')
+                       .replace('BusinessSolution', '<span class="text-yellow-400">BusinessSolution</span>')
+                       .replace('AI', '<span class="text-blue-400">AI</span>');
+          } else if (line.includes('constructor') || line.includes('async')) {
+            line = line.replace('constructor', '<span class="text-purple-500">constructor</span>')
+                       .replace('async', '<span class="text-purple-500">async</span>');
+          } else if (line.includes('this')) {
+            line = line.replace(/this\./g, '<span class="text-blue-400">this.</span>');
+          } else if (line.includes('return')) {
+            line = line.replace('return', '<span class="text-purple-500">return</span>');
+          } else if (line.match(/[a-zA-Z]+\(/)) {
+            line = line.replace(/([a-zA-Z]+)(\()/g, '<span class="text-green-400">$1</span>$2');
+          }
+          
+          codeLine.innerHTML = line || '&nbsp;';
+          codeElement.appendChild(codeLine);
+          i++;
+          
+          setTimeout(typeCode, line ? 100 : 50);
+        }
+      };
+      
+      // Clear previous code
+      codeElement.innerHTML = '';
+      typeCode();
+    }
+  }, [isInView]);
   
   return (
     <section id="about" className="py-24 bg-flowai-beige">
@@ -14,13 +90,13 @@ const About = () => {
             ref={ref as React.RefObject<HTMLDivElement>} 
             className={`relative h-[400px] overflow-hidden rounded-2xl ${isInView ? 'animate-fade-in' : 'opacity-0'}`}
           >
-            <div className="absolute inset-0 bg-flowai-black rounded-2xl overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1a1f2c] to-[#2c3e50] rounded-2xl overflow-hidden">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#ffffff33_0%,_transparent_70%)]"></div>
-              <div className="h-full w-full flex items-center justify-center">
-                <div className="text-flowai-white text-9xl font-bold opacity-10 transform -rotate-12">
-                  FLOW
-                </div>
-                <div className="absolute w-48 h-48 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full filter blur-3xl animate-float"></div>
+              <div 
+                ref={codeRef}
+                className="text-left p-8 font-mono text-sm overflow-auto h-full text-gray-300 code-container"
+              >
+                {/* Code will be typed here */}
               </div>
             </div>
             <div className="absolute bottom-8 right-8 bg-flowai-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg max-w-[280px]">
@@ -48,19 +124,19 @@ const About = () => {
             
             <div className="grid grid-cols-2 gap-8">
               <div className="flex flex-col">
-                <div className="text-3xl font-bold mb-2">150+</div>
+                <div className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">150+</div>
                 <p className="text-base">Clients Worldwide</p>
               </div>
               <div className="flex flex-col">
-                <div className="text-3xl font-bold mb-2">40+</div>
+                <div className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">40+</div>
                 <p className="text-base">AI Experts</p>
               </div>
               <div className="flex flex-col">
-                <div className="text-3xl font-bold mb-2">98%</div>
+                <div className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">98%</div>
                 <p className="text-base">Client Satisfaction</p>
               </div>
               <div className="flex flex-col">
-                <div className="text-3xl font-bold mb-2">24/7</div>
+                <div className="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">24/7</div>
                 <p className="text-base">Support Services</p>
               </div>
             </div>
