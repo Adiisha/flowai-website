@@ -24,14 +24,10 @@ const Index = () => {
       
       const scrollOptions: ScrollToOptions = {
         behavior: 'smooth',
-        block: 'start'
+        top: targetElement.getBoundingClientRect().top + window.scrollY
       };
       
-      const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({
-        ...scrollOptions,
-        top: targetPosition
-      });
+      window.scrollTo(scrollOptions);
     };
     
     // Add the smooth scroll to all anchor links
