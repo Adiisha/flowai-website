@@ -1,10 +1,13 @@
-
 import { useRef, useEffect, useState } from 'react';
 import { useInView } from '@/lib/animate';
 import { Check, DollarSign, Zap, Settings, Users, Shield } from 'lucide-react';
-
 const About = () => {
-  const { ref, isInView } = useInView({ threshold: 0.1 });
+  const {
+    ref,
+    isInView
+  } = useInView({
+    threshold: 0.1
+  });
   const textRef = useRef<HTMLDivElement>(null);
   const [counts, setCounts] = useState({
     clients: 0,
@@ -16,39 +19,34 @@ const About = () => {
     experts: 40,
     satisfaction: 98
   };
-  
   const [activeFeature, setActiveFeature] = useState<string | null>(null);
-  
+
   // Reset and animate counters when they come into view
   useEffect(() => {
     if (isInView) {
       resetAndAnimateCounters();
     }
-    
+
     // Observer for triggering counter animations on scroll
     const observerOptions = {
-      threshold: 0.5,
+      threshold: 0.5
     };
-    
-    const counterObserver = new IntersectionObserver((entries) => {
+    const counterObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           resetAndAnimateCounters();
         }
       });
     }, observerOptions);
-    
     if (textRef.current) {
       counterObserver.observe(textRef.current);
     }
-    
     return () => {
       if (textRef.current) {
         counterObserver.unobserve(textRef.current);
       }
     };
   }, [isInView]);
-  
   const resetAndAnimateCounters = () => {
     // Reset counters first
     setCounts({
@@ -56,20 +54,16 @@ const About = () => {
       experts: 0,
       satisfaction: 0
     });
-    
+
     // Then animate them
     const clientsInterval = setInterval(() => {
       setCounts(prev => {
         const newClients = Math.min(prev.clients + 3, targetCounts.clients);
         const newExperts = Math.min(prev.experts + 1, targetCounts.experts);
         const newSatisfaction = Math.min(prev.satisfaction + 2, targetCounts.satisfaction);
-        
-        if (newClients === targetCounts.clients && 
-            newExperts === targetCounts.experts && 
-            newSatisfaction === targetCounts.satisfaction) {
+        if (newClients === targetCounts.clients && newExperts === targetCounts.experts && newSatisfaction === targetCounts.satisfaction) {
           clearInterval(clientsInterval);
         }
-        
         return {
           clients: newClients,
           experts: newExperts,
@@ -78,37 +72,28 @@ const About = () => {
       });
     }, 40);
   };
-  
-  const features = [
-    {
-      title: "Affordability",
-      icon: <DollarSign className="h-6 w-6" />,
-      description: "We leverage open-source tools and efficient development practices to deliver high-quality AI solutions at a fraction of enterprise costs. Our transparent pricing model ensures predictability with no hidden fees."
-    },
-    {
-      title: "Customization",
-      icon: <Settings className="h-6 w-6" />,
-      description: "Every business has unique needs. Our solutions are fully customizable to fit your specific requirements, with dedicated support to ensure your implementation matches your vision exactly."
-    },
-    {
-      title: "Integration",
-      icon: <Zap className="h-6 w-6" />,
-      description: "Our solutions seamlessly integrate with your existing systems and workflows. We provide comprehensive API documentation and technical support to ensure a smooth transition."
-    },
-    {
-      title: "Support",
-      icon: <Users className="h-6 w-6" />,
-      description: "24/7 expert support is included with all our plans. Our team of AI specialists is always available to address any concerns and provide guidance for optimal implementation."
-    },
-    {
-      title: "Security",
-      icon: <Shield className="h-6 w-6" />,
-      description: "Enterprise-grade security protocols protect your data and ensure compliance with industry regulations. We implement advanced encryption and regular security audits."
-    }
-  ];
-  
-  return (
-    <section id="about" className="py-24 bg-white">
+  const features = [{
+    title: "Affordability",
+    icon: <DollarSign className="h-6 w-6" />,
+    description: "We leverage open-source tools and efficient development practices to deliver high-quality AI solutions at a fraction of enterprise costs. Our transparent pricing model ensures predictability with no hidden fees."
+  }, {
+    title: "Customization",
+    icon: <Settings className="h-6 w-6" />,
+    description: "Every business has unique needs. Our solutions are fully customizable to fit your specific requirements, with dedicated support to ensure your implementation matches your vision exactly."
+  }, {
+    title: "Integration",
+    icon: <Zap className="h-6 w-6" />,
+    description: "Our solutions seamlessly integrate with your existing systems and workflows. We provide comprehensive API documentation and technical support to ensure a smooth transition."
+  }, {
+    title: "Support",
+    icon: <Users className="h-6 w-6" />,
+    description: "24/7 expert support is included with all our plans. Our team of AI specialists is always available to address any concerns and provide guidance for optimal implementation."
+  }, {
+    title: "Security",
+    icon: <Shield className="h-6 w-6" />,
+    description: "Enterprise-grade security protocols protect your data and ensure compliance with industry regulations. We implement advanced encryption and regular security audits."
+  }];
+  return <section id="about" className="bg-white py-0">
       <div className="section-container">
         <div className="text-center mb-16">
           <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded-full">
@@ -121,28 +106,18 @@ const About = () => {
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div
-            ref={ref as React.RefObject<HTMLDivElement>} 
-            className={`relative overflow-hidden rounded-2xl p-8 bg-white border border-gray-100 shadow-lg ${isInView ? 'animate-fade-in' : 'opacity-0'}`}
-          >
+          <div ref={ref as React.RefObject<HTMLDivElement>} className={`relative overflow-hidden rounded-2xl p-8 bg-white border border-gray-100 shadow-lg ${isInView ? 'animate-fade-in' : 'opacity-0'}`}>
             <h3 className="text-2xl font-bold mb-6 text-center">What Makes Us Different</h3>
             
             <div className="flex flex-wrap justify-center gap-3 mb-8">
-              {features.map((feature, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveFeature(activeFeature === feature.title ? null : feature.title)}
-                  className={`feature-button ${activeFeature === feature.title ? 'active' : ''} flex items-center transition-all duration-300 ${feature.title === 'Affordability' ? 'glow-btn' : ''}`}
-                >
+              {features.map((feature, index) => <button key={index} onClick={() => setActiveFeature(activeFeature === feature.title ? null : feature.title)} className={`feature-button ${activeFeature === feature.title ? 'active' : ''} flex items-center transition-all duration-300 ${feature.title === 'Affordability' ? 'glow-btn' : ''}`}>
                   <span className="mr-2">{feature.icon}</span>
                   {feature.title}
-                </button>
-              ))}
+                </button>)}
             </div>
             
             <div className="bg-gray-50 p-6 rounded-xl min-h-[180px] transition-all duration-300">
-              {activeFeature ? (
-                <div className="animate-fade-in">
+              {activeFeature ? <div className="animate-fade-in">
                   <h4 className="text-xl font-bold mb-3 flex items-center">
                     {features.find(f => f.title === activeFeature)?.icon}
                     <span className="ml-2">{features.find(f => f.title === activeFeature)?.title}</span>
@@ -150,8 +125,7 @@ const About = () => {
                   <p className="text-gray-700">{features.find(f => f.title === activeFeature)?.description}</p>
                   
                   {/* Enhanced Affordability section with more clear visuals */}
-                  {activeFeature === 'Affordability' && (
-                    <div className="mt-5 space-y-3">
+                  {activeFeature === 'Affordability' && <div className="mt-5 space-y-3">
                       <div className="p-4 bg-green-50 rounded-lg border border-green-100 flex items-center">
                         <Check className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
                         <p className="text-sm text-green-700 font-medium">Our pricing is typically 40-60% lower than enterprise AI solutions with comparable features.</p>
@@ -164,19 +138,13 @@ const About = () => {
                         <Check className="h-5 w-5 text-purple-500 mr-3 flex-shrink-0" />
                         <p className="text-sm text-purple-700 font-medium">Flexible payment plans to fit businesses of any size.</p>
                       </div>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="text-center flex flex-col items-center justify-center h-full">
+                    </div>}
+                </div> : <div className="text-center flex flex-col items-center justify-center h-full">
                   <p className="text-gray-500">Click any feature above to learn more</p>
                   <div className="mt-4 flex flex-wrap justify-center gap-2">
-                    {['Python', 'TensorFlow', 'PyTorch', 'React', 'Node.js'].map((tech, idx) => (
-                      <span key={idx} className="tech-badge">{tech}</span>
-                    ))}
+                    {['Python', 'TensorFlow', 'PyTorch', 'React', 'Node.js'].map((tech, idx) => <span key={idx} className="tech-badge">{tech}</span>)}
                   </div>
-                </div>
-              )}
+                </div>}
             </div>
             
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-50 rounded-full opacity-70 floating-element"></div>
@@ -184,10 +152,7 @@ const About = () => {
             <div className="absolute top-20 left-10 w-16 h-16 bg-purple-50 rounded-full opacity-60 floating-element animation-delay-700"></div>
           </div>
           
-          <div 
-            ref={textRef}
-            className={`${isInView ? 'animate-slide-up' : 'opacity-0'}`}
-          >
+          <div ref={textRef} className={`${isInView ? 'animate-slide-up' : 'opacity-0'}`}>
             <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded-full">
               Our Vision
             </span>
@@ -219,17 +184,13 @@ const About = () => {
             </div>
             
             <div className="mt-8 grid grid-cols-3 gap-2">
-              {['JavaScript', 'TypeScript', 'SQL', 'AWS', 'Google Cloud', 'Azure ML'].map((tech, idx) => (
-                <span key={idx} className="tech-badge flex items-center justify-center">
+              {['JavaScript', 'TypeScript', 'SQL', 'AWS', 'Google Cloud', 'Azure ML'].map((tech, idx) => <span key={idx} className="tech-badge flex items-center justify-center">
                   {tech}
-                </span>
-              ))}
+                </span>)}
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default About;

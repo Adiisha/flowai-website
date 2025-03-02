@@ -1,12 +1,8 @@
-
 import { useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
-
 const Hero = () => {
   const textRef = useRef<HTMLParagraphElement>(null);
-  
-  return (
-    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#f8f9fa]">
+  return <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#f8f9fa]">
       <div className="absolute inset-0 -z-10 bg-white">
         <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50"></div>
       </div>
@@ -23,7 +19,7 @@ const Hero = () => {
         <div className="absolute top-[30%] right-[20%] animate-float animation-delay-2000 transform-gpu duration-300 floating-element">
           <div className="bg-teal-50 rounded-full w-10 h-10 flex items-center justify-center">
             <div className="text-teal-500">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
             </div>
           </div>
         </div>
@@ -46,8 +42,8 @@ const Hero = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance">
-              Transform Your <br/>
-              Business with <br/>
+              Transform Your <br />
+              Business with <br />
               <span className="gradient-text">Intelligent AI</span>
             </h1>
             
@@ -72,11 +68,11 @@ const Hero = () => {
           </div>
           
           <div className="relative">
-            <div className="bg-white rounded-xl shadow-xl p-6 pb-12 relative z-20">
+            <div className="bg-white rounded-xl shadow-xl p-6 pb-12 relative z-20 py-[19px]">
               <div className="absolute -top-10 -left-5 bg-white rounded-xl shadow-md p-4">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center text-sky-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m12 8 4 4-4 4"/><path d="m8 12h8"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="m12 8 4 4-4 4" /><path d="m8 12h8" /></svg>
                   </div>
                   <div>
                     <p className="text-sm font-medium">Conversational AI</p>
@@ -95,7 +91,7 @@ const Hero = () => {
                 <div className="flex justify-center">
                   <div className="bg-sky-50 rounded-full w-16 h-16 flex items-center justify-center">
                     <div className="text-sky-500">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
                     </div>
                   </div>
                 </div>
@@ -123,7 +119,7 @@ const Hero = () => {
               <div className="absolute -bottom-16 left-12 bg-white rounded-xl shadow-md p-4 max-w-[200px]">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
                   </div>
                   <div>
                     <p className="text-sm font-medium">Customer Insight</p>
@@ -136,15 +132,10 @@ const Hero = () => {
         </div>
       </div>
       
-      <a 
-        href="#services"
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center text-flowai-black hover:text-flowai-darkGray transition-colors duration-300"
-      >
+      <a href="#services" className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center text-flowai-black hover:text-flowai-darkGray transition-colors duration-300">
         <span className="text-sm font-medium mb-2">Scroll to Explore</span>
         <ChevronDown className="animate-bounce" />
       </a>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
