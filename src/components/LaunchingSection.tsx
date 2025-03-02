@@ -1,8 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { useInView } from '@/lib/animate';
 import { Bell } from 'lucide-react';
-
 const LaunchingSection = () => {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -12,34 +10,36 @@ const LaunchingSection = () => {
     minutes: 0,
     seconds: 0
   });
-  
-  const { ref, isInView } = useInView({ threshold: 0.1 });
-  
+  const {
+    ref,
+    isInView
+  } = useInView({
+    threshold: 0.1
+  });
   useEffect(() => {
     // Set the target date to 30 days from now
     const targetDate = new Date();
     targetDate.setDate(targetDate.getDate() + 30);
-    
     const interval = setInterval(() => {
       const now = new Date();
       const difference = targetDate.getTime() - now.getTime();
-      
       if (difference <= 0) {
         clearInterval(interval);
         return;
       }
-      
       const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-      
-      setCountdown({ days, hours, minutes, seconds });
+      const hours = Math.floor(difference % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+      const minutes = Math.floor(difference % (1000 * 60 * 60) / (1000 * 60));
+      const seconds = Math.floor(difference % (1000 * 60) / 1000);
+      setCountdown({
+        days,
+        hours,
+        minutes,
+        seconds
+      });
     }, 1000);
-    
     return () => clearInterval(interval);
   }, []);
-  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
@@ -47,34 +47,32 @@ const LaunchingSection = () => {
       console.log('Email submitted:', email);
       setIsSubmitted(true);
       setEmail('');
-      
+
       // Reset after 3 seconds
       setTimeout(() => {
         setIsSubmitted(false);
       }, 3000);
     }
   };
-  
-  const CountdownItem = ({ value, label }: { value: number, label: string }) => (
-    <div className="flex flex-col items-center">
+  const CountdownItem = ({
+    value,
+    label
+  }: {
+    value: number;
+    label: string;
+  }) => <div className="flex flex-col items-center">
       <div className="bg-white text-flowai-black w-16 h-16 rounded-lg flex items-center justify-center text-2xl font-bold shadow-md border border-gray-100">
         {value.toString().padStart(2, '0')}
       </div>
       <span className="text-sm mt-2 text-gray-600">{label}</span>
-    </div>
-  );
-  
-  return (
-    <section id="launching" className="py-24 bg-white text-gray-900">
+    </div>;
+  return <section id="launching" className="bg-white text-gray-900 py-0">
       <div className="section-container">
         <div className="text-center mb-16">
           <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded-full">
             Coming Soon
           </span>
-          <h2 
-            ref={ref as React.RefObject<HTMLHeadingElement>}
-            className={`mt-4 text-gray-900 ${isInView ? 'animate-fade-in' : 'opacity-0'}`}
-          >
+          <h2 ref={ref as React.RefObject<HTMLHeadingElement>} className={`mt-4 text-gray-900 ${isInView ? 'animate-fade-in' : 'opacity-0'}`}>
             New AI Features Launching Soon
           </h2>
           <p className="max-w-2xl mx-auto mt-4 text-gray-700">
@@ -92,28 +90,16 @@ const LaunchingSection = () => {
               </p>
               
               <form onSubmit={handleSubmit} className="relative">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-100"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <button
-                  type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-sky-500 text-white px-4 py-1.5 rounded transition-colors duration-300 hover:bg-sky-600"
-                >
+                <input type="email" placeholder="Enter your email" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-100" value={email} onChange={e => setEmail(e.target.value)} required />
+                <button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 bg-sky-500 text-white px-4 py-1.5 rounded transition-colors duration-300 hover:bg-sky-600">
                   Notify Me
                 </button>
               </form>
               
-              {isSubmitted && (
-                <div className="mt-3 text-green-600 flex items-center">
+              {isSubmitted && <div className="mt-3 text-green-600 flex items-center">
                   <Bell size={16} className="mr-2" />
                   Thank you! We'll notify you when we launch.
-                </div>
-              )}
+                </div>}
             </div>
             
             <div>
@@ -129,14 +115,9 @@ const LaunchingSection = () => {
                 
                 <div className="mt-8 text-center">
                   <div className="inline-flex gap-2 flex-wrap justify-center">
-                    {['AI Analytics', 'Predictive Insights', 'Custom Reports', 'API Access'].map((feature, index) => (
-                      <span 
-                        key={index}
-                        className="bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-700"
-                      >
+                    {['AI Analytics', 'Predictive Insights', 'Custom Reports', 'API Access'].map((feature, index) => <span key={index} className="bg-gray-100 px-3 py-1 rounded-full text-sm text-gray-700">
                         {feature}
-                      </span>
-                    ))}
+                      </span>)}
                   </div>
                 </div>
               </div>
@@ -144,8 +125,6 @@ const LaunchingSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default LaunchingSection;
