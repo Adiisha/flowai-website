@@ -126,7 +126,7 @@ const Index = () => {
       countObserver.observe(el);
     });
 
-    // Add interactive floating icons animation
+    // Add interactive floating icons animation with improved repulsion
     const addFloatingIcons = () => {
       const iconClasses = [
         'zap',
@@ -144,7 +144,7 @@ const Index = () => {
       container.className = 'fixed inset-0 pointer-events-none z-0 overflow-hidden';
       document.body.appendChild(container);
       
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 25; i++) {
         const icon = document.createElement('div');
         const randomIconName = iconClasses[Math.floor(Math.random() * iconClasses.length)];
         const size = Math.random() * 20 + 10;
@@ -171,7 +171,7 @@ const Index = () => {
         container.appendChild(icon);
       }
       
-      // Add mouse interaction to the icons
+      // Enhanced mouse interaction with improved repulsion for icons
       document.addEventListener('mousemove', (e) => {
         const mouseX = e.clientX;
         const mouseY = e.clientY;
@@ -187,14 +187,16 @@ const Index = () => {
           const distY = mouseY - iconY;
           const distance = Math.sqrt(distX * distX + distY * distY);
           
-          // Only affect icons within a certain radius
-          if (distance < 100) {
-            const moveX = distX * 0.05;
-            const moveY = distY * 0.05;
+          // Only affect icons within a certain radius - enhanced repulsion
+          if (distance < 150) {
+            // Calculate repulsion based on inverse distance (stronger when closer)
+            const repulsionFactor = 1 - distance / 150;
+            const moveX = -distX * 0.08 * repulsionFactor;
+            const moveY = -distY * 0.08 * repulsionFactor;
             
             (icon as HTMLElement).style.transform = `translate(${moveX}px, ${moveY}px)`;
             (icon as HTMLElement).style.opacity = '0.3';
-            (icon as HTMLElement).style.transition = 'transform 0.5s ease-out, opacity 0.5s ease-out';
+            (icon as HTMLElement).style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease-out';
           } else {
             (icon as HTMLElement).style.transform = '';
             (icon as HTMLElement).style.opacity = '0.05';
@@ -224,7 +226,7 @@ const Index = () => {
         case 'layers':
           return '<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline>';
         case 'settings':
-          return '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle>';
+          return '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0 .73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle>';
         default:
           return '<circle cx="12" cy="12" r="10"></circle>';
       }
@@ -246,7 +248,7 @@ const Index = () => {
       slideObserver.observe(section);
     });
 
-    // Add cursor interaction for floating elements
+    // Enhanced cursor interaction for floating elements with improved physics
     const handleCursorInteraction = (e: MouseEvent) => {
       const mouseX = e.clientX;
       const mouseY = e.clientY;
@@ -262,20 +264,23 @@ const Index = () => {
         const distY = mouseY - elementY;
         const distance = Math.sqrt(distX * distX + distY * distY);
         
-        // Create repulsion effect (stronger when closer)
-        const maxDistance = 200;
+        // Create enhanced repulsion effect with spring-like behavior
+        const maxDistance = 250;
         if (distance < maxDistance) {
-          const repulsionStrength = 30 * (1 - distance / maxDistance);
+          // Adjust repulsion strength to be stronger when closer
+          const repulsionStrength = 45 * Math.pow((1 - distance / maxDistance), 1.5);
           const angle = Math.atan2(distY, distX);
           
-          // Move away from cursor
+          // Move away from cursor with spring physics
           const moveX = -Math.cos(angle) * repulsionStrength;
           const moveY = -Math.sin(angle) * repulsionStrength;
           
           (element as HTMLElement).style.transform = `translate(${moveX}px, ${moveY}px)`;
+          (element as HTMLElement).style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
         } else {
-          // Return to original position
+          // Return to original position with spring physics
           (element as HTMLElement).style.transform = '';
+          (element as HTMLElement).style.transition = 'transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
         }
       });
     };

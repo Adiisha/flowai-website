@@ -149,11 +149,21 @@ const About = () => {
                   </h4>
                   <p className="text-gray-700">{features.find(f => f.title === activeFeature)?.description}</p>
                   
-                  {/* Special content for Affordability */}
+                  {/* Enhanced Affordability section with more clear visuals */}
                   {activeFeature === 'Affordability' && (
-                    <div className="mt-4 p-3 bg-green-50 rounded-lg border border-green-100 flex items-center">
-                      <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
-                      <p className="text-sm text-green-700">Our pricing is typically 40-60% lower than enterprise AI solutions with comparable features.</p>
+                    <div className="mt-5 space-y-3">
+                      <div className="p-4 bg-green-50 rounded-lg border border-green-100 flex items-center">
+                        <Check className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                        <p className="text-sm text-green-700 font-medium">Our pricing is typically 40-60% lower than enterprise AI solutions with comparable features.</p>
+                      </div>
+                      <div className="p-4 bg-blue-50 rounded-lg border border-blue-100 flex items-center">
+                        <Check className="h-5 w-5 text-blue-500 mr-3 flex-shrink-0" />
+                        <p className="text-sm text-blue-700 font-medium">No hidden fees or unexpected costs - transparent pricing from start to finish.</p>
+                      </div>
+                      <div className="p-4 bg-purple-50 rounded-lg border border-purple-100 flex items-center">
+                        <Check className="h-5 w-5 text-purple-500 mr-3 flex-shrink-0" />
+                        <p className="text-sm text-purple-700 font-medium">Flexible payment plans to fit businesses of any size.</p>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -171,6 +181,7 @@ const About = () => {
             
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-50 rounded-full opacity-70 floating-element"></div>
             <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-teal-50 rounded-full opacity-70 floating-element"></div>
+            <div className="absolute top-20 left-10 w-16 h-16 bg-purple-50 rounded-full opacity-60 floating-element animation-delay-700"></div>
           </div>
           
           <div 
