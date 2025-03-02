@@ -71,7 +71,8 @@ const Roadmap = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto" ref={ref}>
+        {/* Fixed the ref type issue here by creating a div with proper ref type */}
+        <div className="max-w-4xl mx-auto" ref={ref as React.RefObject<HTMLDivElement>}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <div className="h-[400px] w-full">
               <ResponsiveContainer width="100%" height="100%">
