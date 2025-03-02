@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Home, BellRing } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,9 +48,17 @@ const Navbar = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
+              <a href="#" className="navbar-item flex items-center">
+                <Home className="mr-1 h-4 w-4" />
+                Home
+              </a>
               <a href="#services" className="navbar-item">Services</a>
               <a href="#about" className="navbar-item">About</a>
               <a href="#roadmap" className="navbar-item">Roadmap</a>
+              <a href="#launching" className="navbar-item flex items-center">
+                <BellRing className="mr-1 h-4 w-4" />
+                Launching Soon
+              </a>
               <a href="#contact" className="navbar-item">Contact</a>
             </div>
 
@@ -78,6 +86,14 @@ const Navbar = () => {
         >
           <div className="px-4 pt-2 pb-4 space-y-1 text-center">
             <a
+              href="#"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100 flex items-center justify-center"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <Home className="mr-1 h-4 w-4" />
+              Home
+            </a>
+            <a
               href="#services"
               className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
@@ -97,6 +113,14 @@ const Navbar = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Roadmap
+            </a>
+            <a
+              href="#launching"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100 flex items-center justify-center"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <BellRing className="mr-1 h-4 w-4" />
+              Launching Soon
             </a>
             <a
               href="#contact"
