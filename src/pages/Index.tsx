@@ -246,6 +246,42 @@ const Index = () => {
       slideObserver.observe(section);
     });
 
+    // Add cursor interaction for floating elements
+    const handleCursorInteraction = (e: MouseEvent) => {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      
+      const floatingElements = document.querySelectorAll('.floating-element');
+      floatingElements.forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        const elementX = rect.left + rect.width / 2;
+        const elementY = rect.top + rect.height / 2;
+        
+        // Calculate distance
+        const distX = mouseX - elementX;
+        const distY = mouseY - elementY;
+        const distance = Math.sqrt(distX * distX + distY * distY);
+        
+        // Create repulsion effect (stronger when closer)
+        const maxDistance = 200;
+        if (distance < maxDistance) {
+          const repulsionStrength = 30 * (1 - distance / maxDistance);
+          const angle = Math.atan2(distY, distX);
+          
+          // Move away from cursor
+          const moveX = -Math.cos(angle) * repulsionStrength;
+          const moveY = -Math.sin(angle) * repulsionStrength;
+          
+          (element as HTMLElement).style.transform = `translate(${moveX}px, ${moveY}px)`;
+        } else {
+          // Return to original position
+          (element as HTMLElement).style.transform = '';
+        }
+      });
+    };
+    
+    document.addEventListener('mousemove', handleCursorInteraction);
+
     // Clean up event listeners
     return () => {
       revealElements.forEach(element => {
@@ -260,6 +296,7 @@ const Index = () => {
       document.querySelectorAll('section').forEach(section => {
         slideObserver.unobserve(section);
       });
+      document.removeEventListener('mousemove', handleCursorInteraction);
     };
   }, []);
 

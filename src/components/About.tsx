@@ -19,32 +19,65 @@ const About = () => {
   
   const [activeFeature, setActiveFeature] = useState<string | null>(null);
   
-  // Handle counter animation
+  // Reset and animate counters when they come into view
   useEffect(() => {
-    if (isInView && counts.clients < targetCounts.clients) {
-      const clientsInterval = setInterval(() => {
-        setCounts(prev => {
-          const newClients = Math.min(prev.clients + 3, targetCounts.clients);
-          const newExperts = Math.min(prev.experts + 1, targetCounts.experts);
-          const newSatisfaction = Math.min(prev.satisfaction + 2, targetCounts.satisfaction);
-          
-          if (newClients === targetCounts.clients && 
-              newExperts === targetCounts.experts && 
-              newSatisfaction === targetCounts.satisfaction) {
-            clearInterval(clientsInterval);
-          }
-          
-          return {
-            clients: newClients,
-            experts: newExperts,
-            satisfaction: newSatisfaction
-          };
-        });
-      }, 40);
-      
-      return () => clearInterval(clientsInterval);
+    if (isInView) {
+      resetAndAnimateCounters();
     }
-  }, [isInView, counts]);
+    
+    // Observer for triggering counter animations on scroll
+    const observerOptions = {
+      threshold: 0.5,
+    };
+    
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          resetAndAnimateCounters();
+        }
+      });
+    }, observerOptions);
+    
+    if (textRef.current) {
+      counterObserver.observe(textRef.current);
+    }
+    
+    return () => {
+      if (textRef.current) {
+        counterObserver.unobserve(textRef.current);
+      }
+    };
+  }, [isInView]);
+  
+  const resetAndAnimateCounters = () => {
+    // Reset counters first
+    setCounts({
+      clients: 0,
+      experts: 0,
+      satisfaction: 0
+    });
+    
+    // Then animate them
+    const clientsInterval = setInterval(() => {
+      setCounts(prev => {
+        const newClients = Math.min(prev.clients + 3, targetCounts.clients);
+        const newExperts = Math.min(prev.experts + 1, targetCounts.experts);
+        const newSatisfaction = Math.min(prev.satisfaction + 2, targetCounts.satisfaction);
+        
+        if (newClients === targetCounts.clients && 
+            newExperts === targetCounts.experts && 
+            newSatisfaction === targetCounts.satisfaction) {
+          clearInterval(clientsInterval);
+        }
+        
+        return {
+          clients: newClients,
+          experts: newExperts,
+          satisfaction: newSatisfaction
+        };
+      });
+    }, 40);
+  };
   
   const features = [
     {
@@ -99,7 +132,7 @@ const About = () => {
                 <button
                   key={index}
                   onClick={() => setActiveFeature(activeFeature === feature.title ? null : feature.title)}
-                  className={`feature-button ${activeFeature === feature.title ? 'active' : ''} flex items-center transition-all duration-300`}
+                  className={`feature-button ${activeFeature === feature.title ? 'active' : ''} flex items-center transition-all duration-300 ${feature.title === 'Affordability' ? 'glow-btn' : ''}`}
                 >
                   <span className="mr-2">{feature.icon}</span>
                   {feature.title}
@@ -110,8 +143,19 @@ const About = () => {
             <div className="bg-gray-50 p-6 rounded-xl min-h-[180px] transition-all duration-300">
               {activeFeature ? (
                 <div className="animate-fade-in">
-                  <h4 className="text-xl font-bold mb-3">{features.find(f => f.title === activeFeature)?.title}</h4>
+                  <h4 className="text-xl font-bold mb-3 flex items-center">
+                    {features.find(f => f.title === activeFeature)?.icon}
+                    <span className="ml-2">{features.find(f => f.title === activeFeature)?.title}</span>
+                  </h4>
                   <p className="text-gray-700">{features.find(f => f.title === activeFeature)?.description}</p>
+                  
+                  {/* Special content for Affordability */}
+                  {activeFeature === 'Affordability' && (
+                    <div className="mt-4 p-3 bg-green-50 rounded-lg border border-green-100 flex items-center">
+                      <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
+                      <p className="text-sm text-green-700">Our pricing is typically 40-60% lower than enterprise AI solutions with comparable features.</p>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="text-center flex flex-col items-center justify-center h-full">
@@ -125,8 +169,8 @@ const About = () => {
               )}
             </div>
             
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-50 rounded-full opacity-70"></div>
-            <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-teal-50 rounded-full opacity-70"></div>
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-50 rounded-full opacity-70 floating-element"></div>
+            <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-teal-50 rounded-full opacity-70 floating-element"></div>
           </div>
           
           <div 
