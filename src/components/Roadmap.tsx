@@ -1,15 +1,19 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, MessageSquare, UserCheck, Code, CheckCircle } from 'lucide-react';
+import { useInView } from '@/lib/animate';
 
 const Roadmap = () => {
+  const { ref, isInView } = useInView({ threshold: 0.1 });
+  const [activeStoryIndex, setActiveStoryIndex] = useState(0);
+  
   // Data for pie chart
   const data = [
-    { name: 'Phase 1: Foundation', value: 25, color: '#0ea5e9' },
-    { name: 'Phase 2: Expansion', value: 25, color: '#14b8a6' },
-    { name: 'Phase 3: Innovation', value: 25, color: '#6366f1' },
-    { name: 'Phase 4: Optimization', value: 25, color: '#f97316' },
+    { name: 'Step 1: Discovery', value: 25, color: '#0ea5e9' },
+    { name: 'Step 2: Design', value: 25, color: '#14b8a6' },
+    { name: 'Step 3: Development', value: 25, color: '#6366f1' },
+    { name: 'Step 4: Delivery', value: 25, color: '#f97316' },
   ];
 
   const COLORS = ['#0ea5e9', '#14b8a6', '#6366f1', '#f97316'];
@@ -17,29 +21,57 @@ const Roadmap = () => {
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white p-3 shadow-lg rounded-md border border-gray-100">
+        <div className="bg-white p-3 shadow-lg rounded-md border border-gray-100 transition-all duration-300 animate-float">
           <p className="font-bold">{payload[0].name}</p>
-          <p className="text-gray-600">2024</p>
+          <p className="text-gray-600">Our Process</p>
         </div>
       );
     }
     return null;
   };
+  
+  // Our workflow/story steps
+  const storySteps = [
+    {
+      title: "Step 1: Discovery",
+      icon: <MessageSquare className="h-8 w-8 text-sky-500" />,
+      description: "We start by understanding your business needs and goals through in-depth consultations. Our AI analyzes your requirements to suggest the most effective solutions.",
+      color: '#0ea5e9'
+    },
+    {
+      title: "Step 2: Design",
+      icon: <UserCheck className="h-8 w-8 text-teal-500" />,
+      description: "Our team designs custom AI solutions tailored to your specific needs, creating prototypes for your feedback and approval.",
+      color: '#14b8a6'
+    },
+    {
+      title: "Step 3: Development",
+      icon: <Code className="h-8 w-8 text-indigo-500" />,
+      description: "Our engineers develop your AI solution using cutting-edge technologies while keeping you updated throughout the process.",
+      color: '#6366f1'
+    },
+    {
+      title: "Step 4: Delivery",
+      icon: <CheckCircle className="h-8 w-8 text-orange-500" />,
+      description: "We deploy your AI solution, provide thorough training for your team, and offer ongoing support to ensure optimal performance.",
+      color: '#f97316'
+    }
+  ];
 
   return (
-    <section id="roadmap" className="py-24 bg-flowai-beige">
+    <section id="roadmap" className="py-24 bg-white">
       <div className="section-container">
         <div className="text-center mb-16">
           <span className="px-3 py-1 bg-flowai-black text-flowai-white text-sm font-medium rounded-full">
-            Our Roadmap
+            Our Working Process
           </span>
-          <h2 className="mt-4">The Journey Ahead</h2>
+          <h2 className="mt-4">How We Bring AI To Life</h2>
           <p className="max-w-2xl mx-auto mt-4 text-gray-700">
-            Explore our strategic roadmap, highlighting key milestones and future innovations.
+            From concept to implementation, we follow a structured approach to ensure your AI solution delivers maximum value.
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto" ref={ref}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <div className="h-[400px] w-full">
               <ResponsiveContainer width="100%" height="100%">
@@ -53,93 +85,92 @@ const Roadmap = () => {
                     innerRadius={60}
                     paddingAngle={5}
                     dataKey="value"
-                    animationDuration={1000}
-                    className="hover:cursor-pointer"
+                    animationDuration={1500}
+                    className="cursor-pointer"
+                    onClick={(_, index) => setActiveStoryIndex(index)}
                   >
                     {data.map((entry, index) => (
                       <Cell 
                         key={`cell-${index}`} 
                         fill={COLORS[index % COLORS.length]} 
-                        className="hover:opacity-90 transition-opacity"
+                        className="hover:opacity-80 transition-opacity duration-300"
+                        stroke={activeStoryIndex === index ? "#000" : "#fff"}
+                        strokeWidth={activeStoryIndex === index ? 2 : 1}
                       />
                     ))}
                   </Pie>
                   <Tooltip content={<CustomTooltip />} />
                 </PieChart>
               </ResponsiveContainer>
+              
+              <div className="text-center mt-4">
+                <p className="text-sm text-gray-500">Click on sections to explore our process</p>
+              </div>
             </div>
 
-            <div className="space-y-8">
-              {/* Roadmap Items */}
-              <div className="relative">
-                {/* Vertical Line */}
-                <div className="absolute left-1/2 -ml-0.5 h-full bg-gray-300 w-px"></div>
-
-                {/* Roadmap Items */}
-                <div className="flex flex-col gap-12">
-                  {/* Item 1 */}
-                  <div className="flex items-center justify-between w-full">
-                    <div className="w-5/12 text-right pr-8">
-                      <h3 className="text-xl font-bold mb-2">Phase 1: Foundation</h3>
-                      <p className="text-gray-600">
-                        Establish core AI models and infrastructure.
-                      </p>
-                    </div>
-                    <div className="rounded-full bg-flowai-black text-white p-4 z-10 shadow-md hover:scale-105 transition-transform cursor-pointer">
-                      2024 Q1
-                    </div>
-                    <div className="w-5/12"></div>
+            <div className="space-y-6 relative">
+              <div className="absolute w-1 bg-gray-200 h-full left-4 top-0"></div>
+              
+              {storySteps.map((step, index) => (
+                <div 
+                  key={index}
+                  className={`relative pl-12 py-4 transition-all duration-500 ${
+                    activeStoryIndex === index 
+                      ? 'scale-105 bg-gray-50 rounded-lg shadow-sm' 
+                      : 'opacity-70'
+                  }`}
+                  onClick={() => setActiveStoryIndex(index)}
+                >
+                  <div 
+                    className={`absolute left-0 p-2 rounded-full ${
+                      activeStoryIndex === index ? 'animate-pulse-subtle' : ''
+                    }`}
+                    style={{ backgroundColor: step.color + '20' }}
+                  >
+                    {step.icon}
                   </div>
-
-                  {/* Item 2 */}
-                  <div className="flex items-center justify-between w-full">
-                    <div className="w-5/12"></div>
-                    <div className="rounded-full bg-flowai-black text-white p-4 z-10 shadow-md hover:scale-105 transition-transform cursor-pointer">
-                      2024 Q2
+                  <h4 className="text-xl font-bold mb-2">{step.title}</h4>
+                  <p className="text-gray-700">{step.description}</p>
+                  
+                  {activeStoryIndex === index && (
+                    <div className={`mt-3 animate-fade-in flex gap-2 flex-wrap`}>
+                      {index === 0 && (
+                        <>
+                          <span className="tech-badge">AI Analysis</span>
+                          <span className="tech-badge">Requirements Gathering</span>
+                        </>
+                      )}
+                      {index === 1 && (
+                        <>
+                          <span className="tech-badge">UI/UX Design</span>
+                          <span className="tech-badge">Wireframing</span>
+                          <span className="tech-badge">Prototyping</span>
+                        </>
+                      )}
+                      {index === 2 && (
+                        <>
+                          <span className="tech-badge">Python</span>
+                          <span className="tech-badge">TensorFlow</span>
+                          <span className="tech-badge">React</span>
+                        </>
+                      )}
+                      {index === 3 && (
+                        <>
+                          <span className="tech-badge">Support</span>
+                          <span className="tech-badge">Training</span>
+                          <span className="tech-badge">Maintenance</span>
+                        </>
+                      )}
                     </div>
-                    <div className="w-5/12 text-left pl-8">
-                      <h3 className="text-xl font-bold mb-2">Phase 2: Expansion</h3>
-                      <p className="text-gray-600">
-                        Expand AI capabilities and integrate new data sources.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Item 3 */}
-                  <div className="flex items-center justify-between w-full">
-                    <div className="w-5/12 text-right pr-8">
-                      <h3 className="text-xl font-bold mb-2">Phase 3: Innovation</h3>
-                      <p className="text-gray-600">
-                        Introduce advanced AI features and custom solutions.
-                      </p>
-                    </div>
-                    <div className="rounded-full bg-flowai-black text-white p-4 z-10 shadow-md hover:scale-105 transition-transform cursor-pointer">
-                      2024 Q3
-                    </div>
-                    <div className="w-5/12"></div>
-                  </div>
-
-                  {/* Item 4 */}
-                  <div className="flex items-center justify-between w-full">
-                    <div className="w-5/12"></div>
-                    <div className="rounded-full bg-flowai-black text-white p-4 z-10 shadow-md hover:scale-105 transition-transform cursor-pointer">
-                      2024 Q4
-                    </div>
-                    <div className="w-5/12 text-left pl-8">
-                      <h3 className="text-xl font-bold mb-2">Phase 4: Optimization</h3>
-                      <p className="text-gray-600">
-                        Optimize AI performance and enhance user experience.
-                      </p>
-                    </div>
-                  </div>
+                  )}
                 </div>
-              </div>
+              ))}
             </div>
           </div>
 
           <div className="mt-12 text-center">
             <button className="btn-primary group inline-flex items-center">
-              <span>Learn more about our roadmap</span>
+              <span>Learn more about our process</span>
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
           </div>

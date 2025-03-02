@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -40,3 +41,118 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Enhanced pulse animation */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+/* Section highlight animation */
+.section-highlight {
+  animation: highlight 1s ease;
+}
+
+@keyframes highlight {
+  0% { background-color: rgba(224, 242, 254, 0); }
+  50% { background-color: rgba(224, 242, 254, 0.3); }
+  100% { background-color: rgba(224, 242, 254, 0); }
+}
+
+/* Slide up animation for sections */
+.slide-up-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slide-up-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Interactive elements */
+.interactive-icon {
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.interactive-icon:hover {
+  opacity: 0.8 !important;
+  transform: scale(1.5) !important;
+}
+
+.navbar-item {
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.navbar-item::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.navbar-item:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.feature-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.feature-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.feature-button.active {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.tech-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background-color: #f3f4f6;
+  color: #4b5563;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+  background-color: #e5e7eb;
+  transform: translateY(-1px);
+}
+
