@@ -1,37 +1,54 @@
 
-import { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { ChevronDown, HelpCircle } from 'lucide-react';
 import { useInView } from '@/lib/animate';
 
 interface FAQItemProps {
   question: string;
   answer: string;
-  isOpen: boolean;
-  toggleOpen: () => void;
+  index: number;
 }
 
-const FAQItem = ({ question, answer, isOpen, toggleOpen }: FAQItemProps) => {
+const FAQItem = ({ question, answer, index }: FAQItemProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const answerRef = useRef<HTMLDivElement>(null);
+  const { ref, isInView } = useInView({ threshold: 0.1 });
+
+  const toggleAnswer = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div className={`faq-item ${isOpen ? 'active' : ''}`}>
-      <div className="faq-question" onClick={toggleOpen}>
-        <span>{question}</span>
-        {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+    <div 
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className={`faq-item ${isOpen ? 'active' : ''} ${isInView ? 'animate-fade-in' : 'opacity-0'}`}
+      style={{ animationDelay: `${index * 100}ms` }}
+    >
+      <div className="faq-question" onClick={toggleAnswer}>
+        <div className="flex items-center">
+          <HelpCircle className="h-5 w-5 mr-2 text-sky-500" />
+          <span>{question}</span>
+        </div>
+        <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </div>
-      <div className="faq-answer">
-        <p>{answer}</p>
+      <div 
+        ref={answerRef}
+        className="faq-answer"
+        style={isOpen ? { maxHeight: answerRef.current?.scrollHeight + 'px' } : { maxHeight: 0 }}
+      >
+        <p className="text-gray-700">{answer}</p>
       </div>
     </div>
   );
 };
 
 const FAQ = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
-  const faqItems = [
+  const faqs = [
     {
       question: "What is Flow AI and what services does it offer?",
-      answer: "Flow AI is an AI-driven service platform specializing in automation, chatbot integration, CRM solutions, and interactive website development. We provide comprehensive AI solutions tailored to businesses of all sizes to improve efficiency and customer experiences."
+      answer: "Flow AI is an AI-driven service platform specializing in automation, chatbot integration, CRM solutions, and interactive website development."
     },
     {
       question: "How does Flow AI handle my project from start to finish?",
@@ -39,53 +56,40 @@ const FAQ = () => {
     },
     {
       question: "What industries can benefit from Flow AI's services?",
-      answer: "Flow AI works with various industries, including e-commerce, finance, healthcare, education, and startups looking to automate operations with AI. Our solutions are adaptable to virtually any business model that can benefit from AI-driven improvements."
+      answer: "Flow AI works with various industries, including e-commerce, finance, healthcare, education, and startups looking to automate operations with AI."
     },
     {
       question: "Can I customize the services according to my business needs?",
-      answer: "Yes, all services are fully customizable. Clients can select specific services, and our team will tailor solutions based on their requirements. We take pride in offering bespoke AI solutions that address your unique challenges."
+      answer: "Yes, all services are fully customizable. Clients can select specific services, and our team will tailor solutions based on their requirements."
     },
     {
       question: "How can I get in touch with Flow AI?",
-      answer: "You can reach out via the contact form, email, or WhatsApp. Direct chat options are available for immediate assistance. Our team typically responds within 24 hours to all inquiries."
-    },
-    {
-      question: "Is there a discount for new clients?",
-      answer: "Yes, we offer a 5% discount for all registered users. Simply create an account and log in to automatically apply the discount to any of our services."
-    },
-    {
-      question: "Do you provide ongoing support after project completion?",
-      answer: "Absolutely! All our AI solutions come with dedicated support to ensure optimal performance. We offer different support packages depending on your needs, from basic maintenance to comprehensive 24/7 technical assistance."
+      answer: "You can reach out via the contact form, email, or WhatsApp. Direct chat options are available for immediate assistance."
     }
   ];
 
-  const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
-    <section id="faq" className="bg-white py-16">
+    <section id="faq" className="py-16 bg-gradient-to-b from-gray-50 to-white">
       <div className="section-container">
         <div className="text-center mb-16">
           <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded-full">
-            Common Questions
+            Got Questions?
           </span>
           <h2 ref={ref as React.RefObject<HTMLHeadingElement>} className={`mt-4 text-gray-900 ${isInView ? 'animate-fade-in' : 'opacity-0'}`}>
             Frequently Asked Questions
           </h2>
           <p className="max-w-2xl mx-auto mt-4">
-            Find answers to common questions about our services, pricing, and process.
+            Find answers to common questions about our services, process, and how we can help your business.
           </p>
         </div>
         
         <div className="max-w-3xl mx-auto">
-          {faqItems.map((item, index) => (
+          {faqs.map((faq, index) => (
             <FAQItem 
               key={index}
-              question={item.question}
-              answer={item.answer}
-              isOpen={openIndex === index}
-              toggleOpen={() => toggleFAQ(index)}
+              question={faq.question}
+              answer={faq.answer}
+              index={index}
             />
           ))}
         </div>
