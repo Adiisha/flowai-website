@@ -1,6 +1,6 @@
 
-import { useState, useEffect, useRef } from 'react';
-import { MessageSquare, BarChart4, Users, TicketCheck, BookOpen, ShieldCheck, FileText, Database, Layers, Settings } from 'lucide-react';
+import { useState } from 'react';
+import { MessageSquare, BarChart4, Users, TicketCheck, BookOpen, ShieldCheck, FileText, Database, Info } from 'lucide-react';
 import { useInView } from '@/lib/animate';
 
 interface ServiceCardProps {
@@ -29,7 +29,6 @@ const ServiceCard = ({
     threshold: 0.1
   });
   const [isFlipped, setIsFlipped] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   
   const toggleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -44,13 +43,11 @@ const ServiceCard = ({
         height: "100%",
         minHeight: "400px"
       }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       onClick={toggleFlip}
     >
       <div className="flip-card-inner">
         <div className="flip-card-front">
-          <div className={`bg-gray-50 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-5 transition-all duration-300 ${isHovered ? 'bg-sky-50 text-sky-500' : 'text-gray-700'}`}>
+          <div className="bg-gray-50 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-5 transition-all duration-300 text-gray-700 hover:bg-sky-50 hover:text-sky-500">
             {icon}
           </div>
           <h5 className="mb-3 text-xl font-bold">{title}</h5>
@@ -64,7 +61,10 @@ const ServiceCard = ({
             ))}
           </div>
           
-          <p className="text-sm text-sky-500 mt-4">Click to see more details</p>
+          <div className="mt-4 flex items-center justify-center gap-2 text-sm text-sky-500">
+            <Info size={14} />
+            <span>Click for details</span>
+          </div>
         </div>
         
         <div className="flip-card-back">
@@ -91,7 +91,10 @@ const ServiceCard = ({
             ))}
           </div>
           
-          <p className="text-sm text-sky-500 mt-4">Click to go back</p>
+          <div className="mt-4 flex items-center justify-center gap-2 text-sm text-sky-500">
+            <Info size={14} />
+            <span>Click to go back</span>
+          </div>
         </div>
       </div>
     </div>

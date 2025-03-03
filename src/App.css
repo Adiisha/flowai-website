@@ -250,7 +250,7 @@
   }
 }
 
-/* Service Flip Card Styles */
+/* Service Flip Card Styles - Enhanced */
 .flip-card {
   perspective: 1000px;
   height: 100%;
@@ -270,6 +270,7 @@
 
 .flip-card:hover .flip-card-inner {
   transform: translateY(-5px);
+  box-shadow: 0 10px 25px -10px rgba(14, 165, 233, 0.4);
 }
 
 .flip-card.flipped .flip-card-inner {
@@ -287,17 +288,32 @@
   justify-content: center;
   align-items: center;
   padding: 2rem;
-}
-
-.flip-card-front {
   background-color: white;
   border: 1px solid #e5e7eb;
 }
 
 .flip-card-back {
-  background-color: white;
-  border: 1px solid #e5e7eb;
   transform: rotateY(180deg);
+}
+
+/* Add a subtle glow effect to flip cards */
+.flip-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #0ea5e9, #14b8a6, #6366f1, #f97316);
+  z-index: -1;
+  border-radius: 1rem;
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.flip-card:hover::before {
+  opacity: 0.2;
 }
 
 /* FAQ Accordion Styles */
@@ -340,7 +356,7 @@
 /* Line animation behind content */
 .connecting-line {
   position: absolute;
-  width: 1.5px; 
+  width: 2px; 
   background-color: #f3f4f6;
   left: 4px;
   top: 0;
@@ -350,7 +366,7 @@
 
 .connecting-line-filled {
   position: absolute;
-  width: 1.5px;
+  width: 2px;
   background: linear-gradient(to bottom, #0ea5e9 0%, #14b8a6 50%, #f97316 100%);
   left: 4px;
   top: 0;

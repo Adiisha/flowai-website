@@ -1,14 +1,30 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Home, MessageSquare } from 'lucide-react';
+import { Menu, X, Home, MessageSquare, LogIn } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if user is logged in - this would be replaced with your auth logic
+    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    setIsLoggedIn(loggedIn);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogin = () => {
+    // This would be replaced with your actual authentication logic
+    console.log('Login clicked');
+    // For demo purposes, toggle login state
+    const newLoginState = !isLoggedIn;
+    localStorage.setItem('isLoggedIn', newLoginState.toString());
+    setIsLoggedIn(newLoginState);
   };
 
   // Handle navbar visibility on scroll
@@ -41,7 +57,7 @@ const Navbar = () => {
         <div className="relative flex justify-between items-center bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg hover:bg-white/90 transition-all duration-300">
           <div className="flex-1 flex items-center justify-between">
             <a href="#" className="flex items-center">
-              <img src="/lovable-uploads/e0e33bbb-99fb-4df9-b8e8-af83dc54def1.png" alt="Flow AI Logo" className="h-10 mr-2" />
+              <span className="text-xl font-bold text-sky-500">Flow AI</span>
             </a>
 
             {/* Desktop Navigation */}
@@ -55,8 +71,12 @@ const Navbar = () => {
               <a href="#about" className="navbar-item">Our Mission</a>
               <a href="#contact" className="navbar-item">Contact</a>
               <a href="#faq" className="navbar-item">FAQs</a>
-              <button className="py-2 px-4 bg-sky-500 text-white rounded-md hover:bg-sky-600 transition-all duration-300 glow-btn">
-                Login
+              <button 
+                className="py-2 px-4 bg-sky-500 text-white rounded-md hover:bg-sky-600 transition-all duration-300 glow-btn flex items-center gap-2"
+                onClick={handleLogin}
+              >
+                <LogIn className="h-4 w-4" />
+                {isLoggedIn ? "Dashboard" : "Login"}
               </button>
             </div>
 
@@ -128,10 +148,14 @@ const Navbar = () => {
               FAQs
             </a>
             <button 
-              className="block w-full px-3 py-2 text-base font-medium rounded-md bg-sky-500 text-white hover:bg-sky-600 transition-colors"
-              onClick={() => setIsMenuOpen(false)}
+              className="flex items-center justify-center w-full px-3 py-2 text-base font-medium rounded-md bg-sky-500 text-white hover:bg-sky-600 transition-colors gap-2"
+              onClick={() => {
+                handleLogin();
+                setIsMenuOpen(false);
+              }}
             >
-              Login
+              <LogIn className="h-4 w-4" />
+              {isLoggedIn ? "Dashboard" : "Login"}
             </button>
           </div>
         </div>
