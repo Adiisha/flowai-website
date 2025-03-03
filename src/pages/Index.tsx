@@ -1,14 +1,14 @@
-
 import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import About from '@/components/About';
 import Roadmap from '@/components/Roadmap';
+import Testimonials from '@/components/Testimonials';
+import LaunchingSection from '@/components/LaunchingSection';
 import ContactUs from '@/components/ContactUs';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
-import LoginBanner from '@/components/LoginBanner';
 
 const Index = () => {
   useEffect(() => {
@@ -308,13 +308,12 @@ const Index = () => {
   return (
     <div className="relative">
       <Navbar />
-      <div className="container mx-auto px-4 pt-20">
-        <LoginBanner />
-      </div>
       <Hero />
       <Services />
       <About />
       <Roadmap />
+      <Testimonials />
+      <LaunchingSection />
       <ContactUs />
       <Footer />
       <BackToTop />

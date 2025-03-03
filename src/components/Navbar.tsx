@@ -1,30 +1,14 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Home, MessageSquare, LogIn } from 'lucide-react';
+import { Menu, X, Home, BellRing } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    // Check if user is logged in - this would be replaced with your auth logic
-    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    setIsLoggedIn(loggedIn);
-  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const handleLogin = () => {
-    // This would be replaced with your actual authentication logic
-    console.log('Login clicked');
-    // For demo purposes, toggle login state
-    const newLoginState = !isLoggedIn;
-    localStorage.setItem('isLoggedIn', newLoginState.toString());
-    setIsLoggedIn(newLoginState);
   };
 
   // Handle navbar visibility on scroll
@@ -57,7 +41,9 @@ const Navbar = () => {
         <div className="relative flex justify-between items-center bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg hover:bg-white/90 transition-all duration-300">
           <div className="flex-1 flex items-center justify-between">
             <a href="#" className="flex items-center">
-              <span className="text-xl font-bold text-sky-500">Flow AI</span>
+              <span className="text-2xl font-bold text-flowai-black">
+                Flow<span className="text-sky-500">AI</span>
+              </span>
             </a>
 
             {/* Desktop Navigation */}
@@ -66,18 +52,13 @@ const Navbar = () => {
                 <Home className="mr-1 h-4 w-4 animate-pulse-subtle" />
                 Home
               </a>
-              <a href="#roadmap" className="navbar-item">Process</a>
               <a href="#services" className="navbar-item">Services</a>
-              <a href="#about" className="navbar-item">Our Mission</a>
+              <a href="#about" className="navbar-item">About</a>
+              <a href="#launching" className="navbar-item flex items-center">
+                <BellRing className="mr-1 h-4 w-4 animate-pulse-subtle" />
+                Launching Soon
+              </a>
               <a href="#contact" className="navbar-item">Contact</a>
-              <a href="#faq" className="navbar-item">FAQs</a>
-              <button 
-                className="py-2 px-4 bg-sky-500 text-white rounded-md hover:bg-sky-600 transition-all duration-300 glow-btn flex items-center gap-2"
-                onClick={handleLogin}
-              >
-                <LogIn className="h-4 w-4" />
-                {isLoggedIn ? "Dashboard" : "Login"}
-              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -112,13 +93,6 @@ const Navbar = () => {
               Home
             </a>
             <a
-              href="#roadmap"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Process
-            </a>
-            <a
               href="#services"
               className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
@@ -130,33 +104,23 @@ const Navbar = () => {
               className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
             >
-              Our Mission
+              About
             </a>
             <a
-              href="#contact"
+              href="#launching"
               className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100 flex items-center justify-center"
               onClick={() => setIsMenuOpen(false)}
             >
-              <MessageSquare className="mr-1 h-4 w-4" />
-              Contact
+              <BellRing className="mr-1 h-4 w-4" />
+              Launching Soon
             </a>
             <a
-              href="#faq"
+              href="#contact"
               className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
             >
-              FAQs
+              Contact
             </a>
-            <button 
-              className="flex items-center justify-center w-full px-3 py-2 text-base font-medium rounded-md bg-sky-500 text-white hover:bg-sky-600 transition-colors gap-2"
-              onClick={() => {
-                handleLogin();
-                setIsMenuOpen(false);
-              }}
-            >
-              <LogIn className="h-4 w-4" />
-              {isLoggedIn ? "Dashboard" : "Login"}
-            </button>
           </div>
         </div>
       </nav>

@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { MessageSquare, UserCheck, Code, CheckCircle } from 'lucide-react';
 import { useInView } from '@/lib/animate';
-
 const Roadmap = () => {
   const {
     ref,
@@ -35,7 +34,7 @@ const Roadmap = () => {
   }];
   const COLORS = ['#0ea5e9', '#14b8a6', '#6366f1', '#f97316'];
 
-  // Enhanced scroll animation for the connecting line
+  // Enhanced scroll animation for the connecting line - modified to fill from top to bottom
   useEffect(() => {
     const handleScroll = () => {
       if (lineContainerRef.current) {
@@ -47,10 +46,11 @@ const Roadmap = () => {
         const sectionHeight = rect.height;
         
         // Calculate progress based on scroll position
+        // This will make the line fill from top (0%) to bottom (100%) as user scrolls down
         const scrollProgress = (windowHeight - sectionTop) / (windowHeight + sectionHeight);
         const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
         
-        // Update line height - fills from top to bottom as user scrolls
+        // Update line height
         setLineProgress(clampedProgress * 100);
       }
     };
@@ -95,9 +95,7 @@ const Roadmap = () => {
     description: "We deploy your AI solution, provide thorough training for your team, and offer ongoing support to ensure optimal performance.",
     color: '#f97316'
   }];
-  
-  return (
-    <section id="roadmap" className="bg-white py-10">
+  return <section id="roadmap" className="bg-white py-0">
       <div className="section-container">
         <div className="text-center mb-16">
           <span className="px-3 py-1 bg-flowai-black text-flowai-white text-sm font-medium rounded-full">
@@ -144,69 +142,47 @@ const Roadmap = () => {
             </div>
 
             <div className="space-y-6 relative" ref={lineContainerRef}>
-              {/* Connecting line behind the content with z-index: -1 */}
-              <div className="connecting-line z-[-1]"></div>
-              <div 
-                className="connecting-line-filled z-[-1]" 
-                style={{
-                  height: `${lineProgress}%`
-                }}
-              ></div>
+              {/* Enhanced connecting line with more visible gradient - adjusted for top to bottom fill */}
+              <div className="absolute w-1.5 bg-gray-200 h-full left-4 top-0 rounded-full z-[1]"></div>
+              <div className="absolute w-1.5 bg-gradient-to-b from-sky-500 via-indigo-500 to-orange-500 left-4 top-0 transition-all duration-700 ease-out rounded-full z-[2]" style={{
+              height: `${lineProgress}%`
+            }}></div>
               
-              {storySteps.map((step, index) => (
-                <div 
-                  key={index} 
-                  className={`relative pl-12 py-4 transition-all duration-500 cursor-pointer rounded-lg ${activeStoryIndex === index ? 'scale-105 bg-gray-50 shadow-sm border border-gray-100' : 'opacity-70 hover:opacity-90'}`} 
-                  onClick={() => setActiveStoryIndex(index)}
-                >
-                  <div 
-                    className={`absolute left-0 p-2 rounded-full ${activeStoryIndex === index ? 'animate-pulse-subtle' : ''}`} 
-                    style={{
-                      backgroundColor: step.color + '20'
-                    }}
-                  >
+              {storySteps.map((step, index) => <div key={index} className={`relative pl-12 py-4 transition-all duration-500 cursor-pointer rounded-lg ${activeStoryIndex === index ? 'scale-105 bg-gray-50 shadow-sm border border-gray-100' : 'opacity-70 hover:opacity-90'}`} onClick={() => setActiveStoryIndex(index)}>
+                  <div className={`absolute left-0 p-2 rounded-full z-[3] ${activeStoryIndex === index ? 'animate-pulse-subtle' : ''}`} style={{
+                backgroundColor: step.color + '20'
+              }}>
                     {step.icon}
                   </div>
                   <h4 className="text-xl font-bold mb-2">{step.title}</h4>
                   <p className="text-gray-700">{step.description}</p>
                   
-                  {activeStoryIndex === index && (
-                    <div className={`mt-3 animate-fade-in flex gap-2 flex-wrap`}>
+                  {activeStoryIndex === index && <div className={`mt-3 animate-fade-in flex gap-2 flex-wrap`}>
                       {index === 0 && <>
-                        <span className="tech-badge">AI Analysis</span>
-                        <span className="tech-badge">Requirements Gathering</span>
-                        <span className="tech-badge">Client Consultation</span>
-                      </>}
+                          <span className="tech-badge">AI Analysis</span>
+                          <span className="tech-badge">Requirements Gathering</span>
+                        </>}
                       {index === 1 && <>
-                        <span className="tech-badge">UI/UX Design</span>
-                        <span className="tech-badge">Wireframing</span>
-                        <span className="tech-badge">Prototyping</span>
-                        <span className="tech-badge">Client Feedback</span>
-                      </>}
+                          <span className="tech-badge">UI/UX Design</span>
+                          <span className="tech-badge">Wireframing</span>
+                          <span className="tech-badge">Prototyping</span>
+                        </>}
                       {index === 2 && <>
-                        <span className="tech-badge">Python</span>
-                        <span className="tech-badge">TensorFlow</span>
-                        <span className="tech-badge">React</span>
-                        <span className="tech-badge">Node.js</span>
-                        <span className="tech-badge">QA Testing</span>
-                      </>}
+                          <span className="tech-badge">Python</span>
+                          <span className="tech-badge">TensorFlow</span>
+                          <span className="tech-badge">React</span>
+                        </>}
                       {index === 3 && <>
-                        <span className="tech-badge">Support</span>
-                        <span className="tech-badge">Training</span>
-                        <span className="tech-badge">Maintenance</span>
-                        <span className="tech-badge">Documentation</span>
-                        <span className="tech-badge">Updates</span>
-                      </>}
-                    </div>
-                  )}
-                </div>
-              ))}
+                          <span className="tech-badge">Support</span>
+                          <span className="tech-badge">Training</span>
+                          <span className="tech-badge">Maintenance</span>
+                        </>}
+                    </div>}
+                </div>)}
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Roadmap;
