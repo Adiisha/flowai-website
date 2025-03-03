@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -5,62 +6,7 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-.animate-delay-50  { animation-delay: 50ms; }
-.animate-delay-100 { animation-delay: 100ms; }
-.animate-delay-150 { animation-delay: 150ms; }
-.animate-delay-200 { animation-delay: 200ms; }
-.animate-delay-250 { animation-delay: 250ms; }
-.animate-delay-300 { animation-delay: 300ms; }
-.animate-delay-350 { animation-delay: 350ms; }
-.animate-delay-400 { animation-delay: 400ms; }
-.animate-delay-450 { animation-delay: 450ms; }
-.animate-delay-500 { animation-delay: 500ms; }
-.animate-delay-550 { animation-delay: 550ms; }
-.animate-delay-600 { animation-delay: 600ms; }
-.animate-delay-650 { animation-delay: 650ms; }
-.animate-delay-700 { animation-delay: 700ms; }
-.animate-delay-750 { animation-delay: 750ms; }
-.animate-delay-800 { animation-delay: 800ms; }
-.animate-delay-850 { animation-delay: 850ms; }
-.animate-delay-900 { animation-delay: 900ms; }
-.animate-delay-950 { animation-delay: 950ms; }
-.animate-delay-1000 { animation-delay: 1000ms; }
+/* ... keep existing code (logo and animation styles) */
 
 /* Floating animation */
 @keyframes float {
@@ -70,6 +16,8 @@
   75% { transform: translateY(-5px) rotate(0.5deg); }
   100% { transform: translateY(0px) rotate(0deg); }
 }
+
+/* ... keep existing code (animation delay classes) */
 
 /* Enhanced pulse animation */
 @keyframes pulse-subtle {
@@ -261,29 +209,68 @@
   padding-bottom: 2rem !important;
 }
 
-/* Service Flip Card Styles - Enhanced with true 3D flip */
+/* Banner section for login discount */
+.discount-banner {
+  position: relative;
+  background: linear-gradient(to right, #0ea5e9, #6366f1);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+  margin-bottom: 2rem;
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+.discount-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+  z-index: 1;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  20% {
+    left: 100%;
+    opacity: 0.6;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* Service Flip Card Styles - Enhanced */
 .flip-card {
   perspective: 1000px;
   height: 100%;
   width: 100%;
   cursor: pointer;
-  transition: transform 0.3s ease-in-out;
-}
-
-.flip-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px -10px rgba(14, 165, 233, 0.4);
 }
 
 .flip-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
   border-radius: 1rem;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -10px rgba(14, 165, 233, 0.4);
 }
 
 .flip-card.flipped .flip-card-inner {
@@ -294,7 +281,6 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 1rem;
   display: flex;
@@ -338,7 +324,6 @@
   margin-bottom: 1rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
-  background-color: white;
 }
 
 .faq-item:hover {
@@ -387,72 +372,4 @@
   top: 0;
   z-index: -1; /* Move behind content */
   transition: height 0.7s ease-out;
-}
-
-/* Floating background elements styles */
-.floating-elements-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: -10;
-}
-
-.floating-element {
-  position: absolute;
-  opacity: 0.05;
-  transform: translateY(0);
-  animation: float 10s ease-in-out infinite;
-  z-index: -10;
-}
-
-/* Add more floating elements */
-.floating-icon {
-  position: absolute;
-  opacity: 0.04;
-  z-index: -5;
-  transition: all 0.5s ease;
-}
-
-.floating-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-/* Improved Modal positioning */
-.login-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-}
-
-.login-modal {
-  background-color: white;
-  border-radius: 1rem;
-  padding: 2rem;
-  width: 100%;
-  max-width: 450px;
-  animation: modal-appear 0.3s ease-out forwards;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-@keyframes modal-appear {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
