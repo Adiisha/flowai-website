@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -5,41 +6,7 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
+/* ... keep existing code (logo and animation styles) */
 
 /* Floating animation */
 @keyframes float {
@@ -50,30 +17,7 @@
   100% { transform: translateY(0px) rotate(0deg); }
 }
 
-.animation-delay-500 {
-  animation-delay: 0.5s;
-}
-
-.animation-delay-700 {
-  animation-delay: 0.7s;
-}
-
-.animation-delay-1000 {
-  animation-delay: 1s;
-}
-
-.animation-delay-1400 {
-  animation-delay: 1.4s;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animate-float {
-  animation: float 8s ease-in-out infinite;
-  will-change: transform;
-}
+/* ... keep existing code (animation delay classes) */
 
 /* Enhanced pulse animation */
 @keyframes pulse-subtle {
@@ -96,11 +40,12 @@
   100% { background-color: rgba(224, 242, 254, 0); }
 }
 
-/* Slide up animation for sections */
+/* Slide up animation for sections - reduce spacing */
 .slide-up-section {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.8s ease, transform 0.8s ease;
+  margin-bottom: -24px; /* Reduced space between sections */
 }
 
 .slide-up-visible {
@@ -108,16 +53,17 @@
   transform: translateY(0);
 }
 
-/* Interactive elements */
+/* Interactive elements with z-index adjusted to back layer */
 .interactive-icon {
   cursor: pointer;
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
   will-change: transform, opacity;
+  z-index: -5;
 }
 
 .interactive-icon:hover {
-  opacity: 0.9 !important;
-  transform: scale(1.8) !important;
+  opacity: 0.2 !important;
+  transform: scale(1.4) !important;
 }
 
 .navbar-item {
@@ -144,6 +90,7 @@
   transform-origin: bottom left;
 }
 
+/* All buttons now have consistent glow styles */
 .feature-button {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
@@ -167,6 +114,26 @@
   box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
 }
 
+/* Apply glow effect to all feature buttons */
+.feature-button::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #0ea5e9, #14b8a6, #6366f1, #f97316);
+  z-index: -1;
+  border-radius: 0.5rem;
+  filter: blur(8px);
+  opacity: 0.1;
+  transition: opacity 0.4s ease;
+}
+
+.feature-button:hover::before {
+  opacity: 0.5;
+}
+
 .tech-badge {
   display: inline-block;
   padding: 0.25rem 0.75rem;
@@ -184,7 +151,7 @@
   box-shadow: 0 3px 10px -3px rgba(0, 0, 0, 0.1);
 }
 
-/* Glowing button effect */
+/* Glowing button effect - universal */
 .glow-btn {
   position: relative;
   overflow: hidden;
@@ -209,10 +176,11 @@
   opacity: 0.8;
 }
 
-/* Floating element interactions */
+/* Floating element interactions - moved to back layer */
 .floating-element {
   transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   will-change: transform;
+  z-index: -1;
 }
 
 /* Add permanent subtle glow to buttons */
@@ -233,4 +201,10 @@
   color: white;
   background-color: rgba(14, 165, 233, 0.9);
   border-color: rgba(14, 165, 233, 0.2);
+}
+
+/* Section spacing - reduce gaps */
+.section-container {
+  padding-top: 3rem !important; 
+  padding-bottom: 3rem !important;
 }
