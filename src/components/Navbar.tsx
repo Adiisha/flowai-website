@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Home, BellRing } from 'lucide-react';
+import { Menu, X, Home, MessageSquare } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -41,9 +41,7 @@ const Navbar = () => {
         <div className="relative flex justify-between items-center bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg hover:bg-white/90 transition-all duration-300">
           <div className="flex-1 flex items-center justify-between">
             <a href="#" className="flex items-center">
-              <span className="text-2xl font-bold text-flowai-black">
-                Flow<span className="text-sky-500">AI</span>
-              </span>
+              <img src="/lovable-uploads/e0e33bbb-99fb-4df9-b8e8-af83dc54def1.png" alt="Flow AI Logo" className="h-10 mr-2" />
             </a>
 
             {/* Desktop Navigation */}
@@ -52,13 +50,14 @@ const Navbar = () => {
                 <Home className="mr-1 h-4 w-4 animate-pulse-subtle" />
                 Home
               </a>
+              <a href="#roadmap" className="navbar-item">Process</a>
               <a href="#services" className="navbar-item">Services</a>
-              <a href="#about" className="navbar-item">About</a>
-              <a href="#launching" className="navbar-item flex items-center">
-                <BellRing className="mr-1 h-4 w-4 animate-pulse-subtle" />
-                Launching Soon
-              </a>
+              <a href="#about" className="navbar-item">Our Mission</a>
               <a href="#contact" className="navbar-item">Contact</a>
+              <a href="#faq" className="navbar-item">FAQs</a>
+              <button className="py-2 px-4 bg-sky-500 text-white rounded-md hover:bg-sky-600 transition-all duration-300 glow-btn">
+                Login
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -93,6 +92,13 @@ const Navbar = () => {
               Home
             </a>
             <a
+              href="#roadmap"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Process
+            </a>
+            <a
               href="#services"
               className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
@@ -104,23 +110,29 @@ const Navbar = () => {
               className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
             >
-              About
-            </a>
-            <a
-              href="#launching"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100 flex items-center justify-center"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <BellRing className="mr-1 h-4 w-4" />
-              Launching Soon
+              Our Mission
             </a>
             <a
               href="#contact"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100 flex items-center justify-center"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <MessageSquare className="mr-1 h-4 w-4" />
+              Contact
+            </a>
+            <a
+              href="#faq"
               className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
             >
-              Contact
+              FAQs
             </a>
+            <button 
+              className="block w-full px-3 py-2 text-base font-medium rounded-md bg-sky-500 text-white hover:bg-sky-600 transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Login
+            </button>
           </div>
         </div>
       </nav>
