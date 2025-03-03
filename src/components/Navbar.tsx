@@ -180,10 +180,10 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Login Modal */}
+      {/* Login Modal with proper centered positioning */}
       {showLoginModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 max-w-md w-full animate-fade-in">
+        <div className="login-modal-overlay">
+          <div className="login-modal">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-xl font-bold">Login to Flow AI</h3>
               <button onClick={() => setShowLoginModal(false)} className="text-gray-500 hover:text-gray-700">

@@ -51,7 +51,7 @@ const ServiceCard = ({
             {icon}
           </div>
           <h5 className="mb-3 text-xl font-bold">{title}</h5>
-          <p className="text-base text-flowai-black/80 mb-4">{description}</p>
+          <p className="text-base text-gray-700 mb-4">{description}</p>
           
           <div className="flex flex-wrap mt-3 justify-center gap-2">
             {technologies.slice(0, 3).map((tech, i) => (
@@ -69,7 +69,7 @@ const ServiceCard = ({
         
         <div className="flip-card-back">
           <h5 className="mb-4 text-xl font-bold">{title}</h5>
-          <p className="text-base text-flowai-black/80 mb-4">{detailedDescription}</p>
+          <p className="text-base text-gray-700 mb-4">{detailedDescription}</p>
           
           <div className="mb-4">
             <h6 className="font-semibold mb-2">Key Benefits:</h6>
@@ -226,9 +226,9 @@ const Services = () => {
 
   return (
     <section id="services" className="bg-gradient-to-b from-white to-gray-50 py-16 relative">
-      {/* Additional floating background elements */}
+      {/* Background floating elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[-1]">
-        {[...Array(12)].map((_, i) => (
+        {[...Array(20)].map((_, i) => (
           <div 
             key={i}
             className="absolute animate-float z-[-1]"
@@ -287,15 +287,15 @@ const Services = () => {
         ))}
       </div>
       
-      <div className="section-container">
+      <div className="section-container max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded-full">
             Our Expertise
           </span>
-          <h2 ref={ref as React.RefObject<HTMLHeadingElement>} className={`mt-4 text-gray-900 ${isInView ? 'animate-fade-in' : 'opacity-0'}`}>
+          <h2 ref={ref as React.RefObject<HTMLHeadingElement>} className={`mt-4 text-3xl font-bold text-gray-900 ${isInView ? 'animate-fade-in' : 'opacity-0'}`}>
             AI Solutions Tailored for Your Business
           </h2>
-          <p className="max-w-2xl mx-auto mt-4">
+          <p className="max-w-2xl mx-auto mt-4 text-gray-600">
             Discover how our cutting-edge AI services can transform your operations, enhance customer experiences, and drive growth.
           </p>
         </div>

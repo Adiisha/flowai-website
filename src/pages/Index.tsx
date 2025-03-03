@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -125,7 +126,7 @@ const Index = () => {
       countObserver.observe(el);
     });
 
-    // Add interactive floating icons animation with improved repulsion - moved to back layer
+    // Add enhanced interactive floating icons animation spread throughout the site
     const addFloatingIcons = () => {
       const iconClasses = [
         'zap',
@@ -136,21 +137,29 @@ const Index = () => {
         'database',
         'activity',
         'layers',
-        'settings'
+        'settings',
+        'message-square',
+        'users',
+        'shield',
+        'file-text',
+        'search',
+        'cloud',
+        'grid'
       ];
       
       const container = document.createElement('div');
       container.className = 'fixed inset-0 pointer-events-none z-[-10] overflow-hidden'; // Changed z-index to negative
       document.body.appendChild(container);
       
-      for (let i = 0; i < 25; i++) {
+      // Create more floating elements (50 instead of 25)
+      for (let i = 0; i < 50; i++) {
         const icon = document.createElement('div');
         const randomIconName = iconClasses[Math.floor(Math.random() * iconClasses.length)];
-        const size = Math.random() * 20 + 10;
+        const size = Math.random() * 25 + 10; // Larger range of sizes
         const x = Math.random() * window.innerWidth;
-        const y = Math.random() * window.innerHeight;
-        const duration = Math.random() * 20 + 10;
-        const delay = Math.random() * 5;
+        const y = Math.random() * document.body.scrollHeight; // Cover the entire document height
+        const duration = Math.random() * 30 + 10; // Longer animation durations
+        const delay = Math.random() * 10;
         
         icon.className = `absolute opacity-5 animate-float interactive-icon`;
         icon.style.width = `${size}px`;
@@ -226,6 +235,20 @@ const Index = () => {
           return '<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline>';
         case 'settings':
           return '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0 .73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle>';
+        case 'message-square':
+          return '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>';
+        case 'users':
+          return '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>';
+        case 'shield':
+          return '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>';
+        case 'file-text':
+          return '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline>';
+        case 'search':
+          return '<circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>';
+        case 'cloud':
+          return '<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>';
+        case 'grid':
+          return '<rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>';
         default:
           return '<circle cx="12" cy="12" r="10"></circle>';
       }
@@ -252,7 +275,7 @@ const Index = () => {
       const mouseX = e.clientX;
       const mouseY = e.clientY;
       
-      const floatingElements = document.querySelectorAll('.floating-element');
+      const floatingElements = document.querySelectorAll('.floating-element, .floating-icon');
       floatingElements.forEach((element) => {
         const rect = element.getBoundingClientRect();
         const elementX = rect.left + rect.width / 2;
