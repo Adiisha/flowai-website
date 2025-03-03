@@ -1,7 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { useInView } from '@/lib/animate';
 import { Check, DollarSign, Zap, Settings, Users, Shield } from 'lucide-react';
-
 const About = () => {
   const {
     ref,
@@ -20,13 +19,15 @@ const About = () => {
     experts: 40,
     satisfaction: 98
   };
-  const [activeFeature, setActiveFeature] = useState<string | null>("Affordability");
+  const [activeFeature, setActiveFeature] = useState<string | null>(null);
 
+  // Reset and animate counters when they come into view
   useEffect(() => {
     if (isInView) {
       resetAndAnimateCounters();
     }
 
+    // Observer for triggering counter animations on scroll
     const observerOptions = {
       threshold: 0.5
     };
@@ -46,14 +47,15 @@ const About = () => {
       }
     };
   }, [isInView]);
-
   const resetAndAnimateCounters = () => {
+    // Reset counters first
     setCounts({
       clients: 0,
       experts: 0,
       satisfaction: 0
     });
 
+    // Then animate them
     const clientsInterval = setInterval(() => {
       setCounts(prev => {
         const newClients = Math.min(prev.clients + 3, targetCounts.clients);
@@ -70,54 +72,27 @@ const About = () => {
       });
     }, 40);
   };
-
   const features = [{
     title: "Affordability",
     icon: <DollarSign className="h-6 w-6" />,
-    description: "We leverage open-source tools and efficient development practices to deliver high-quality AI solutions at a fraction of enterprise costs. Our transparent pricing model ensures predictability with no hidden fees.",
-    details: [
-      { bg: "bg-green-50", border: "border-green-100", text: "text-green-700", icon: "text-green-500", content: "Our pricing is typically 40-60% lower than enterprise AI solutions with comparable features." },
-      { bg: "bg-blue-50", border: "border-blue-100", text: "text-blue-700", icon: "text-blue-500", content: "No hidden fees or unexpected costs - transparent pricing from start to finish." },
-      { bg: "bg-purple-50", border: "border-purple-100", text: "text-purple-700", icon: "text-purple-500", content: "Flexible payment plans to fit businesses of any size." }
-    ]
+    description: "We leverage open-source tools and efficient development practices to deliver high-quality AI solutions at a fraction of enterprise costs. Our transparent pricing model ensures predictability with no hidden fees."
   }, {
     title: "Customization",
     icon: <Settings className="h-6 w-6" />,
-    description: "Every business has unique needs. Our solutions are fully customizable to fit your specific requirements, with dedicated support to ensure your implementation matches your vision exactly.",
-    details: [
-      { bg: "bg-amber-50", border: "border-amber-100", text: "text-amber-700", icon: "text-amber-500", content: "Tailored AI models trained specifically for your business domain and data." },
-      { bg: "bg-teal-50", border: "border-teal-100", text: "text-teal-700", icon: "text-teal-500", content: "Customizable dashboards and user interfaces that match your brand identity." },
-      { bg: "bg-indigo-50", border: "border-indigo-100", text: "text-indigo-700", icon: "text-indigo-500", content: "Modular architecture allowing you to choose only the features you need." }
-    ]
+    description: "Every business has unique needs. Our solutions are fully customizable to fit your specific requirements, with dedicated support to ensure your implementation matches your vision exactly."
   }, {
     title: "Integration",
     icon: <Zap className="h-6 w-6" />,
-    description: "Our solutions seamlessly integrate with your existing systems and workflows. We provide comprehensive API documentation and technical support to ensure a smooth transition.",
-    details: [
-      { bg: "bg-sky-50", border: "border-sky-100", text: "text-sky-700", icon: "text-sky-500", content: "Integration with 100+ popular platforms and services via well-documented APIs." },
-      { bg: "bg-emerald-50", border: "border-emerald-100", text: "text-emerald-700", icon: "text-emerald-500", content: "Pre-built connectors for major CRM, ERP, and marketing automation tools." },
-      { bg: "bg-fuchsia-50", border: "border-fuchsia-100", text: "text-fuchsia-700", icon: "text-fuchsia-500", content: "Dedicated integration team to help with custom implementation needs." }
-    ]
+    description: "Our solutions seamlessly integrate with your existing systems and workflows. We provide comprehensive API documentation and technical support to ensure a smooth transition."
   }, {
     title: "Support",
     icon: <Users className="h-6 w-6" />,
-    description: "24/7 expert support is included with all our plans. Our team of AI specialists is always available to address any concerns and provide guidance for optimal implementation.",
-    details: [
-      { bg: "bg-cyan-50", border: "border-cyan-100", text: "text-cyan-700", icon: "text-cyan-500", content: "24/7 technical support through chat, email, and phone." },
-      { bg: "bg-rose-50", border: "border-rose-100", text: "text-rose-700", icon: "text-rose-500", content: "Regular check-ins and quarterly performance reviews for enterprise clients." },
-      { bg: "bg-blue-50", border: "border-blue-100", text: "text-blue-700", icon: "text-blue-500", content: "Comprehensive knowledge base with tutorials and best practices." }
-    ]
+    description: "24/7 expert support is included with all our plans. Our team of AI specialists is always available to address any concerns and provide guidance for optimal implementation."
   }, {
     title: "Security",
     icon: <Shield className="h-6 w-6" />,
-    description: "Enterprise-grade security protocols protect your data and ensure compliance with industry regulations. We implement advanced encryption and regular security audits.",
-    details: [
-      { bg: "bg-red-50", border: "border-red-100", text: "text-red-700", icon: "text-red-500", content: "GDPR, HIPAA, and SOC 2 compliant systems for data protection." },
-      { bg: "bg-emerald-50", border: "border-emerald-100", text: "text-emerald-700", icon: "text-emerald-500", content: "End-to-end encryption for all data at rest and in transit." },
-      { bg: "bg-violet-50", border: "border-violet-100", text: "text-violet-700", icon: "text-violet-500", content: "Regular penetration testing and security audits by third-party experts." }
-    ]
+    description: "Enterprise-grade security protocols protect your data and ensure compliance with industry regulations. We implement advanced encryption and regular security audits."
   }];
-
   return <section id="about" className="bg-white py-0">
       <div className="section-container">
         <div className="text-center mb-16">
@@ -135,7 +110,7 @@ const About = () => {
             <h3 className="text-2xl font-bold mb-6 text-center">What Makes Us Different</h3>
             
             <div className="flex flex-wrap justify-center gap-3 mb-8">
-              {features.map((feature, index) => <button key={index} onClick={() => setActiveFeature(activeFeature === feature.title ? null : feature.title)} className={`feature-button glow-btn ${activeFeature === feature.title ? 'active' : ''} flex items-center transition-all duration-300`}>
+              {features.map((feature, index) => <button key={index} onClick={() => setActiveFeature(activeFeature === feature.title ? null : feature.title)} className={`feature-button ${activeFeature === feature.title ? 'active' : ''} flex items-center transition-all duration-300 ${feature.title === 'Affordability' ? 'glow-btn' : ''}`}>
                   <span className="mr-2">{feature.icon}</span>
                   {feature.title}
                 </button>)}
@@ -149,14 +124,21 @@ const About = () => {
                   </h4>
                   <p className="text-gray-700">{features.find(f => f.title === activeFeature)?.description}</p>
                   
-                  <div className="mt-5 space-y-3">
-                    {features.find(f => f.title === activeFeature)?.details.map((detail, idx) => (
-                      <div key={idx} className={`p-4 ${detail.bg} rounded-lg border ${detail.border} flex items-center`}>
-                        <Check className={`h-5 w-5 ${detail.icon} mr-3 flex-shrink-0`} />
-                        <p className={`text-sm ${detail.text} font-medium`}>{detail.content}</p>
+                  {/* Enhanced Affordability section with more clear visuals */}
+                  {activeFeature === 'Affordability' && <div className="mt-5 space-y-3">
+                      <div className="p-4 bg-green-50 rounded-lg border border-green-100 flex items-center">
+                        <Check className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                        <p className="text-sm text-green-700 font-medium">Our pricing is typically 40-60% lower than enterprise AI solutions with comparable features.</p>
                       </div>
-                    ))}
-                  </div>
+                      <div className="p-4 bg-blue-50 rounded-lg border border-blue-100 flex items-center">
+                        <Check className="h-5 w-5 text-blue-500 mr-3 flex-shrink-0" />
+                        <p className="text-sm text-blue-700 font-medium">No hidden fees or unexpected costs - transparent pricing from start to finish.</p>
+                      </div>
+                      <div className="p-4 bg-purple-50 rounded-lg border border-purple-100 flex items-center">
+                        <Check className="h-5 w-5 text-purple-500 mr-3 flex-shrink-0" />
+                        <p className="text-sm text-purple-700 font-medium">Flexible payment plans to fit businesses of any size.</p>
+                      </div>
+                    </div>}
                 </div> : <div className="text-center flex flex-col items-center justify-center h-full">
                   <p className="text-gray-500">Click any feature above to learn more</p>
                   <div className="mt-4 flex flex-wrap justify-center gap-2">
@@ -165,9 +147,9 @@ const About = () => {
                 </div>}
             </div>
             
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-50 rounded-full opacity-70 floating-element z-[-1]"></div>
-            <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-teal-50 rounded-full opacity-70 floating-element z-[-1]"></div>
-            <div className="absolute top-20 left-10 w-16 h-16 bg-purple-50 rounded-full opacity-60 floating-element animation-delay-700 z-[-1]"></div>
+            <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-50 rounded-full opacity-70 floating-element"></div>
+            <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-teal-50 rounded-full opacity-70 floating-element"></div>
+            <div className="absolute top-20 left-10 w-16 h-16 bg-purple-50 rounded-full opacity-60 floating-element animation-delay-700"></div>
           </div>
           
           <div ref={textRef} className={`${isInView ? 'animate-slide-up' : 'opacity-0'}`}>
@@ -211,5 +193,4 @@ const About = () => {
       </div>
     </section>;
 };
-
 export default About;

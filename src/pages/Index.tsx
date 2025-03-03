@@ -126,7 +126,7 @@ const Index = () => {
       countObserver.observe(el);
     });
 
-    // Add interactive floating icons animation with improved repulsion - moved to back layer
+    // Add interactive floating icons animation with improved repulsion
     const addFloatingIcons = () => {
       const iconClasses = [
         'zap',
@@ -141,7 +141,7 @@ const Index = () => {
       ];
       
       const container = document.createElement('div');
-      container.className = 'fixed inset-0 pointer-events-none z-[-10] overflow-hidden'; // Changed z-index to negative
+      container.className = 'fixed inset-0 pointer-events-none z-0 overflow-hidden';
       document.body.appendChild(container);
       
       for (let i = 0; i < 25; i++) {
@@ -171,7 +171,7 @@ const Index = () => {
         container.appendChild(icon);
       }
       
-      // Enhanced mouse interaction with improved repulsion for icons - more subtle
+      // Enhanced mouse interaction with improved repulsion for icons
       document.addEventListener('mousemove', (e) => {
         const mouseX = e.clientX;
         const mouseY = e.clientY;
@@ -187,20 +187,20 @@ const Index = () => {
           const distY = mouseY - iconY;
           const distance = Math.sqrt(distX * distX + distY * distY);
           
-          // Only affect icons within a certain radius - more subtle repulsion
+          // Only affect icons within a certain radius - enhanced repulsion
           if (distance < 150) {
-            // Calculate repulsion based on inverse distance (stronger when closer) - but more subtle
-            const repulsionFactor = 0.8 * (1 - distance / 150);
-            const moveX = -distX * 0.05 * repulsionFactor;
-            const moveY = -distY * 0.05 * repulsionFactor;
+            // Calculate repulsion based on inverse distance (stronger when closer)
+            const repulsionFactor = 1 - distance / 150;
+            const moveX = -distX * 0.08 * repulsionFactor;
+            const moveY = -distY * 0.08 * repulsionFactor;
             
             (icon as HTMLElement).style.transform = `translate(${moveX}px, ${moveY}px)`;
-            (icon as HTMLElement).style.opacity = '0.1';
-            (icon as HTMLElement).style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.7s ease-out';
+            (icon as HTMLElement).style.opacity = '0.3';
+            (icon as HTMLElement).style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease-out';
           } else {
             (icon as HTMLElement).style.transform = '';
             (icon as HTMLElement).style.opacity = '0.05';
-            (icon as HTMLElement).style.transition = 'transform 1.2s ease-out, opacity 1.2s ease-out';
+            (icon as HTMLElement).style.transition = 'transform 1s ease-out, opacity 1s ease-out';
           }
         });
       });
