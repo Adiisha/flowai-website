@@ -1,15 +1,16 @@
 
 import { useState } from 'react';
-import { Mail, Send, Phone, CheckSquare, MessageSquare } from 'lucide-react';
+import { Mail, Send, Phone, Check, ChevronDown, MessageSquare } from 'lucide-react';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
-    services: [] as string[]
+    service: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   
   const services = [
     "AI Chatbots",
@@ -30,21 +31,12 @@ const ContactUs = () => {
     }));
   };
   
-  const handleServiceChange = (service: string) => {
-    setFormData(prev => {
-      const serviceList = [...prev.services];
-      if (serviceList.includes(service)) {
-        return {
-          ...prev,
-          services: serviceList.filter(s => s !== service)
-        };
-      } else {
-        return {
-          ...prev,
-          services: [...serviceList, service]
-        };
-      }
-    });
+  const handleServiceSelect = (service: string) => {
+    setFormData(prev => ({
+      ...prev,
+      service
+    }));
+    setIsDropdownOpen(false);
   };
   
   const handleSubmit = (e: React.FormEvent) => {
@@ -59,7 +51,7 @@ const ContactUs = () => {
         name: '',
         email: '',
         message: '',
-        services: []
+        service: ''
       });
       setIsSubmitted(false);
     }, 3000);
@@ -151,27 +143,40 @@ const ContactUs = () => {
               
               <div>
                 <label className="block text-sm font-medium mb-2 text-gray-700">
-                  Services You're Interested In
+                  Service You're Interested In
                 </label>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                  {services.map((service, index) => (
-                    <div key={index} className="flex items-center space-x-2">
-                      <button
-                        type="button"
-                        className={`w-5 h-5 flex-shrink-0 rounded transition-colors ${
-                          formData.services.includes(service) 
-                            ? 'bg-sky-500 text-white' 
-                            : 'bg-white border border-gray-300'
-                        }`}
-                        onClick={() => handleServiceChange(service)}
-                      >
-                        {formData.services.includes(service) && (
-                          <CheckSquare className="w-5 h-5" />
-                        )}
-                      </button>
-                      <span className="text-sm">{service}</span>
+                <div className="relative">
+                  <button
+                    type="button"
+                    className="w-full p-3 bg-white rounded-md border border-gray-200 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-left flex justify-between items-center"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  >
+                    <span className={formData.service ? 'text-gray-900' : 'text-gray-400'}>
+                      {formData.service || 'Select a service'}
+                    </span>
+                    <ChevronDown className={`w-5 h-5 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  
+                  {isDropdownOpen && (
+                    <div className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg">
+                      <ul className="py-1 max-h-60 overflow-auto">
+                        {services.map((service, index) => (
+                          <li 
+                            key={index}
+                            className="px-3 py-2 hover:bg-gray-100 cursor-pointer flex items-center"
+                            onClick={() => handleServiceSelect(service)}
+                          >
+                            {formData.service === service && (
+                              <Check className="w-4 h-4 text-sky-500 mr-2" />
+                            )}
+                            <span className={`${formData.service === service ? 'text-sky-600 font-medium' : ''}`}>
+                              {service}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
               

@@ -1,6 +1,5 @@
-
 import { useState } from 'react';
-import { MessageSquare, BarChart4, Users, TicketCheck, BookOpen, ShieldCheck, FileText, Database, ChevronDown, ChevronUp } from 'lucide-react';
+import { MessageSquare, BarChart4, Users, TicketCheck, BookOpen, ShieldCheck, FileText, Database } from 'lucide-react';
 import { useInView } from '@/lib/animate';
 
 interface ServiceCardProps {
@@ -23,22 +22,19 @@ const ServiceCard = ({
   index
 }: ServiceCardProps) => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
-
   return (
     <div 
       ref={ref as React.RefObject<HTMLDivElement>} 
-      className={`service-card relative overflow-hidden transition-all duration-500 ${isExpanded ? 'h-auto' : 'h-[300px]'} 
-                 ${isInView ? 'animate-fade-in' : 'opacity-0'} hover:shadow-glow`} 
+      className={`service-card h-full transition-all duration-300 ${isInView ? 'animate-fade-in' : 'opacity-0'} hover:shadow-glow`} 
       style={{
         animationDelay: `${index * 100}ms`,
       }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="p-6 h-full flex flex-col">
+      <div className="p-6 h-full flex flex-col relative overflow-hidden">
         <div className="bg-gray-50 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-5 transition-all duration-300 text-gray-700 
                       hover:bg-sky-50 hover:text-sky-500 glow-icon">
           {icon}
@@ -54,49 +50,35 @@ const ServiceCard = ({
           ))}
         </div>
         
-        <button 
-          onClick={toggleExpand} 
-          className="mt-auto mx-auto glow-btn service-expand-btn flex items-center justify-center gap-2 text-sky-500 hover:text-sky-600"
+        <div 
+          className={`absolute inset-0 bg-white p-6 transition-all duration-300 flex flex-col ${
+            isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full pointer-events-none'
+          }`}
+          style={{ zIndex: 10 }}
         >
-          {isExpanded ? (
-            <>
-              <span>Show Less</span>
-              <ChevronUp size={16} />
-            </>
-          ) : (
-            <>
-              <span>Show More</span>
-              <ChevronDown size={16} />
-            </>
-          )}
-        </button>
-        
-        {isExpanded && (
-          <div className="expanded-content mt-4 animate-fade-in">
-            <hr className="my-4 border-gray-200" />
-            <p className="text-base text-gray-700 mb-4">{detailedDescription}</p>
-            
-            <div className="mb-4">
-              <h6 className="font-semibold mb-2">Key Benefits:</h6>
-              <ul className="text-left text-sm">
-                {benefits.map((benefit, i) => (
-                  <li key={i} className="mb-1 flex items-start">
-                    <span className="text-sky-500 mr-2">•</span>
-                    {benefit}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            
-            <div className="flex flex-wrap mt-3 gap-2">
-              {technologies.map((tech, i) => (
-                <span key={i} className="tech-badge glow-badge">
-                  {tech}
-                </span>
+          <h5 className="mb-3 text-xl font-bold text-sky-600">{title}</h5>
+          <p className="text-base text-gray-700 mb-4">{detailedDescription}</p>
+          
+          <div className="mb-4">
+            <h6 className="font-semibold mb-2">Key Benefits:</h6>
+            <ul className="text-left text-sm">
+              {benefits.map((benefit, i) => (
+                <li key={i} className="mb-1 flex items-start">
+                  <span className="text-sky-500 mr-2">•</span>
+                  {benefit}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
-        )}
+          
+          <div className="flex flex-wrap mt-auto gap-2">
+            {technologies.map((tech, i) => (
+              <span key={i} className="tech-badge glow-badge">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -222,67 +204,6 @@ const Services = () => {
 
   return (
     <section id="services" className="bg-gradient-to-b from-white to-gray-50 py-16 relative">
-      {/* Background floating elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-[-1]">
-        {[...Array(20)].map((_, i) => (
-          <div 
-            key={i}
-            className="absolute animate-float z-[-1]"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${10 + Math.random() * 20}s`,
-              opacity: 0.05
-            }}
-          >
-            <div className={`rounded-full w-${8 + Math.floor(Math.random() * 16)} h-${8 + Math.floor(Math.random() * 16)}`}>
-              {i % 5 === 0 && (
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                  <line x1="2" y1="12" x2="22" y2="12"></line>
-                </svg>
-              )}
-              {i % 5 === 1 && (
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                  <polyline points="2 17 12 22 22 17"></polyline>
-                  <polyline points="2 12 12 17 22 12"></polyline>
-                </svg>
-              )}
-              {i % 5 === 2 && (
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-                  <rect x="9" y="9" width="6" height="6"></rect>
-                  <line x1="9" y1="1" x2="9" y2="4"></line>
-                  <line x1="15" y1="1" x2="15" y2="4"></line>
-                  <line x1="9" y1="20" x2="9" y2="23"></line>
-                  <line x1="15" y1="20" x2="15" y2="23"></line>
-                  <line x1="20" y1="9" x2="23" y2="9"></line>
-                  <line x1="20" y1="14" x2="23" y2="14"></line>
-                  <line x1="1" y1="9" x2="4" y2="9"></line>
-                  <line x1="1" y1="14" x2="4" y2="14"></line>
-                </svg>
-              )}
-              {i % 5 === 3 && (
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="12" y1="20" x2="12" y2="10"></line>
-                  <line x1="18" y1="20" x2="18" y2="4"></line>
-                  <line x1="6" y1="20" x2="6" y2="16"></line>
-                </svg>
-              )}
-              {i % 5 === 4 && (
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
-                  <path d="m9 12 2 2 4-4"></path>
-                </svg>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-      
       <div className="section-container max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded-full">

@@ -1,5 +1,5 @@
 
-import { Mail, Phone, Twitter, Facebook, Instagram, Linkedin, ArrowRight } from 'lucide-react';
+import { Mail, Phone, Instagram, ArrowRight } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -12,17 +12,13 @@ const Footer = () => {
               Empowering businesses with custom AI solutions to drive innovation, efficiency, and growth.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-flowai-white hover:text-teal-500 transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-flowai-white hover:text-teal-500 transition-colors">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-flowai-white hover:text-teal-500 transition-colors">
+              <a 
+                href="https://www.instagram.com/theflowai.in/?utm_source=ig_web_button_share_sheet" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-flowai-white hover:text-teal-500 transition-colors"
+              >
                 <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-flowai-white hover:text-teal-500 transition-colors">
-                <Linkedin className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -49,9 +45,9 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#testimonials" className="text-flowai-white/80 hover:text-teal-500 transition-colors flex items-center">
+                <a href="#faq" className="text-flowai-white/80 hover:text-teal-500 transition-colors flex items-center">
                   <ArrowRight className="w-3 h-3 mr-2" />
-                  Testimonials
+                  FAQs
                 </a>
               </li>
             </ul>
@@ -62,22 +58,22 @@ const Footer = () => {
               <h4 className="text-xl font-semibold mb-6">Services</h4>
               <ul className="space-y-3">
                 <li>
-                  <a href="#" className="text-flowai-white/80 hover:text-teal-500 transition-colors">
+                  <a href="#services" className="text-flowai-white/80 hover:text-teal-500 transition-colors">
                     AI Chatbots
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-flowai-white/80 hover:text-teal-500 transition-colors">
+                  <a href="#services" className="text-flowai-white/80 hover:text-teal-500 transition-colors">
                     AI-Powered CRM
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-flowai-white/80 hover:text-teal-500 transition-colors">
+                  <a href="#services" className="text-flowai-white/80 hover:text-teal-500 transition-colors">
                     Ticketing Systems
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-flowai-white/80 hover:text-teal-500 transition-colors">
+                  <a href="#services" className="text-flowai-white/80 hover:text-teal-500 transition-colors">
                     Feedback Analysis
                   </a>
                 </li>

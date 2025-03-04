@@ -1,6 +1,6 @@
 
 import { useState, useRef } from 'react';
-import { ChevronDown, HelpCircle } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { useInView } from '@/lib/animate';
 
 interface FAQItemProps {
@@ -21,22 +21,25 @@ const FAQItem = ({ question, answer, index }: FAQItemProps) => {
   return (
     <div 
       ref={ref as React.RefObject<HTMLDivElement>}
-      className={`faq-item mb-4 ${isOpen ? 'active' : ''} ${isInView ? 'animate-fade-in' : 'opacity-0'}`}
+      className={`faq-item mb-4 bg-white shadow-sm rounded-lg overflow-hidden ${isInView ? 'animate-fade-in' : 'opacity-0'}`}
       style={{ animationDelay: `${index * 100}ms` }}
     >
-      <div className="faq-question" onClick={toggleAnswer}>
-        <div className="flex items-center">
-          <HelpCircle className="h-5 w-5 mr-2 text-sky-500 flex-shrink-0" />
-          <span className="text-left">{question}</span>
-        </div>
-        <ChevronDown className={`h-5 w-5 transition-transform duration-300 flex-shrink-0 ${isOpen ? 'rotate-180' : ''}`} />
+      <div 
+        className="faq-question py-4 px-6 flex justify-between items-center cursor-pointer hover:bg-gray-50"
+        onClick={toggleAnswer}
+      >
+        <span className="text-left font-medium">{question}</span>
+        <ChevronDown 
+          className={`h-5 w-5 transition-transform duration-300 text-sky-500 ${isOpen ? 'rotate-180' : ''}`} 
+        />
       </div>
+      
       <div 
         ref={answerRef}
-        className="faq-answer"
+        className="faq-answer bg-white px-6"
         style={isOpen ? { maxHeight: answerRef.current?.scrollHeight + 'px' } : { maxHeight: 0 }}
       >
-        <p className="text-gray-700">{answer}</p>
+        <p className="text-gray-700 py-4">{answer}</p>
       </div>
     </div>
   );
@@ -69,21 +72,18 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="py-16 bg-gradient-to-b from-gray-50 to-white">
-      <div className="section-container max-w-6xl mx-auto px-6">
+    <section id="faq" className="py-16 bg-gray-50">
+      <div className="section-container max-w-3xl mx-auto px-6">
         <div className="text-center mb-12">
-          <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded-full">
-            Got Questions?
-          </span>
-          <h2 ref={ref as React.RefObject<HTMLHeadingElement>} className={`mt-4 text-3xl font-bold text-gray-900 ${isInView ? 'animate-fade-in' : 'opacity-0'}`}>
+          <h2 ref={ref as React.RefObject<HTMLHeadingElement>} className={`text-3xl font-bold text-gray-900 ${isInView ? 'animate-fade-in' : 'opacity-0'}`}>
             Frequently Asked Questions
           </h2>
-          <p className="max-w-2xl mx-auto mt-4 text-gray-600">
-            Find answers to common questions about our services, process, and how we can help your business.
+          <p className="mt-4 text-gray-600">
+            Find answers to common questions about Flow AI and our services.
           </p>
         </div>
         
-        <div className="max-w-3xl mx-auto">
+        <div className="space-y-4">
           {faqs.map((faq, index) => (
             <FAQItem 
               key={index}
