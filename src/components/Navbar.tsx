@@ -1,21 +1,14 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Home, MessageSquare, Cpu, ChevronRight } from 'lucide-react';
-import ChatBot from './ChatBot';
+import { Menu, X, Home, MessageSquare } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
-  const [showChatbot, setShowChatbot] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const openChatbot = () => {
-    setShowChatbot(true);
-    setIsMenuOpen(false);
   };
 
   // Handle navbar visibility on scroll
@@ -37,18 +30,6 @@ const Navbar = () => {
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos]);
-
-  useEffect(() => {
-    if (showChatbot) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [showChatbot]);
 
   return (
     <header 
@@ -74,14 +55,6 @@ const Navbar = () => {
               <a href="#about" className="navbar-item">Our Mission</a>
               <a href="#contact" className="navbar-item">Contact</a>
               <a href="#faq" className="navbar-item">FAQs</a>
-              <button 
-                className="py-2 px-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-md hover:shadow-lg transition-all duration-300 glow-btn flex items-center gap-2"
-                onClick={openChatbot}
-              >
-                <Cpu className="h-4 w-4" />
-                Try AI Assistant
-                <ChevronRight className="h-3 w-3" />
-              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -151,19 +124,9 @@ const Navbar = () => {
             >
               FAQs
             </a>
-            <button 
-              className="flex items-center justify-center w-full px-3 py-2 text-base font-medium rounded-md bg-gradient-to-r from-indigo-500 to-purple-600 text-white transition-colors gap-2"
-              onClick={openChatbot}
-            >
-              <Cpu className="h-4 w-4" />
-              Try AI Assistant
-            </button>
           </div>
         </div>
       </nav>
-
-      {/* ChatBot Component */}
-      <ChatBot isOpen={showChatbot} onClose={() => setShowChatbot(false)} />
     </header>
   );
 };
