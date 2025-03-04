@@ -93,30 +93,6 @@ const FAQ = () => {
             />
           ))}
         </div>
-
-        {/* Add floating elements to the background */}
-        <div className="relative">
-          {[...Array(8)].map((_, i) => (
-            <div 
-              key={i}
-              className="floating-icon absolute"
-              style={{
-                width: `${30 + Math.random() * 20}px`,
-                height: `${30 + Math.random() * 20}px`,
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${15 + Math.random() * 10}s`
-              }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="17" x2="12" y2="17.01"></line>
-              </svg>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

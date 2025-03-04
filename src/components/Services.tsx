@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { MessageSquare, BarChart4, Users, TicketCheck, BookOpen, ShieldCheck, FileText, Database, Info } from 'lucide-react';
+import { MessageSquare, BarChart4, Users, TicketCheck, BookOpen, ShieldCheck, FileText, Database, ChevronDown, ChevronUp } from 'lucide-react';
 import { useInView } from '@/lib/animate';
 
 interface ServiceCardProps {
@@ -22,92 +22,88 @@ const ServiceCard = ({
   benefits,
   index
 }: ServiceCardProps) => {
-  const {
-    ref,
-    isInView
-  } = useInView({
-    threshold: 0.1
-  });
-  const [isFlipped, setIsFlipped] = useState(false);
+  const { ref, isInView } = useInView({ threshold: 0.1 });
+  const [isExpanded, setIsExpanded] = useState(false);
   
-  const toggleFlip = () => {
-    setIsFlipped(!isFlipped);
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
   };
 
   return (
     <div 
       ref={ref as React.RefObject<HTMLDivElement>} 
-      className={`flip-card ${isFlipped ? 'flipped' : ''} ${isInView ? 'animate-fade-in' : 'opacity-0'}`} 
+      className={`service-card relative overflow-hidden transition-all duration-500 ${isExpanded ? 'h-auto' : 'h-[300px]'} 
+                 ${isInView ? 'animate-fade-in' : 'opacity-0'} hover:shadow-glow`} 
       style={{
         animationDelay: `${index * 100}ms`,
-        height: "100%",
-        minHeight: "400px"
       }}
-      onClick={toggleFlip}
     >
-      <div className="flip-card-inner">
-        <div className="flip-card-front">
-          <div className="bg-gray-50 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-5 transition-all duration-300 text-gray-700 hover:bg-sky-50 hover:text-sky-500">
-            {icon}
-          </div>
-          <h5 className="mb-3 text-xl font-bold">{title}</h5>
-          <p className="text-base text-gray-700 mb-4">{description}</p>
-          
-          <div className="flex flex-wrap mt-3 justify-center gap-2">
-            {technologies.slice(0, 3).map((tech, i) => (
-              <span key={i} className="tech-badge">
-                {tech}
-              </span>
-            ))}
-          </div>
-          
-          <div className="mt-4 flex items-center justify-center gap-2 text-sm text-sky-500">
-            <Info size={14} />
-            <span>Click for details</span>
-          </div>
+      <div className="p-6 h-full flex flex-col">
+        <div className="bg-gray-50 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-5 transition-all duration-300 text-gray-700 
+                      hover:bg-sky-50 hover:text-sky-500 glow-icon">
+          {icon}
+        </div>
+        <h5 className="mb-3 text-xl font-bold">{title}</h5>
+        <p className="text-base text-gray-700 mb-4">{description}</p>
+        
+        <div className="flex flex-wrap mt-3 gap-2 mb-4">
+          {technologies.slice(0, 3).map((tech, i) => (
+            <span key={i} className="tech-badge glow-badge">
+              {tech}
+            </span>
+          ))}
         </div>
         
-        <div className="flip-card-back">
-          <h5 className="mb-4 text-xl font-bold">{title}</h5>
-          <p className="text-base text-gray-700 mb-4">{detailedDescription}</p>
-          
-          <div className="mb-4">
-            <h6 className="font-semibold mb-2">Key Benefits:</h6>
-            <ul className="text-left text-sm">
-              {benefits.map((benefit, i) => (
-                <li key={i} className="mb-1 flex items-start">
-                  <span className="text-sky-500 mr-2">•</span>
-                  {benefit}
-                </li>
+        <button 
+          onClick={toggleExpand} 
+          className="mt-auto mx-auto glow-btn service-expand-btn flex items-center justify-center gap-2 text-sky-500 hover:text-sky-600"
+        >
+          {isExpanded ? (
+            <>
+              <span>Show Less</span>
+              <ChevronUp size={16} />
+            </>
+          ) : (
+            <>
+              <span>Show More</span>
+              <ChevronDown size={16} />
+            </>
+          )}
+        </button>
+        
+        {isExpanded && (
+          <div className="expanded-content mt-4 animate-fade-in">
+            <hr className="my-4 border-gray-200" />
+            <p className="text-base text-gray-700 mb-4">{detailedDescription}</p>
+            
+            <div className="mb-4">
+              <h6 className="font-semibold mb-2">Key Benefits:</h6>
+              <ul className="text-left text-sm">
+                {benefits.map((benefit, i) => (
+                  <li key={i} className="mb-1 flex items-start">
+                    <span className="text-sky-500 mr-2">•</span>
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            <div className="flex flex-wrap mt-3 gap-2">
+              {technologies.map((tech, i) => (
+                <span key={i} className="tech-badge glow-badge">
+                  {tech}
+                </span>
               ))}
-            </ul>
+            </div>
           </div>
-          
-          <div className="flex flex-wrap mt-3 justify-center gap-2">
-            {technologies.map((tech, i) => (
-              <span key={i} className="tech-badge">
-                {tech}
-              </span>
-            ))}
-          </div>
-          
-          <div className="mt-4 flex items-center justify-center gap-2 text-sm text-sky-500">
-            <Info size={14} />
-            <span>Click to go back</span>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
 };
 
 const Services = () => {
-  const {
-    ref,
-    isInView
-  } = useInView({
-    threshold: 0.1
-  });
+  const { ref, isInView } = useInView({ threshold: 0.1 });
   
   const services = [
     {
@@ -237,7 +233,7 @@ const Services = () => {
               left: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 5}s`,
               animationDuration: `${10 + Math.random() * 20}s`,
-              opacity: 0.03
+              opacity: 0.05
             }}
           >
             <div className={`rounded-full w-${8 + Math.floor(Math.random() * 16)} h-${8 + Math.floor(Math.random() * 16)}`}>
