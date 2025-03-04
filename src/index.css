@@ -446,8 +446,16 @@
   /* Instead of creating circular references with utility classes */
 
   .floating-element {
-    @apply absolute opacity-10 transition-all duration-500;
+    @apply absolute opacity-20 transition-all duration-500;
     z-index: -1;
+  }
+
+  .connecting-line {
+    @apply absolute left-0 top-0 w-[2px] h-full bg-gray-200/30;
+  }
+
+  .connecting-line-filled {
+    @apply absolute left-0 top-0 w-[2px] bg-gradient-to-b from-sky-500/50 to-indigo-500/50;
   }
 
   .interactive-floating-element {
