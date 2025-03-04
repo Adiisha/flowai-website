@@ -441,15 +441,15 @@
   }
 
   .chatbot-container .mt-2 {
-    @apply mt-2;
+    margin-top: 0.5rem;
   }
 
   .chatbot-container .mt-3 {
-    @apply mt-3;
+    margin-top: 0.75rem;
   }
 
   .chatbot-container .ml-2 {
-    @apply ml-2;
+    margin-left: 0.5rem;
   }
 
   .floating-element {
