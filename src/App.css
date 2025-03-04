@@ -41,6 +41,27 @@
   color: #888;
 }
 
+.animate-delay-50  { animation-delay: 50ms; }
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-150 { animation-delay: 150ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-250 { animation-delay: 250ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-350 { animation-delay: 350ms; }
+.animate-delay-400 { animation-delay: 400ms; }
+.animate-delay-450 { animation-delay: 450ms; }
+.animate-delay-500 { animation-delay: 500ms; }
+.animate-delay-550 { animation-delay: 550ms; }
+.animate-delay-600 { animation-delay: 600ms; }
+.animate-delay-650 { animation-delay: 650ms; }
+.animate-delay-700 { animation-delay: 700ms; }
+.animate-delay-750 { animation-delay: 750ms; }
+.animate-delay-800 { animation-delay: 800ms; }
+.animate-delay-850 { animation-delay: 850ms; }
+.animate-delay-900 { animation-delay: 900ms; }
+.animate-delay-950 { animation-delay: 950ms; }
+.animate-delay-1000 { animation-delay: 1000ms; }
+
 /* Floating animation */
 @keyframes float {
   0% { transform: translateY(0px) rotate(0deg); }
@@ -48,31 +69,6 @@
   50% { transform: translateY(-12px) rotate(-1deg); }
   75% { transform: translateY(-5px) rotate(0.5deg); }
   100% { transform: translateY(0px) rotate(0deg); }
-}
-
-.animation-delay-500 {
-  animation-delay: 0.5s;
-}
-
-.animation-delay-700 {
-  animation-delay: 0.7s;
-}
-
-.animation-delay-1000 {
-  animation-delay: 1s;
-}
-
-.animation-delay-1400 {
-  animation-delay: 1.4s;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animate-float {
-  animation: float 8s ease-in-out infinite;
-  will-change: transform;
 }
 
 /* Enhanced pulse animation */
@@ -96,11 +92,12 @@
   100% { background-color: rgba(224, 242, 254, 0); }
 }
 
-/* Slide up animation for sections */
+/* Slide up animation for sections - reduce spacing further */
 .slide-up-section {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.8s ease, transform 0.8s ease;
+  margin-bottom: -30px; /* Further reduced space between sections */
 }
 
 .slide-up-visible {
@@ -108,16 +105,17 @@
   transform: translateY(0);
 }
 
-/* Interactive elements */
+/* Interactive elements with z-index adjusted to back layer */
 .interactive-icon {
   cursor: pointer;
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
   will-change: transform, opacity;
+  z-index: -10; /* Moved further back */
 }
 
 .interactive-icon:hover {
-  opacity: 0.9 !important;
-  transform: scale(1.8) !important;
+  opacity: 0.2 !important;
+  transform: scale(1.4) !important;
 }
 
 .navbar-item {
@@ -144,7 +142,8 @@
   transform-origin: bottom left;
 }
 
-.feature-button {
+/* All buttons now have consistent glow styles */
+.feature-button, button {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   background-color: white;
@@ -155,16 +154,36 @@
   z-index: 1;
 }
 
-.feature-button:hover {
+.feature-button:hover, button:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
 }
 
-.feature-button.active {
+.feature-button.active, button.active {
   background-color: #f3f4f6;
   border-color: #d1d5db;
   transform: translateY(-3px);
   box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+}
+
+/* Apply glow effect to all feature buttons */
+.feature-button::before, button::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #0ea5e9, #14b8a6, #6366f1, #f97316);
+  z-index: -1;
+  border-radius: 0.5rem;
+  filter: blur(8px);
+  opacity: 0.1;
+  transition: opacity 0.4s ease;
+}
+
+.feature-button:hover::before, button:hover::before {
+  opacity: 0.5;
 }
 
 .tech-badge {
@@ -184,7 +203,7 @@
   box-shadow: 0 3px 10px -3px rgba(0, 0, 0, 0.1);
 }
 
-/* Glowing button effect */
+/* Glowing button effect - universal */
 .glow-btn {
   position: relative;
   overflow: hidden;
@@ -209,10 +228,11 @@
   opacity: 0.8;
 }
 
-/* Floating element interactions */
+/* Floating element interactions - moved to back layer */
 .floating-element {
   transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   will-change: transform;
+  z-index: -10; /* Moved further back */
 }
 
 /* Add permanent subtle glow to buttons */
@@ -233,4 +253,206 @@
   color: white;
   background-color: rgba(14, 165, 233, 0.9);
   border-color: rgba(14, 165, 233, 0.2);
+}
+
+/* Section spacing - further reduce gaps */
+.section-container {
+  padding-top: 2rem !important; 
+  padding-bottom: 2rem !important;
+}
+
+/* Service Flip Card Styles - Enhanced with true 3D flip */
+.flip-card {
+  perspective: 1000px;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.flip-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -10px rgba(14, 165, 233, 0.4);
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Add a subtle glow effect to flip cards */
+.flip-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #0ea5e9, #14b8a6, #6366f1, #f97316);
+  z-index: -1;
+  border-radius: 1rem;
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.flip-card:hover::before {
+  opacity: 0.2;
+}
+
+/* FAQ Accordion Styles */
+.faq-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.faq-item:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+  padding: 1rem;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.faq-answer {
+  padding: 0 1rem;
+  max-height: 0;
+  overflow: hidden;
+  background-color: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 500px;
+  padding: 1rem;
+}
+
+/* Line animation behind content */
+.connecting-line {
+  position: absolute;
+  width: 2px; 
+  background-color: #f3f4f6;
+  left: 4px;
+  top: 0;
+  bottom: 0;
+  z-index: -1; /* Move behind content */
+}
+
+.connecting-line-filled {
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(to bottom, #0ea5e9 0%, #14b8a6 50%, #f97316 100%);
+  left: 4px;
+  top: 0;
+  z-index: -1; /* Move behind content */
+  transition: height 0.7s ease-out;
+}
+
+/* Floating background elements styles */
+.floating-elements-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -10;
+}
+
+.floating-element {
+  position: absolute;
+  opacity: 0.05;
+  transform: translateY(0);
+  animation: float 10s ease-in-out infinite;
+  z-index: -10;
+}
+
+/* Add more floating elements */
+.floating-icon {
+  position: absolute;
+  opacity: 0.04;
+  z-index: -5;
+  transition: all 0.5s ease;
+}
+
+.floating-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Improved Modal positioning */
+.login-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.login-modal {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 450px;
+  animation: modal-appear 0.3s ease-out forwards;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+@keyframes modal-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
