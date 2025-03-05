@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useInView } from '@/lib/animate';
@@ -9,7 +8,7 @@ const Hero = () => {
   
   // Text animation elements
   const textRef = useRef<HTMLParagraphElement>(null);
-  const headingRefs = useRef<(HTMLHeadingElement | null)[]>([]);
+  const headingRefs = useRef<(HTMLElement | null)[]>([]);
 
   // Handle animations when section comes into view
   useEffect(() => {
@@ -191,7 +190,7 @@ const Hero = () => {
               <div className="absolute -bottom-16 left-12 bg-white rounded-xl shadow-md p-4 max-w-[200px] animate-float animation-delay-2000">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 1 0 7.75" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
                   </div>
                   <div>
                     <p className="text-sm font-medium">Customer Insight</p>
