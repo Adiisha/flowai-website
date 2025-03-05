@@ -13,6 +13,7 @@ const Roadmap = () => {
   });
   const [activeStoryIndex, setActiveStoryIndex] = useState(0);
   const lineContainerRef = useRef<HTMLDivElement>(null);
+  const [lineProgress, setLineProgress] = useState(0);
 
   // Data for pie chart
   const data = [{
@@ -33,6 +34,31 @@ const Roadmap = () => {
     color: '#f97316'
   }];
   const COLORS = ['#0ea5e9', '#14b8a6', '#6366f1', '#f97316'];
+
+  // Enhanced scroll animation for the connecting line
+  useEffect(() => {
+    const handleScroll = () => {
+      if (lineContainerRef.current) {
+        const rect = lineContainerRef.current.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Calculate how much of the section is visible
+        const sectionTop = rect.top;
+        const sectionHeight = rect.height;
+        
+        // Calculate progress based on scroll position
+        const scrollProgress = (windowHeight - sectionTop) / (windowHeight + sectionHeight);
+        const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
+        
+        // Update line height - fills from top to bottom as user scrolls
+        setLineProgress(clampedProgress * 100);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    // Initial calculation
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   const CustomTooltip = ({
     active,
@@ -118,7 +144,14 @@ const Roadmap = () => {
             </div>
 
             <div className="space-y-6 relative" ref={lineContainerRef}>
-              {/* Removed the connecting line elements */}
+              {/* Connecting line behind the content with z-index: -1 */}
+              <div className="connecting-line z-[-1]"></div>
+              <div 
+                className="connecting-line-filled z-[-1]" 
+                style={{
+                  height: `${lineProgress}%`
+                }}
+              ></div>
               
               {storySteps.map((step, index) => (
                 <div 

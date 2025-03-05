@@ -4,7 +4,7 @@ import { ChevronDown } from 'lucide-react';
 import { useInView } from '@/lib/animate';
 
 const Hero = () => {
-  const { ref, isInView } = useInView({ threshold: 0.1, triggerOnce: false });
+  const { ref, isInView } = useInView({ threshold: 0.1, triggerOnce: false }); // Changed triggerOnce to false
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   
   // Text animation elements
@@ -97,36 +97,6 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        
-        {/* Smart Solutions floating element */}
-        <div className="absolute bottom-[20%] right-[25%] animate-float animation-delay-1000 transform-gpu duration-300 floating-element z-[-1]">
-          <div className="bg-white rounded-xl shadow-md p-3">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-purple-100 flex items-center justify-center text-purple-500">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-              </div>
-              <div>
-                <p className="text-xs font-medium">Smart Solutions</p>
-                <p className="text-[10px] text-gray-500">Affordable Prices</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Customer Insight floating element */}
-        <div className="absolute bottom-[40%] left-[15%] animate-float-2 animation-delay-800 transform-gpu duration-300 floating-element z-[-1]">
-          <div className="bg-white rounded-xl shadow-md p-3">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              </div>
-              <div>
-                <p className="text-xs font-medium">Customer Insight</p>
-                <p className="text-[10px] text-gray-500">Personalized Experience</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       
       <div className="container mx-auto px-6 z-10 pt-20">
@@ -187,7 +157,7 @@ const Hero = () => {
           <div className={`relative transform transition-all duration-700 ${isImageLoaded ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
             <div className="bg-white rounded-xl shadow-xl p-6 relative z-20 py-[19px]">
               {/* Conversational AI element */}
-              <div className="absolute -top-10 -left-5 bg-white rounded-xl shadow-md p-4 animate-float animation-delay-700 floating-element">
+              <div className="absolute -top-10 -left-5 bg-white rounded-xl shadow-md p-4 animate-float animation-delay-700">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center text-sky-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="m12 8 4 4-4 4" /><path d="m8 12h8" /></svg>
@@ -199,31 +169,18 @@ const Hero = () => {
                 </div>
               </div>
               
-              {/* AI Assistants element */}
-              <div className="absolute -top-8 right-10 bg-white rounded-xl shadow-md p-3 animate-float-2 floating-element">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-full bg-rose-100 flex items-center justify-center text-rose-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
-                  </div>
-                  <div>
-                    <p className="text-xs font-medium">AI Assistants</p>
-                    <p className="text-[10px] text-gray-500">24/7 Support</p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Main UI grid with all floating elements */}
+              {/* Main UI grid with floating elements instead of static ones */}
               <div className="grid grid-cols-3 gap-4 relative mb-4">
                 {/* Chatbots - Now floating */}
                 <div className="col-span-3 flex justify-center mt-6">
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-3 animate-float animation-delay-1000 floating-element">
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-3 animate-float animation-delay-1000">
                     <p className="text-center text-sm font-medium">Chatbots</p>
                   </div>
                 </div>
                 
                 {/* Clock icon - Now animated */}
                 <div className="flex justify-center">
-                  <div className="bg-sky-50 rounded-full w-16 h-16 flex items-center justify-center animate-float-2 animation-delay-1500 floating-element">
+                  <div className="bg-sky-50 rounded-full w-16 h-16 flex items-center justify-center animate-float-2 animation-delay-1500">
                     <div className="text-sky-500">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
                     </div>
@@ -232,15 +189,28 @@ const Hero = () => {
                 
                 {/* CRM - Now floating */}
                 <div className="flex justify-center">
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-3 animate-float animation-delay-800 floating-element">
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-3 animate-float animation-delay-800">
                     <p className="text-center text-sm font-medium">CRM</p>
                   </div>
                 </div>
                 
                 {/* Analytics - Now floating */}
                 <div className="flex justify-center">
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-3 animate-float-3 animation-delay-1200 floating-element">
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-3 animate-float-3 animation-delay-1200">
                     <p className="text-center text-sm font-medium">Analytics</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* AI Assistants element */}
+              <div className="absolute -top-8 right-10 bg-white rounded-xl shadow-md p-3 animate-float-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-rose-100 flex items-center justify-center text-rose-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium">AI Assistants</p>
+                    <p className="text-[10px] text-gray-500">24/7 Support</p>
                   </div>
                 </div>
               </div>

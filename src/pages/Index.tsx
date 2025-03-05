@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -42,7 +41,7 @@ const Index = () => {
       anchor.addEventListener('click', smoothScroll);
     });
     
-    // Enhanced reveal animation for elements with slide up - modified to always trigger on scroll
+    // Enhanced reveal animation for elements with slide up - modified to trigger repeatedly
     const observerOptions = {
       root: null,
       rootMargin: '0px',
@@ -131,7 +130,7 @@ const Index = () => {
       countObserver.observe(el);
     });
 
-    // Add slide-up animation for sections - always trigger on scroll in/out of view
+    // Add slide-up animation for sections - modified to trigger repeatedly
     const slideObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
