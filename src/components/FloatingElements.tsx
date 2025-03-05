@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { BarChart3, Database, Globe, Activity, Users, PieChart, LayoutDashboard, Network, Server, Code } from 'lucide-react';
 
@@ -9,22 +8,28 @@ const FloatingElements = () => {
     const container = containerRef.current;
     if (!container) return;
 
-    // Define elements that will float
+    // Define elements that will float - increase number and size for better visibility
     const elements = [
-      { icon: BarChart3, size: 24, color: 'text-sky-500/20', delay: 0 },
-      { icon: Database, size: 20, color: 'text-teal-500/20', delay: 5 },
-      { icon: Globe, size: 28, color: 'text-indigo-500/20', delay: 2 },
-      { icon: Activity, size: 22, color: 'text-amber-500/20', delay: 7 },
-      { icon: Users, size: 26, color: 'text-purple-500/20', delay: 3 },
-      { icon: PieChart, size: 30, color: 'text-pink-500/20', delay: 6 },
-      { icon: Database, size: 18, color: 'text-blue-500/20', delay: 9 },
-      { icon: LayoutDashboard, size: 32, color: 'text-emerald-500/20', delay: 4 },
-      { icon: Network, size: 28, color: 'text-orange-500/20', delay: 1 },
-      { icon: Server, size: 22, color: 'text-cyan-500/20', delay: 8 },
-      { icon: Code, size: 26, color: 'text-red-500/20', delay: 2 },
-      { icon: BarChart3, size: 20, color: 'text-lime-500/20', delay: 5 },
-      { icon: Users, size: 30, color: 'text-violet-500/20', delay: 7 },
-      { icon: Globe, size: 24, color: 'text-yellow-500/20', delay: 0 },
+      { icon: BarChart3, size: 28, color: 'text-sky-500/30', delay: 0 },
+      { icon: Database, size: 24, color: 'text-teal-500/30', delay: 5 },
+      { icon: Globe, size: 32, color: 'text-indigo-500/30', delay: 2 },
+      { icon: Activity, size: 26, color: 'text-amber-500/30', delay: 7 },
+      { icon: Users, size: 30, color: 'text-purple-500/30', delay: 3 },
+      { icon: PieChart, size: 34, color: 'text-pink-500/30', delay: 6 },
+      { icon: Database, size: 22, color: 'text-blue-500/30', delay: 9 },
+      { icon: LayoutDashboard, size: 36, color: 'text-emerald-500/30', delay: 4 },
+      { icon: Network, size: 32, color: 'text-orange-500/30', delay: 1 },
+      { icon: Server, size: 26, color: 'text-cyan-500/30', delay: 8 },
+      { icon: Code, size: 30, color: 'text-red-500/30', delay: 2 },
+      { icon: BarChart3, size: 24, color: 'text-lime-500/30', delay: 5 },
+      { icon: Users, size: 34, color: 'text-violet-500/30', delay: 7 },
+      { icon: Globe, size: 28, color: 'text-yellow-500/30', delay: 0 },
+      { icon: PieChart, size: 32, color: 'text-fuchsia-500/30', delay: 3 },
+      { icon: Database, size: 26, color: 'text-emerald-500/30', delay: 6 },
+      { icon: Activity, size: 30, color: 'text-blue-500/30', delay: 1 },
+      { icon: LayoutDashboard, size: 28, color: 'text-amber-500/30', delay: 4 },
+      { icon: Server, size: 24, color: 'text-rose-500/30', delay: 8 },
+      { icon: Code, size: 32, color: 'text-indigo-500/30', delay: 2 },
     ];
 
     // Clear any existing elements
@@ -40,7 +45,6 @@ const FloatingElements = () => {
       el.style.animationDelay = `${delay}s`;
       
       // Distribute elements more evenly throughout the page
-      // Modified positioning to cover more of the viewport
       const x = Math.random() * 90 + 5; // 5-95% of width
       const y = Math.random() * 180 + 5; // 5-185% of height (to spread down the page)
       
@@ -89,19 +93,19 @@ const FloatingElements = () => {
           // Apply repulsion with increased visibility
           (el as HTMLElement).style.transform = `translate(${moveX}px, ${moveY}px)`;
           (el as HTMLElement).style.transition = 'transform 1s cubic-bezier(0.34, 1.56, 0.64, 1)';
-          (el as HTMLElement).style.opacity = '0.3'; // Increase opacity when interacting
+          (el as HTMLElement).style.opacity = '0.4'; // Increased opacity when interacting
         } else {
           // Reset position with a smoother transition
           (el as HTMLElement).style.transform = '';
           (el as HTMLElement).style.transition = 'transform 1.5s ease-out, opacity 1s ease-out';
-          (el as HTMLElement).style.opacity = '0.2'; // Default opacity slightly increased
+          (el as HTMLElement).style.opacity = '0.3'; // Default opacity increased
         }
       });
     };
 
     document.addEventListener('mousemove', handleMouseMove);
 
-    // Add mockup UI elements
+    // Add mockup UI elements with increased visibility
     addMockupElements(container);
 
     return () => {
@@ -114,7 +118,7 @@ const FloatingElements = () => {
     // Create a few subtle "dashboard" elements with better placement and more elements
     const mockups = [
       // Mini chart
-      `<div class="absolute w-32 h-20 bg-white/5 backdrop-blur-sm rounded-lg p-2 opacity-15 border border-gray-200/20">
+      `<div class="absolute w-32 h-20 bg-white/10 backdrop-blur-sm rounded-lg p-2 opacity-25 border border-gray-200/20">
         <div class="h-12 flex items-end gap-1">
           <div class="w-1/6 bg-sky-400/50 rounded-t-sm h-3"></div>
           <div class="w-1/6 bg-sky-400/50 rounded-t-sm h-8"></div>
@@ -127,7 +131,7 @@ const FloatingElements = () => {
       </div>`,
       
       // Mini analytics card
-      `<div class="absolute w-40 h-24 bg-white/5 backdrop-blur-sm rounded-lg p-2 opacity-15 border border-gray-200/20">
+      `<div class="absolute w-40 h-24 bg-white/10 backdrop-blur-sm rounded-lg p-2 opacity-25 border border-gray-200/20">
         <div class="h-3 w-12 bg-gray-200/40 rounded-sm mb-2"></div>
         <div class="text-xl font-bold text-sky-500/60">84%</div>
         <div class="w-full h-1.5 bg-gray-200/20 rounded-sm mt-2">
@@ -140,7 +144,7 @@ const FloatingElements = () => {
       </div>`,
       
       // Mini CRM card
-      `<div class="absolute w-36 h-32 bg-white/5 backdrop-blur-sm rounded-lg p-2 opacity-15 border border-gray-200/20">
+      `<div class="absolute w-36 h-32 bg-white/10 backdrop-blur-sm rounded-lg p-2 opacity-25 border border-gray-200/20">
         <div class="flex justify-between mb-2">
           <div class="h-6 w-6 rounded-full bg-indigo-400/30"></div>
           <div class="h-2 w-10 bg-gray-200/40 rounded-sm"></div>
@@ -162,7 +166,7 @@ const FloatingElements = () => {
       </div>`,
       
       // Mini conversation bubble
-      `<div class="absolute w-40 h-28 bg-white/5 backdrop-blur-sm rounded-lg p-2 opacity-15 border border-gray-200/20">
+      `<div class="absolute w-40 h-28 bg-white/10 backdrop-blur-sm rounded-lg p-2 opacity-25 border border-gray-200/20">
         <div class="h-3 w-12 bg-gray-200/40 rounded-sm mb-3"></div>
         <div class="flex gap-1 mb-2">
           <div class="h-4 w-4 rounded-full bg-purple-400/30"></div>
@@ -179,7 +183,7 @@ const FloatingElements = () => {
       </div>`,
       
       // Pie chart mockup
-      `<div class="absolute w-44 h-44 bg-white/5 backdrop-blur-sm rounded-lg p-2 opacity-15 border border-gray-200/20">
+      `<div class="absolute w-44 h-44 bg-white/10 backdrop-blur-sm rounded-lg p-2 opacity-25 border border-gray-200/20">
         <div class="flex justify-between mb-2">
           <div class="h-3 w-16 bg-gray-200/40 rounded-sm"></div>
           <div class="h-3 w-6 bg-gray-200/40 rounded-sm"></div>
@@ -191,7 +195,7 @@ const FloatingElements = () => {
       </div>`,
       
       // Data table mockup
-      `<div class="absolute w-48 h-36 bg-white/5 backdrop-blur-sm rounded-lg p-2 opacity-15 border border-gray-200/20">
+      `<div class="absolute w-48 h-36 bg-white/10 backdrop-blur-sm rounded-lg p-2 opacity-25 border border-gray-200/20">
         <div class="h-3 w-20 bg-gray-200/40 rounded-sm mb-3"></div>
         <div class="space-y-2">
           <div class="flex gap-2">
@@ -218,7 +222,7 @@ const FloatingElements = () => {
       </div>`,
       
       // Progress bars mockup
-      `<div class="absolute w-40 h-28 bg-white/5 backdrop-blur-sm rounded-lg p-2 opacity-15 border border-gray-200/20">
+      `<div class="absolute w-40 h-28 bg-white/10 backdrop-blur-sm rounded-lg p-2 opacity-25 border border-gray-200/20">
         <div class="h-3 w-14 bg-gray-200/40 rounded-sm mb-3"></div>
         <div class="space-y-3">
           <div>
@@ -246,6 +250,93 @@ const FloatingElements = () => {
             </div>
             <div class="w-full h-1.5 bg-gray-200/20 rounded-sm">
               <div class="w-[60%] h-full bg-purple-400/40 rounded-sm"></div>
+            </div>
+          </div>
+        </div>
+      </div>`,
+      
+      // Dashboard card
+      `<div class="absolute w-48 h-32 bg-white/10 backdrop-blur-sm rounded-lg p-2 opacity-25 border border-gray-200/20">
+        <div class="flex justify-between items-center mb-2">
+          <div class="h-3 w-16 bg-gray-200/40 rounded-sm"></div>
+          <div class="flex space-x-1">
+            <div class="h-3 w-3 rounded-full bg-rose-400/30"></div>
+            <div class="h-3 w-3 rounded-full bg-amber-400/30"></div>
+            <div class="h-3 w-3 rounded-full bg-green-400/30"></div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="bg-white/5 rounded p-1">
+            <div class="h-2 w-10 bg-gray-200/30 rounded-sm mb-1"></div>
+            <div class="text-lg font-bold text-teal-500/70">28k</div>
+          </div>
+          <div class="bg-white/5 rounded p-1">
+            <div class="h-2 w-10 bg-gray-200/30 rounded-sm mb-1"></div>
+            <div class="text-lg font-bold text-indigo-500/70">14%</div>
+          </div>
+          <div class="bg-white/5 rounded p-1">
+            <div class="h-2 w-10 bg-gray-200/30 rounded-sm mb-1"></div>
+            <div class="text-lg font-bold text-amber-500/70">$32k</div>
+          </div>
+          <div class="bg-white/5 rounded p-1">
+            <div class="h-2 w-10 bg-gray-200/30 rounded-sm mb-1"></div>
+            <div class="text-lg font-bold text-purple-500/70">87%</div>
+          </div>
+        </div>
+      </div>`,
+      
+      // Timeline mockup
+      `<div class="absolute w-40 h-36 bg-white/10 backdrop-blur-sm rounded-lg p-2 opacity-25 border border-gray-200/20">
+        <div class="h-3 w-14 bg-gray-200/40 rounded-sm mb-3"></div>
+        <div class="space-y-3">
+          <div class="flex gap-2">
+            <div class="h-4 w-4 rounded-full bg-sky-400/50 flex-shrink-0"></div>
+            <div>
+              <div class="h-2 w-24 bg-gray-200/40 rounded-sm mb-1"></div>
+              <div class="h-1.5 w-16 bg-gray-200/30 rounded-sm"></div>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <div class="h-4 w-4 rounded-full bg-purple-400/50 flex-shrink-0"></div>
+            <div>
+              <div class="h-2 w-20 bg-gray-200/40 rounded-sm mb-1"></div>
+              <div class="h-1.5 w-24 bg-gray-200/30 rounded-sm"></div>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <div class="h-4 w-4 rounded-full bg-amber-400/50 flex-shrink-0"></div>
+            <div>
+              <div class="h-2 w-18 bg-gray-200/40 rounded-sm mb-1"></div>
+              <div class="h-1.5 w-12 bg-gray-200/30 rounded-sm"></div>
+            </div>
+          </div>
+        </div>
+      </div>`,
+      
+      // AI Chat mockup
+      `<div class="absolute w-44 h-36 bg-white/10 backdrop-blur-sm rounded-lg p-2 opacity-25 border border-gray-200/20">
+        <div class="flex justify-between items-center mb-2">
+          <div class="h-3 w-12 bg-gray-200/40 rounded-sm"></div>
+          <div class="h-3 w-3 rounded-full bg-green-400/50"></div>
+        </div>
+        <div class="space-y-2">
+          <div class="flex gap-1 mb-1">
+            <div class="h-5 w-5 rounded-full bg-teal-400/30 flex-shrink-0"></div>
+            <div class="bg-teal-400/10 rounded-lg p-1 text-[0.5rem] max-w-[70%]">
+              <div class="h-1.5 w-16 bg-white/20 rounded-sm mb-1"></div>
+              <div class="h-1.5 w-12 bg-white/20 rounded-sm"></div>
+            </div>
+          </div>
+          <div class="flex gap-1 justify-end mb-1">
+            <div class="bg-indigo-400/10 rounded-lg p-1 text-[0.5rem] max-w-[70%]">
+              <div class="h-1.5 w-20 bg-white/20 rounded-sm"></div>
+            </div>
+            <div class="h-5 w-5 rounded-full bg-indigo-400/30 flex-shrink-0"></div>
+          </div>
+          <div class="flex gap-1">
+            <div class="h-5 w-5 rounded-full bg-teal-400/30 flex-shrink-0"></div>
+            <div class="bg-teal-400/10 rounded-lg p-1 text-[0.5rem] max-w-[70%]">
+              <div class="h-1.5 w-24 bg-white/20 rounded-sm"></div>
             </div>
           </div>
         </div>

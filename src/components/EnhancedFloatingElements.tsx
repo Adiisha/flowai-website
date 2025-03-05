@@ -125,7 +125,7 @@ const EnhancedFloatingElements = () => {
       <BarChart className="text-rose-500/30" />
     ];
     
-    // Create 25-30 floating elements spread throughout the page
+    // Create 40-45 floating elements spread throughout the page (increased from 25-30)
     const documentHeight = Math.max(
       document.body.scrollHeight,
       document.body.offsetHeight,
@@ -133,7 +133,7 @@ const EnhancedFloatingElements = () => {
       document.documentElement.scrollHeight
     );
     
-    for (let i = 0; i < 28; i++) {
+    for (let i = 0; i < 45; i++) {
       const useIcon = Math.random() > 0.6;
       const type = types[Math.floor(Math.random() * types.length)];
       const size = Math.random() * 40 + 20;
@@ -147,7 +147,7 @@ const EnhancedFloatingElements = () => {
         y: Math.random() * documentHeight,
         size: size,
         speed: Math.random() * 1 + 0.5,
-        opacity: Math.random() * 0.2 + 0.1 // Increased opacity for better visibility
+        opacity: Math.random() * 0.3 + 0.15 // Increased opacity for better visibility (0.15-0.45)
       });
     }
     
