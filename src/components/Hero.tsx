@@ -1,10 +1,9 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useInView } from '@/lib/animate';
 
 const Hero = () => {
-  const { ref, isInView } = useInView({ threshold: 0.1, triggerOnce: false }); // Changed triggerOnce to false
+  const { ref, isInView } = useInView({ threshold: 0.1 });
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   
   // Text animation elements
@@ -13,10 +12,8 @@ const Hero = () => {
 
   // Handle animations when section comes into view
   useEffect(() => {
-    const headingElements = headingRefs.current.filter(Boolean);
-    
-    // Apply animations only when in view, remove them when out of view
     if (isInView) {
+      const headingElements = headingRefs.current.filter(Boolean);
       headingElements.forEach((el, index) => {
         if (el) {
           setTimeout(() => {
@@ -31,19 +28,6 @@ const Hero = () => {
           textRef.current?.classList.add('animate-fade-in');
           textRef.current!.style.opacity = '1';
         }, headingElements.length * 200);
-      }
-    } else {
-      // Reset animations when out of view
-      headingElements.forEach((el) => {
-        if (el) {
-          el.classList.remove('animate-slide-in-from-bottom');
-          el.style.opacity = '0';
-        }
-      });
-
-      if (textRef.current) {
-        textRef.current.classList.remove('animate-fade-in');
-        textRef.current.style.opacity = '0';
       }
     }
   }, [isInView]);
@@ -155,8 +139,7 @@ const Hero = () => {
           </div>
           
           <div className={`relative transform transition-all duration-700 ${isImageLoaded ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
-            <div className="bg-white rounded-xl shadow-xl p-6 relative z-20 py-[19px]">
-              {/* Conversational AI element */}
+            <div className="bg-white rounded-xl shadow-xl p-6 pb-12 relative z-20 py-[19px]">
               <div className="absolute -top-10 -left-5 bg-white rounded-xl shadow-md p-4 animate-float animation-delay-700">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center text-sky-500">
@@ -169,40 +152,54 @@ const Hero = () => {
                 </div>
               </div>
               
-              {/* Main UI grid with floating elements instead of static ones */}
               <div className="grid grid-cols-3 gap-4 relative mb-4">
-                {/* Chatbots - Now floating */}
                 <div className="col-span-3 flex justify-center mt-6">
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-3 animate-float animation-delay-1000">
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-3">
                     <p className="text-center text-sm font-medium">Chatbots</p>
                   </div>
                 </div>
                 
-                {/* Clock icon - Now animated */}
                 <div className="flex justify-center">
-                  <div className="bg-sky-50 rounded-full w-16 h-16 flex items-center justify-center animate-float-2 animation-delay-1500">
+                  <div className="bg-sky-50 rounded-full w-16 h-16 flex items-center justify-center">
                     <div className="text-sky-500">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
                     </div>
                   </div>
                 </div>
                 
-                {/* CRM - Now floating */}
                 <div className="flex justify-center">
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-3 animate-float animation-delay-800">
-                    <p className="text-center text-sm font-medium">CRM</p>
+                  <div className="text-center">
+                    <p className="text-sm font-medium">CRM</p>
                   </div>
                 </div>
                 
-                {/* Analytics - Now floating */}
                 <div className="flex justify-center">
-                  <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-3 animate-float-3 animation-delay-1200">
+                  <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-3">
                     <p className="text-center text-sm font-medium">Analytics</p>
                   </div>
                 </div>
               </div>
               
-              {/* AI Assistants element */}
+              <div className="absolute -bottom-8 -right-5 bg-white rounded-xl shadow-md p-4 max-w-[200px] animate-float animation-delay-1200">
+                <p className="text-sm font-medium">Smart Solutions, Affordable Prices</p>
+                <div className="mt-2 text-xs text-gray-500">
+                  Designed for businesses of all sizes
+                </div>
+              </div>
+              
+              <div className="absolute -bottom-16 left-12 bg-white rounded-xl shadow-md p-4 max-w-[200px] animate-float animation-delay-2000">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 1 0 7.75" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">Customer Insight</p>
+                    <p className="text-xs text-gray-500">Personalized Experience</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* New element from the image you shared */}
               <div className="absolute -top-8 right-10 bg-white rounded-xl shadow-md p-3 animate-float-2">
                 <div className="flex items-center gap-2">
                   <div className="w-7 h-7 rounded-full bg-rose-100 flex items-center justify-center text-rose-500">
