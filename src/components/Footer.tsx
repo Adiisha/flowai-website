@@ -1,5 +1,5 @@
 
-import { Mail, Phone, Instagram, ArrowRight } from 'lucide-react';
+import { Mail, Phone, Instagram, ArrowRight, Github } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -19,6 +19,14 @@ const Footer = () => {
                 className="text-flowai-white hover:text-teal-500 transition-colors"
               >
                 <Instagram className="w-5 h-5" />
+              </a>
+              <a 
+                href="https://github.com/theflowai/Chatbot.git" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-flowai-white hover:text-teal-500 transition-colors"
+              >
+                <Github className="w-5 h-5" />
               </a>
             </div>
           </div>

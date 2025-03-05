@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import FloatingElements from "./components/FloatingElements";
+import EnhancedFloatingElements from "./components/EnhancedFloatingElements";
+import AnimationEffects from "./components/AnimationEffects";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +18,8 @@ const App = () => (
       <Toaster />
       <Sonner />
       <FloatingElements />
+      <EnhancedFloatingElements />
+      <AnimationEffects />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
