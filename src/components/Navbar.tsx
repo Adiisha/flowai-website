@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from 'react';
 import { Menu, X, Home, MessageSquare } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,29 +38,29 @@ const Navbar = () => {
       }`}
     >
       <nav className="mx-auto max-w-7xl mt-4 mb-8 px-6 md:px-8">
-        <div className="relative flex justify-between items-center bg-[#F5F5DC]/80 backdrop-blur-md rounded-xl p-4 shadow-lg hover:bg-[#F5F5DC]/90 transition-all duration-300">
+        <div className="relative flex justify-between items-center bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg hover:bg-white/90 transition-all duration-300">
           <div className="flex-1 flex items-center justify-between">
-            <Link to="/" className="flex items-center">
-              <span className="text-xl font-bold text-black">Flow AI</span>
-            </Link>
+            <a href="#" className="flex items-center">
+              <span className="text-xl font-bold text-sky-500">Flow AI</span>
+            </a>
 
-            {/* Desktop Navigation - Centered */}
-            <div className="hidden md:flex items-center space-x-8 mx-auto">
-              <Link to="/" className="navbar-item flex items-center text-black">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#" className="navbar-item flex items-center">
                 <Home className="mr-1 h-4 w-4 animate-pulse-subtle" />
                 Home
-              </Link>
-              <a href="#roadmap" className="navbar-item text-black">Process</a>
-              <Link to="/services" className="navbar-item text-black">Services</Link>
-              <a href="#about" className="navbar-item text-black">Our Mission</a>
-              <a href="#contact" className="navbar-item text-black">Contact</a>
-              <a href="#faq" className="navbar-item text-black">FAQs</a>
+              </a>
+              <a href="#roadmap" className="navbar-item">Process</a>
+              <a href="#services" className="navbar-item">Services</a>
+              <a href="#about" className="navbar-item">Our Mission</a>
+              <a href="#contact" className="navbar-item">Contact</a>
+              <a href="#faq" className="navbar-item">FAQs</a>
             </div>
 
             {/* Mobile Menu Button */}
             <div className="md:hidden">
               <button
-                className="p-2 rounded-md text-black hover:bg-[#F5F5DC] focus:outline-none"
+                className="p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none"
                 onClick={toggleMenu}
               >
                 {isMenuOpen ? (
@@ -76,43 +75,43 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         <div
-          className={`absolute left-0 right-0 z-20 md:hidden bg-[#F5F5DC]/95 backdrop-blur-md shadow-lg rounded-b-xl transform transition-all duration-300 ease-in-out ${
+          className={`absolute left-0 right-0 z-20 md:hidden bg-white/95 backdrop-blur-md shadow-lg rounded-b-xl transform transition-all duration-300 ease-in-out ${
             isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5 pointer-events-none'
           }`}
         >
           <div className="px-4 pt-2 pb-4 space-y-1 text-center">
-            <Link
-              to="/"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-[#F5F5DC] text-black flex items-center justify-center"
+            <a
+              href="#"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100 flex items-center justify-center"
               onClick={() => setIsMenuOpen(false)}
             >
               <Home className="mr-1 h-4 w-4" />
               Home
-            </Link>
+            </a>
             <a
               href="#roadmap"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-[#F5F5DC] text-black"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
             >
               Process
             </a>
-            <Link
-              to="/services"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-[#F5F5DC] text-black"
+            <a
+              href="#services"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
             >
               Services
-            </Link>
+            </a>
             <a
               href="#about"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-[#F5F5DC] text-black"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
             >
               Our Mission
             </a>
             <a
               href="#contact"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-[#F5F5DC] text-black flex items-center justify-center"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100 flex items-center justify-center"
               onClick={() => setIsMenuOpen(false)}
             >
               <MessageSquare className="mr-1 h-4 w-4" />
@@ -120,7 +119,7 @@ const Navbar = () => {
             </a>
             <a
               href="#faq"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-[#F5F5DC] text-black"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
             >
               FAQs
