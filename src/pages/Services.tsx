@@ -63,15 +63,15 @@ const ServicesPage = () => {
   ];
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-flowai-beigePale min-h-screen">
       <div className="pt-32 pb-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <span className="px-3 py-1 bg-[#F5F5DC] text-black text-sm font-medium rounded-full">
+            <span className="px-3 py-1 bg-flowai-beigeSubtle text-flowai-black text-sm font-medium rounded-full">
               Our Solutions
             </span>
-            <h1 className="text-4xl font-bold mt-4 mb-6 text-black">AI Services & Solutions</h1>
-            <p className="max-w-3xl mx-auto text-lg text-black">
+            <h1 className="text-4xl font-bold mt-4 mb-6 text-flowai-black">AI Services & Solutions</h1>
+            <p className="max-w-3xl mx-auto text-lg text-flowai-black">
               Explore our comprehensive range of AI solutions designed to transform your business operations,
               enhance customer experiences, and drive sustainable growth.
             </p>
@@ -82,19 +82,19 @@ const ServicesPage = () => {
               <Link 
                 key={index} 
                 to={`/services/${service.id}`} 
-                className={`bg-[#F5F5DC] rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl transform hover:-translate-y-2 ${
+                className={`bg-flowai-beigeSubtle rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl transform hover:-translate-y-2 ${
                   isInView ? 'animate-fade-in' : 'opacity-0'
                 }`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="p-8">
-                  <div className="bg-white p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 text-black">
+                  <div className="bg-flowai-white p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 text-flowai-black">
                     {service.icon}
                   </div>
-                  <h3 className="text-2xl font-bold mb-3 text-black">{service.title}</h3>
-                  <p className="text-black mb-6">{service.description}</p>
+                  <h3 className="text-2xl font-bold mb-3 text-flowai-black">{service.title}</h3>
+                  <p className="text-flowai-black mb-6">{service.description}</p>
                   <div className="mt-auto">
-                    <span className="inline-flex items-center text-black font-medium hover:underline">
+                    <span className="inline-flex items-center text-flowai-black font-medium hover:underline">
                       Learn More
                       <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -107,12 +107,15 @@ const ServicesPage = () => {
           </div>
           
           <div className="mt-16 text-center">
-            <Link to="/contact" className="px-8 py-4 bg-black text-white rounded-lg font-medium inline-flex items-center hover:bg-opacity-80 transition-all">
+            <a 
+              href="/#contact" 
+              className="px-8 py-4 bg-flowai-black text-flowai-white rounded-lg font-medium inline-flex items-center hover:bg-opacity-80 transition-all"
+            >
               Get a Custom Solution
               <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

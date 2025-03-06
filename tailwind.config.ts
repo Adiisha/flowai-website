@@ -66,6 +66,8 @@ export default {
         flowai: {
           beige: "#F5F5DC",
           beigeDark: "#E8E6DE", 
+          beigePale: "#F8F8F0", // Added lighter variant
+          beigeSubtle: "#EFEFE3", // Added more subtle variant
           black: "#000000",
           white: "#FFFFFF",
           gray: "#666666",

@@ -19,7 +19,7 @@ const ServiceCard = ({
   id,
   index
 }: ServiceCardProps) => {
-  const { ref, isInView } = useInView({ threshold: 0.1 });
+  const { ref, isInView } = useInView({ threshold: 0.1, triggerOnce: false });
   const [isHovered, setIsHovered] = useState(false);
   
   return (
@@ -33,16 +33,16 @@ const ServiceCard = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="p-6 h-full flex flex-col relative overflow-hidden bg-[#F5F5DC]">
-        <div className="bg-white p-4 rounded-full w-16 h-16 flex items-center justify-center mb-5 transition-all duration-300 text-black 
-                      hover:bg-black hover:text-white glow-icon">
+      <div className="p-6 h-full flex flex-col relative overflow-hidden bg-flowai-beigeSubtle">
+        <div className="bg-flowai-white p-4 rounded-full w-16 h-16 flex items-center justify-center mb-5 transition-all duration-300 text-flowai-black 
+                      hover:bg-flowai-black hover:text-flowai-white glow-icon">
           {icon}
         </div>
-        <h5 className="mb-3 text-xl font-bold text-black">{title}</h5>
-        <p className="text-base text-black mb-4">{description}</p>
+        <h5 className="mb-3 text-xl font-bold text-flowai-black">{title}</h5>
+        <p className="text-base text-flowai-black mb-4">{description}</p>
         
         <div className="mt-auto">
-          <span className="px-4 py-2 bg-black text-white rounded-lg inline-flex items-center text-sm font-medium transition-all hover:bg-opacity-80">
+          <span className="px-4 py-2 bg-flowai-black text-flowai-white rounded-lg inline-flex items-center text-sm font-medium transition-all hover:bg-opacity-80">
             Learn More
             <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -55,7 +55,7 @@ const ServiceCard = ({
 };
 
 const Services = () => {
-  const { ref, isInView } = useInView({ threshold: 0.1 });
+  const { ref, isInView } = useInView({ threshold: 0.1, triggerOnce: false });
   
   const services = [
     {
@@ -109,19 +109,19 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="bg-gradient-to-b from-white to-[#F5F5DC] py-16 relative">
+    <section id="services" className="bg-gradient-to-b from-flowai-white to-flowai-beigePale py-16 relative">
       <div className="section-container max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="px-3 py-1 bg-[#F5F5DC] text-black text-sm font-medium rounded-full">
+          <span className="px-3 py-1 bg-flowai-beigeSubtle text-flowai-black text-sm font-medium rounded-full">
             Our Expertise
           </span>
-          <h2 ref={ref as React.RefObject<HTMLHeadingElement>} className={`mt-4 text-3xl font-bold text-black ${isInView ? 'animate-fade-in' : 'opacity-0'}`}>
+          <h2 ref={ref as React.RefObject<HTMLHeadingElement>} className={`mt-4 text-3xl font-bold text-flowai-black ${isInView ? 'animate-fade-in' : 'opacity-0'}`}>
             AI Solutions Tailored for Your Business
           </h2>
-          <p className="max-w-2xl mx-auto mt-4 text-black">
+          <p className="max-w-2xl mx-auto mt-4 text-flowai-black">
             Discover how our cutting-edge AI services can transform your operations, enhance customer experiences, and drive growth.
           </p>
-          <Link to="/services" className="mt-6 inline-block px-8 py-3 bg-black text-white rounded-lg font-medium hover:bg-opacity-80 transition-all">
+          <Link to="/services" className="mt-6 inline-block px-8 py-3 bg-flowai-black text-flowai-white rounded-lg font-medium hover:bg-opacity-80 transition-all">
             View All Services
           </Link>
         </div>
