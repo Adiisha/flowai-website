@@ -10,7 +10,7 @@ interface UseInViewProps {
 export const useInView = ({
   threshold = 0.1,
   rootMargin = '0px',
-  triggerOnce = true,
+  triggerOnce = false, // Changed default to false to trigger on every scroll
 }: UseInViewProps = {}) => {
   const ref = useRef<HTMLElement | null>(null);
   const [isInView, setIsInView] = useState(false);
@@ -75,19 +75,28 @@ export const useAnimatedSection = (threshold = 0.15, staggered = true) => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          if (ref.current) {
-            observer.unobserve(ref.current);
-            
-            // Apply animations to children if staggered
-            if (staggered && ref.current) {
-              const children = Array.from(ref.current.children);
-              children.forEach((child, index) => {
-                setTimeout(() => {
-                  (child as HTMLElement).classList.add('animate-slide-in-from-bottom');
-                  (child as HTMLElement).style.opacity = '1';
-                }, index * 100);
-              });
-            }
+          
+          // Apply animations to children if staggered
+          if (staggered && ref.current) {
+            const children = Array.from(ref.current.children);
+            children.forEach((child, index) => {
+              setTimeout(() => {
+                (child as HTMLElement).classList.add('animate-slide-in-from-bottom');
+                (child as HTMLElement).style.opacity = '1';
+              }, index * 100);
+            });
+          }
+        } else {
+          // Reset visibility when leaving viewport
+          setIsVisible(false);
+          
+          // Reset animations when element leaves viewport
+          if (staggered && ref.current) {
+            const children = Array.from(ref.current.children);
+            children.forEach((child) => {
+              (child as HTMLElement).classList.remove('animate-slide-in-from-bottom');
+              (child as HTMLElement).style.opacity = '0';
+            });
           }
         }
       },

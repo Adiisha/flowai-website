@@ -64,10 +64,10 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         flowai: {
-          beige: "#f1efe7",
-          beigeDark: "#e8e6de",
+          beige: "#F5F5DC",
+          beigeDark: "#E8E6DE", 
           black: "#000000",
-          white: "#ffffff",
+          white: "#FFFFFF",
           gray: "#666666",
           lightGray: "#cccccc",
           darkGray: "#333333",
