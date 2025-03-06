@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 
 interface UseInViewProps {
@@ -17,10 +18,13 @@ export const useInView = ({
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsInView(entry.isIntersecting);
-        
-        if (triggerOnce && entry.isIntersecting && ref.current) {
-          observer.unobserve(ref.current);
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          if (triggerOnce && ref.current) {
+            observer.unobserve(ref.current);
+          }
+        } else if (!triggerOnce) {
+          setIsInView(false);
         }
       },
       { threshold, rootMargin }
@@ -62,36 +66,28 @@ export const fadeInAnimation = (index: number, delay = 0.1) => {
   };
 };
 
-export const useAnimatedSection = (threshold = 0.15, staggered = true, triggerOnce = false) => {
+export const useAnimatedSection = (threshold = 0.15, staggered = true) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-        
         if (entry.isIntersecting) {
-          if (staggered && ref.current) {
-            const children = Array.from(ref.current.children);
-            children.forEach((child, index) => {
-              setTimeout(() => {
-                (child as HTMLElement).classList.add('animate-slide-in-from-bottom');
-                (child as HTMLElement).style.opacity = '1';
-              }, index * 100);
-            });
-          }
-          
-          if (triggerOnce && ref.current) {
+          setIsVisible(true);
+          if (ref.current) {
             observer.unobserve(ref.current);
-          }
-        } else if (!triggerOnce) {
-          if (staggered && ref.current) {
-            const children = Array.from(ref.current.children);
-            children.forEach((child) => {
-              (child as HTMLElement).classList.remove('animate-slide-in-from-bottom');
-              (child as HTMLElement).style.opacity = '0';
-            });
+            
+            // Apply animations to children if staggered
+            if (staggered && ref.current) {
+              const children = Array.from(ref.current.children);
+              children.forEach((child, index) => {
+                setTimeout(() => {
+                  (child as HTMLElement).classList.add('animate-slide-in-from-bottom');
+                  (child as HTMLElement).style.opacity = '1';
+                }, index * 100);
+              });
+            }
           }
         }
       },
@@ -107,7 +103,7 @@ export const useAnimatedSection = (threshold = 0.15, staggered = true, triggerOn
         observer.unobserve(ref.current);
       }
     };
-  }, [threshold, staggered, triggerOnce]);
+  }, [threshold, staggered]);
   
   return { ref, isVisible };
 };
