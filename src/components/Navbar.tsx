@@ -44,17 +44,24 @@ const Navbar = () => {
               <span className="text-xl font-bold text-sky-500">Flow AI</span>
             </a>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#" className="navbar-item flex items-center">
-                <Home className="mr-1 h-4 w-4 animate-pulse-subtle" />
-                Home
-              </a>
-              <a href="#roadmap" className="navbar-item">Process</a>
-              <a href="#services" className="navbar-item">Services</a>
-              <a href="#about" className="navbar-item">Our Mission</a>
-              <a href="#contact" className="navbar-item">Contact</a>
-              <a href="#faq" className="navbar-item">FAQs</a>
+            {/* Desktop Navigation - Centered */}
+            <div className="hidden md:flex items-center justify-center absolute left-0 right-0 mx-auto">
+              <div className="flex items-center space-x-8">
+                <a href="#" className="navbar-item flex items-center">
+                  <Home className="mr-1 h-4 w-4 animate-pulse-subtle" />
+                  Home
+                </a>
+                <a href="#roadmap" className="navbar-item">Process</a>
+                <a href="#services" className="navbar-item">Services</a>
+                <a href="#about" className="navbar-item">Our Mission</a>
+                <a href="#contact" className="navbar-item">Contact</a>
+                <a href="#faq" className="navbar-item">FAQs</a>
+              </div>
+            </div>
+
+            {/* Right side empty div to maintain spacing */}
+            <div className="hidden md:block">
+              {/* Empty div to help center the links */}
             </div>
 
             {/* Mobile Menu Button */}

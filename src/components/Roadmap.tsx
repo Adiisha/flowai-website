@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
-import { MessageSquare, UserCheck, Code, CheckCircle } from 'lucide-react';
+import { MessageSquare, UserCheck, Code, CheckCircle, LineChart } from 'lucide-react';
 import { useInView } from '@/lib/animate';
 
 const Roadmap = () => {
@@ -15,25 +15,30 @@ const Roadmap = () => {
   const lineContainerRef = useRef<HTMLDivElement>(null);
   const [lineProgress, setLineProgress] = useState(0);
 
-  // Data for pie chart
+  // Data for pie chart - updated with 5 steps
   const data = [{
     name: 'Step 1: Discovery',
-    value: 25,
+    value: 20,
     color: '#0ea5e9'
   }, {
     name: 'Step 2: Design',
-    value: 25,
+    value: 20,
     color: '#14b8a6'
   }, {
     name: 'Step 3: Development',
-    value: 25,
+    value: 20,
     color: '#6366f1'
   }, {
     name: 'Step 4: Delivery',
-    value: 25,
+    value: 20,
     color: '#f97316'
+  }, {
+    name: 'Step 5: Continuous Improvement',
+    value: 20,
+    color: '#8b5cf6'
   }];
-  const COLORS = ['#0ea5e9', '#14b8a6', '#6366f1', '#f97316'];
+  
+  const COLORS = ['#0ea5e9', '#14b8a6', '#6366f1', '#f97316', '#8b5cf6'];
 
   // Enhanced scroll animation for the connecting line
   useEffect(() => {
@@ -73,7 +78,7 @@ const Roadmap = () => {
     return null;
   };
 
-  // Our workflow/story steps
+  // Our workflow/story steps - added step 5
   const storySteps = [{
     title: "Step 1: Discovery",
     icon: <MessageSquare className="h-8 w-8 text-sky-500" />,
@@ -94,6 +99,11 @@ const Roadmap = () => {
     icon: <CheckCircle className="h-8 w-8 text-orange-500" />,
     description: "We deploy your AI solution, provide thorough training for your team, and offer ongoing support to ensure optimal performance.",
     color: '#f97316'
+  }, {
+    title: "Step 5: Continuous Improvement",
+    icon: <LineChart className="h-8 w-8 text-purple-500" />,
+    description: "Our relationship continues after deployment. We monitor the solution's performance, gather feedback, and continuously refine the AI models to ensure they evolve with your business and maintain optimal effectiveness.",
+    color: '#8b5cf6'
   }];
   
   return (
@@ -129,6 +139,17 @@ const Roadmap = () => {
                 </div>
               </div>
               
+              {/* Add Step Icons to pie chart */}
+              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center">
+                <div className="relative w-24 h-24 bg-white rounded-full flex items-center justify-center">
+                  {activeStoryIndex === 0 && <MessageSquare className="h-10 w-10 text-sky-500" />}
+                  {activeStoryIndex === 1 && <UserCheck className="h-10 w-10 text-teal-500" />}
+                  {activeStoryIndex === 2 && <Code className="h-10 w-10 text-indigo-500" />}
+                  {activeStoryIndex === 3 && <CheckCircle className="h-10 w-10 text-orange-500" />}
+                  {activeStoryIndex === 4 && <LineChart className="h-10 w-10 text-purple-500" />}
+                </div>
+              </div>
+              
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie data={data} cx="50%" cy="50%" labelLine={false} outerRadius={150} innerRadius={60} paddingAngle={5} dataKey="value" animationDuration={1500} className="cursor-pointer" onClick={(_, index) => setActiveStoryIndex(index)}>
@@ -144,14 +165,7 @@ const Roadmap = () => {
             </div>
 
             <div className="space-y-6 relative" ref={lineContainerRef}>
-              {/* Connecting line behind the content with z-index: -1 */}
-              <div className="connecting-line z-[-1]"></div>
-              <div 
-                className="connecting-line-filled z-[-1]" 
-                style={{
-                  height: `${lineProgress}%`
-                }}
-              ></div>
+              {/* Removing the connecting line */}
               
               {storySteps.map((step, index) => (
                 <div 
@@ -196,6 +210,13 @@ const Roadmap = () => {
                         <span className="tech-badge">Maintenance</span>
                         <span className="tech-badge">Documentation</span>
                         <span className="tech-badge">Updates</span>
+                      </>}
+                      {index === 4 && <>
+                        <span className="tech-badge">Performance Monitoring</span>
+                        <span className="tech-badge">Feedback Collection</span>
+                        <span className="tech-badge">Model Refinement</span>
+                        <span className="tech-badge">Business Evolution</span>
+                        <span className="tech-badge">Continued Support</span>
                       </>}
                     </div>
                   )}
