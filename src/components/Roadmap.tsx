@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { MessageSquare, UserCheck, Code, CheckCircle, LineChart } from 'lucide-react';
@@ -70,7 +69,7 @@ const Roadmap = () => {
     payload
   }: any) => {
     if (active && payload && payload.length) {
-      return <div className="bg-white p-3 shadow-lg rounded-md border border-gray-100 transition-all duration-300 animate-float">
+      return <div className="bg-white p-3 shadow-lg rounded-md border border-gray-100 transition-all duration-300 animate-float absolute -right-48 top-1/3">
           <p className="font-bold">{payload[0].name}</p>
           <p className="text-gray-600">Our Process</p>
         </div>;

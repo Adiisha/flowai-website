@@ -38,45 +38,41 @@ const Navbar = () => {
       }`}
     >
       <nav className="mx-auto max-w-7xl mt-4 mb-8 px-6 md:px-8">
-        <div className="relative flex justify-between items-center bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg hover:bg-white/90 transition-all duration-300">
-          <div className="flex-1 flex items-center justify-between">
+        <div className="relative flex justify-center items-center bg-white/80 backdrop-blur-md rounded-xl p-4 shadow-lg hover:bg-white/90 transition-all duration-300">
+          {/* Desktop Navigation - Properly Centered */}
+          <div className="hidden md:flex items-center justify-center">
+            <div className="flex items-center space-x-8">
+              <a href="#" className="navbar-item flex items-center">
+                <Home className="mr-1 h-4 w-4 animate-pulse-subtle" />
+                Home
+              </a>
+              <a href="#roadmap" className="navbar-item">Process</a>
+              <a href="#services" className="navbar-item">Services</a>
+              <a href="#about" className="navbar-item">Our Mission</a>
+              <a href="#contact" className="navbar-item">Contact</a>
+              <a href="#faq" className="navbar-item">FAQs</a>
+            </div>
+          </div>
+
+          {/* Mobile Menu Button - Positioned at the right side for mobile */}
+          <div className="md:hidden absolute right-4">
+            <button
+              className="p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none"
+              onClick={toggleMenu}
+            >
+              {isMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
+          
+          {/* Logo - Positioned absolute left for mobile */}
+          <div className="md:hidden absolute left-4">
             <a href="#" className="flex items-center">
               <span className="text-xl font-bold text-sky-500">Flow AI</span>
             </a>
-
-            {/* Desktop Navigation - Centered */}
-            <div className="hidden md:flex items-center justify-center absolute left-0 right-0 mx-auto">
-              <div className="flex items-center space-x-8">
-                <a href="#" className="navbar-item flex items-center">
-                  <Home className="mr-1 h-4 w-4 animate-pulse-subtle" />
-                  Home
-                </a>
-                <a href="#roadmap" className="navbar-item">Process</a>
-                <a href="#services" className="navbar-item">Services</a>
-                <a href="#about" className="navbar-item">Our Mission</a>
-                <a href="#contact" className="navbar-item">Contact</a>
-                <a href="#faq" className="navbar-item">FAQs</a>
-              </div>
-            </div>
-
-            {/* Right side empty div to maintain spacing */}
-            <div className="hidden md:block">
-              {/* Empty div to help center the links */}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
-              <button
-                className="p-2 rounded-md text-gray-700 hover:bg-gray-100 focus:outline-none"
-                onClick={toggleMenu}
-              >
-                {isMenuOpen ? (
-                  <X className="h-6 w-6" />
-                ) : (
-                  <Menu className="h-6 w-6" />
-                )}
-              </button>
-            </div>
           </div>
         </div>
 

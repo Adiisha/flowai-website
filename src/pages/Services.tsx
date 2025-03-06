@@ -32,7 +32,7 @@ const ServicesPage = () => {
                 <h2 className="text-2xl font-bold mb-3">{service.title}</h2>
                 <p className="text-gray-700 mb-6 flex-grow">{service.detailedDescription}</p>
                 
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap justify-center gap-2 mb-6">
                   {service.technologies.slice(0, 4).map((tech, i) => (
                     <span key={i} className="tech-badge">
                       {tech}
